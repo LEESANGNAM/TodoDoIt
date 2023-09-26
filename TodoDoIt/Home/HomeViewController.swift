@@ -64,9 +64,13 @@ class HomeViewController: UIViewController {
                                                        heightDimension: .fractionalHeight(0.2)),
                     subitem: item, count: 1)
             }
+            
+            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.1))
+            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+            
             let section = NSCollectionLayoutSection(group: containerGroup)
             section.orthogonalScrollingBehavior = .groupPagingCentered
-
+            section.boundarySupplementaryItems = [sectionHeader]
             return section
 
         }
@@ -90,6 +94,18 @@ class HomeViewController: UIViewController {
             let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
             return cell
         }
+        
+        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+            if kind == UICollectionView.elementKindSectionHeader {
+                // 섹션 헤더를 만들고 반환
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MySectionHeaderView", for: indexPath) as! ListCollectionViewHeaderView
+                // headerView의 내용 설정
+                return headerView
+            } else {
+                return nil
+            }
+        }
+        
         // initial data
         var snapshot = NSDiffableDataSourceSnapshot<SectionType, String>()
             snapshot.appendSections(SectionType.allCases)
@@ -101,20 +117,11 @@ class HomeViewController: UIViewController {
         
     }
     
-    private func setupCalendar() {
-        let calendar = FSCalendar(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.backgroundColor = .white
-        calendar.scrollDirection = .horizontal
-        calendar.appearance.headerDateFormat = "YYYY년 M월"
-        calendar.appearance.headerMinimumDissolvedAlpha = 0
-//        calendar.scope = .week // 주간 달력 설정
-         view.addSubview(calendar)
-         self.fsCalendar = calendar
-        
-    }
+    
     private func setCollectionView(){
         view.addSubview(collectionView)
-        collectionView.backgroundColor = .systemBlue
+//        collectionView.backgroundColor = .systemBlue
+        collectionView.register(ListCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "MySectionHeaderView")
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
@@ -122,15 +129,41 @@ class HomeViewController: UIViewController {
         fsCalendar.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(20)
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(200)
+            make.height.equalToSuperview().multipliedBy(0.3)
         }
         
         collectionView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(20)
             make.top.equalTo(fsCalendar.snp.bottom).offset(20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+            make.bottom.greaterThanOrEqualTo(view.safeAreaLayoutGuide).offset(-20)
         }
         
     }
+}
+
+extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
+    private func setupCalendar() {
+        let calendar = FSCalendar(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        view.backgroundColor = .white
+        calendar.scrollDirection = .horizontal
+        calendar.appearance.headerDateFormat = "YYYY년 M월"
+        calendar.appearance.headerMinimumDissolvedAlpha = 0
+        calendar.appearance.todayColor = .clear
+        calendar.appearance.titleTodayColor = .black //Today에 표시되는 특정 글자색
+//        calendar.scope = .week // 주간 달력 설정
+         view.addSubview(calendar)
+         self.fsCalendar = calendar
+        fsCalendar.delegate = self
+        fsCalendar.dataSource = self
+    }
+    
+//    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+//        calendar.snp.updateConstraints { make in
+//            make.height.equalTo(bounds.height)
+//            make.top.equalTo(view.safeAreaLayoutGuide)
+//        }
+//        self.view.layoutIfNeeded()
+//
+//    }
 }
 
