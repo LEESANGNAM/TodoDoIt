@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D62B07772AC2B101002C7EAB /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = D62B07762AC2B101002C7EAB /* FSCalendar */; };
+		D62B077A2AC2B10D002C7EAB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D62B07792AC2B10D002C7EAB /* Kingfisher */; };
+		D62B077D2AC2B11B002C7EAB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D62B077C2AC2B11B002C7EAB /* SnapKit */; };
+		D62B07802AC2B17F002C7EAB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D62B077F2AC2B17F002C7EAB /* Realm */; };
+		D62B07822AC2B17F002C7EAB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D62B07812AC2B17F002C7EAB /* RealmSwift */; };
+		D62B07852AC2B1BA002C7EAB /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = D62B07842AC2B1BA002C7EAB /* Toast */; };
 		D6D92F062AC031DF0074236E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F052AC031DF0074236E /* AppDelegate.swift */; };
 		D6D92F082AC031DF0074236E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F072AC031DF0074236E /* SceneDelegate.swift */; };
 		D6D92F0A2AC031DF0074236E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F092AC031DF0074236E /* HomeViewController.swift */; };
@@ -29,6 +35,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D62B07852AC2B1BA002C7EAB /* Toast in Frameworks */,
+				D62B077D2AC2B11B002C7EAB /* SnapKit in Frameworks */,
+				D62B077A2AC2B10D002C7EAB /* Kingfisher in Frameworks */,
+				D62B07802AC2B17F002C7EAB /* Realm in Frameworks */,
+				D62B07822AC2B17F002C7EAB /* RealmSwift in Frameworks */,
+				D62B07772AC2B101002C7EAB /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +92,14 @@
 			dependencies = (
 			);
 			name = TodoDoIt;
+			packageProductDependencies = (
+				D62B07762AC2B101002C7EAB /* FSCalendar */,
+				D62B07792AC2B10D002C7EAB /* Kingfisher */,
+				D62B077C2AC2B11B002C7EAB /* SnapKit */,
+				D62B077F2AC2B17F002C7EAB /* Realm */,
+				D62B07812AC2B17F002C7EAB /* RealmSwift */,
+				D62B07842AC2B1BA002C7EAB /* Toast */,
+			);
 			productName = TodoDoIt;
 			productReference = D6D92F022AC031DF0074236E /* TodoDoIt.app */;
 			productType = "com.apple.product-type.application";
@@ -108,6 +128,13 @@
 				Base,
 			);
 			mainGroup = D6D92EF92AC031DF0074236E;
+			packageReferences = (
+				D62B07752AC2B101002C7EAB /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				D62B07782AC2B10D002C7EAB /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				D62B077B2AC2B11B002C7EAB /* XCRemoteSwiftPackageReference "SnapKit" */,
+				D62B077E2AC2B17F002C7EAB /* XCRemoteSwiftPackageReference "realm-swift" */,
+				D62B07832AC2B1BA002C7EAB /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+			);
 			productRefGroup = D6D92F032AC031DF0074236E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -344,6 +371,82 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D62B07752AC2B101002C7EAB /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		D62B07782AC2B10D002C7EAB /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		D62B077B2AC2B11B002C7EAB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		D62B077E2AC2B17F002C7EAB /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.42.4;
+			};
+		};
+		D62B07832AC2B1BA002C7EAB /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D62B07762AC2B101002C7EAB /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D62B07752AC2B101002C7EAB /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+		D62B07792AC2B10D002C7EAB /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D62B07782AC2B10D002C7EAB /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		D62B077C2AC2B11B002C7EAB /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D62B077B2AC2B11B002C7EAB /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		D62B077F2AC2B17F002C7EAB /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D62B077E2AC2B17F002C7EAB /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		D62B07812AC2B17F002C7EAB /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D62B077E2AC2B17F002C7EAB /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		D62B07842AC2B1BA002C7EAB /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D62B07832AC2B1BA002C7EAB /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D6D92EFA2AC031DF0074236E /* Project object */;
 }
