@@ -9,17 +9,97 @@ import UIKit
 import FSCalendar
 import SnapKit
 
+enum SectionType: Int, CaseIterable {
+    case one, two, three
+    
+    var title: String {
+        switch self {
+        case .one:
+            return "목표"
+        case .two:
+            return "할일"
+        case .three:
+            return "메모"
+        }
+    }
+}
+
+
 class HomeViewController: UIViewController {
     private weak var fsCalendar: FSCalendar!
+    
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+    var dataSource: UICollectionViewDiffableDataSource<SectionType,String>?
+    let testData1 = ["여기는", "목표", "들어가야함","자리임", "나오겠지"]
+    let testData2 = ["요기는", "메모", "들어갈껄?", "자리야" ,"나와라"]
+    let testData3 = ["이칸은", "할일", "들어가야지", "자리", "나와야함"]
+    
     
     override func viewDidLoad() {
          super.viewDidLoad()
         setupCalendar()
+        setCollectionView()
         setConstraint()
-        
+        configureDataSource()
        
      }
     
+    func createLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout {
+            (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            
+            let item = NSCollectionLayoutItem(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                  heightDimension: .fractionalHeight(1.0)))
+            item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+            var containerGroup: NSCollectionLayoutGroup!
+            if sectionIndex == 0 {
+                containerGroup = NSCollectionLayoutGroup.horizontal(
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                       heightDimension: .fractionalHeight(0.3)),
+                    subitem: item, count: 1)
+            } else {
+                containerGroup = NSCollectionLayoutGroup.horizontal(
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                       heightDimension: .fractionalHeight(0.2)),
+                    subitem: item, count: 1)
+            }
+            let section = NSCollectionLayoutSection(group: containerGroup)
+            section.orthogonalScrollingBehavior = .groupPagingCentered
+
+            return section
+
+        }
+        return layout
+    }
+    
+    func configureDataSource() {
+        
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, String> { (cell, indexPath, identifier) in
+            
+            var content = UIListContentConfiguration.valueCell()
+            content.text = identifier
+            cell.contentConfiguration = content
+            
+            var backgroundConfig = UIBackgroundConfiguration.listPlainCell()
+            backgroundConfig.backgroundColor = UIColor(red: CGFloat(Int.random(in: 0...1)), green: CGFloat(Int.random(in: 0...1)), blue: CGFloat(Int.random(in: 0...1)), alpha: 1)
+            backgroundConfig.cornerRadius = 10
+            cell.backgroundConfiguration = backgroundConfig
+        }
+        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+            let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+            return cell
+        }
+        // initial data
+        var snapshot = NSDiffableDataSourceSnapshot<SectionType, String>()
+            snapshot.appendSections(SectionType.allCases)
+    print(SectionType.allCases)
+        snapshot.appendItems(testData1,toSection: SectionType.allCases[0])
+        snapshot.appendItems(testData2,toSection: SectionType.allCases[1])
+        snapshot.appendItems(testData3,toSection: SectionType.allCases[2])
+        dataSource?.apply(snapshot, animatingDifferences: false)
+        
+    }
     
     private func setupCalendar() {
         let calendar = FSCalendar(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -32,13 +112,25 @@ class HomeViewController: UIViewController {
          self.fsCalendar = calendar
         
     }
+    private func setCollectionView(){
+        view.addSubview(collectionView)
+        collectionView.backgroundColor = .systemBlue
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    }
     
     private func setConstraint() {
         fsCalendar.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(20)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(200)
         }
+        
+        collectionView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.top.equalTo(fsCalendar.snp.bottom).offset(20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+        }
+        
     }
 }
 
