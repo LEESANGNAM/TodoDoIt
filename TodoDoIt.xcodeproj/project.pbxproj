@@ -57,6 +57,14 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		D62B07892AC2B732002C7EAB /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D6D92F092AC031DF0074236E /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		D6D92EF92AC031DF0074236E = {
 			isa = PBXGroup;
 			children = (
@@ -76,10 +84,10 @@
 		D6D92F042AC031DF0074236E /* TodoDoIt */ = {
 			isa = PBXGroup;
 			children = (
+				D62B07892AC2B732002C7EAB /* Home */,
 				D62B07862AC2B22F002C7EAB /* TabBar */,
 				D6D92F052AC031DF0074236E /* AppDelegate.swift */,
 				D6D92F072AC031DF0074236E /* SceneDelegate.swift */,
-				D6D92F092AC031DF0074236E /* HomeViewController.swift */,
 				D6D92F0E2AC031E00074236E /* Assets.xcassets */,
 				D6D92F102AC031E00074236E /* LaunchScreen.storyboard */,
 				D6D92F132AC031E00074236E /* Info.plist */,
