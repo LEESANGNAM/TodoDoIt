@@ -13,6 +13,7 @@
 		D62B07802AC2B17F002C7EAB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D62B077F2AC2B17F002C7EAB /* Realm */; };
 		D62B07822AC2B17F002C7EAB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D62B07812AC2B17F002C7EAB /* RealmSwift */; };
 		D62B07852AC2B1BA002C7EAB /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = D62B07842AC2B1BA002C7EAB /* Toast */; };
+		D62B07882AC2B252002C7EAB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B07872AC2B252002C7EAB /* TabBarController.swift */; };
 		D6D92F062AC031DF0074236E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F052AC031DF0074236E /* AppDelegate.swift */; };
 		D6D92F082AC031DF0074236E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F072AC031DF0074236E /* SceneDelegate.swift */; };
 		D6D92F0A2AC031DF0074236E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F092AC031DF0074236E /* HomeViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D62B07872AC2B252002C7EAB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		D6D92F022AC031DF0074236E /* TodoDoIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoDoIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D92F052AC031DF0074236E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6D92F072AC031DF0074236E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D62B07862AC2B22F002C7EAB /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				D62B07872AC2B252002C7EAB /* TabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		D6D92EF92AC031DF0074236E = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +76,7 @@
 		D6D92F042AC031DF0074236E /* TodoDoIt */ = {
 			isa = PBXGroup;
 			children = (
+				D62B07862AC2B22F002C7EAB /* TabBar */,
 				D6D92F052AC031DF0074236E /* AppDelegate.swift */,
 				D6D92F072AC031DF0074236E /* SceneDelegate.swift */,
 				D6D92F092AC031DF0074236E /* HomeViewController.swift */,
@@ -162,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6D92F0A2AC031DF0074236E /* HomeViewController.swift in Sources */,
+				D62B07882AC2B252002C7EAB /* TabBarController.swift in Sources */,
 				D6D92F062AC031DF0074236E /* AppDelegate.swift in Sources */,
 				D6D92F082AC031DF0074236E /* SceneDelegate.swift in Sources */,
 			);
