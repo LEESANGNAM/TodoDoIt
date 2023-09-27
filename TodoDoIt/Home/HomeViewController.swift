@@ -34,6 +34,7 @@ class HomeViewController: UIViewController {
     let testData2 = ["요기는", "메모", "들어갈껄?", "자리야" ,"나와라"]
     let testData3 = ["이칸은", "할일", "들어가야지", "자리", "나와야함"]
     
+    let repository = Repository()
     
     override func viewDidLoad() {
          super.viewDidLoad()
@@ -41,7 +42,18 @@ class HomeViewController: UIViewController {
         setCollectionView()
         setConstraint()
         configureDataSource()
-       
+        
+        let testModel = DoIt(title: "테스트목표 데이터", startDate: Date(), endDate: Date(), complete: 30)
+        let testModel2 = DoIt(title: "목표데이터 완료결과 넣는것", startDate: Date(), endDate: Date(), complete: 20)
+        let testComplet = DoitCompleted(title: testModel2.title, impression: "목표2를1번달성~")
+        let testMemo = Memo(title: "물챙겨야함")
+        testModel2.doitComplete.append(testComplet)
+        repository.createItem(testModel)
+        repository.createItem(testModel2)
+        repository.createItem(testMemo)
+        
+        
+        
      }
     
     func createLayout() -> UICollectionViewLayout {
@@ -109,8 +121,7 @@ class HomeViewController: UIViewController {
         
         // initial data
         var snapshot = NSDiffableDataSourceSnapshot<SectionType, String>()
-            snapshot.appendSections(SectionType.allCases)
-    print(SectionType.allCases)
+        snapshot.appendSections(SectionType.allCases)
         snapshot.appendItems(testData1,toSection: SectionType.allCases[0])
         snapshot.appendItems(testData2,toSection: SectionType.allCases[1])
         snapshot.appendItems(testData3,toSection: SectionType.allCases[2])
