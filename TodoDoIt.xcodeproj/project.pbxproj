@@ -109,6 +109,15 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		D62B079A2AC45599002C7EAB /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D62B07862AC2B22F002C7EAB /* TabBar */,
+				D62B07892AC2B732002C7EAB /* Home */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
 		D6D92EF92AC031DF0074236E = {
 			isa = PBXGroup;
 			children = (
@@ -128,11 +137,10 @@
 		D6D92F042AC031DF0074236E /* TodoDoIt */ = {
 			isa = PBXGroup;
 			children = (
+				D62B079A2AC45599002C7EAB /* Scene */,
 				D62B07972AC3EAB5002C7EAB /* Service */,
 				D62B07902AC3E176002C7EAB /* Model */,
 				D62B078D2AC33C7F002C7EAB /* Component */,
-				D62B07892AC2B732002C7EAB /* Home */,
-				D62B07862AC2B22F002C7EAB /* TabBar */,
 				D6D92F052AC031DF0074236E /* AppDelegate.swift */,
 				D6D92F072AC031DF0074236E /* SceneDelegate.swift */,
 				D6D92F0E2AC031E00074236E /* Assets.xcassets */,
