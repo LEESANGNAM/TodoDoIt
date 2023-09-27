@@ -113,6 +113,8 @@ class HomeViewController: BaseViewController {
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MySectionHeaderView", for: indexPath) as! ListCollectionViewHeaderView
                 // headerView의 내용 설정
                 headerView.titleLabel.text = SectionType.allCases[indexPath.section].title
+                headerView.addButton.tag = indexPath.section
+                headerView.addButton.addTarget(self, action: #selector(self.addButtonTapped), for: .touchUpInside)
                 return headerView
             } else {
                 return nil
@@ -128,7 +130,14 @@ class HomeViewController: BaseViewController {
         dataSource?.apply(snapshot, animatingDifferences: false)
         
     }
-    
+    @objc func addButtonTapped(_ sender: UIButton){
+        switch sender.tag {
+        case 0: navigationController?.pushViewController(DoitAddViewController(), animated: true)
+        case 1: break
+        case 2: break
+        default: break
+        }
+    }
     
     private func setCollectionView(){
         view.addSubview(collectionView)

@@ -23,6 +23,7 @@
 		D62B07A02AC45813002C7EAB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B079F2AC45813002C7EAB /* BaseViewController.swift */; };
 		D62B07A22AC4581A002C7EAB /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B07A12AC4581A002C7EAB /* BaseView.swift */; };
 		D62B07A42AC4584A002C7EAB /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B07A32AC4584A002C7EAB /* BaseCollectionViewCell.swift */; };
+		D62B07A62AC48D9F002C7EAB /* DoitAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B07A52AC48D9F002C7EAB /* DoitAddView.swift */; };
 		D6D92F062AC031DF0074236E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F052AC031DF0074236E /* AppDelegate.swift */; };
 		D6D92F082AC031DF0074236E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F072AC031DF0074236E /* SceneDelegate.swift */; };
 		D6D92F0A2AC031DF0074236E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F092AC031DF0074236E /* HomeViewController.swift */; };
@@ -41,6 +42,7 @@
 		D62B079F2AC45813002C7EAB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D62B07A12AC4581A002C7EAB /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		D62B07A32AC4584A002C7EAB /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		D62B07A52AC48D9F002C7EAB /* DoitAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitAddView.swift; sourceTree = "<group>"; };
 		D6D92F022AC031DF0074236E /* TodoDoIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoDoIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D92F052AC031DF0074236E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6D92F072AC031DF0074236E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				D62B079C2AC456B5002C7EAB /* DoitAddViewController.swift */,
+				D62B07A52AC48D9F002C7EAB /* DoitAddView.swift */,
 			);
 			path = Doit;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			files = (
 				D62B07942AC3E96B002C7EAB /* Memo.swift in Sources */,
 				D6D92F0A2AC031DF0074236E /* HomeViewController.swift in Sources */,
+				D62B07A62AC48D9F002C7EAB /* DoitAddView.swift in Sources */,
 				D62B07A02AC45813002C7EAB /* BaseViewController.swift in Sources */,
 				D62B07A22AC4581A002C7EAB /* BaseView.swift in Sources */,
 				D62B07882AC2B252002C7EAB /* TabBarController.swift in Sources */,
