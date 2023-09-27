@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class ListCollectionViewHeaderView: UICollectionReusableView {
-    let titleLabel = {
+    var titleLabel = {
         let view = UILabel()
         view.text = "여기가 헤더뷰 타이틀"
         return view

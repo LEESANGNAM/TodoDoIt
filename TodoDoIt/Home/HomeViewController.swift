@@ -100,6 +100,7 @@ class HomeViewController: UIViewController {
                 // 섹션 헤더를 만들고 반환
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MySectionHeaderView", for: indexPath) as! ListCollectionViewHeaderView
                 // headerView의 내용 설정
+                headerView.titleLabel.text = SectionType.allCases[indexPath.section].title
                 return headerView
             } else {
                 return nil
@@ -120,7 +121,6 @@ class HomeViewController: UIViewController {
     
     private func setCollectionView(){
         view.addSubview(collectionView)
-//        collectionView.backgroundColor = .systemBlue
         collectionView.register(ListCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "MySectionHeaderView")
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
