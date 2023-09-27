@@ -13,5 +13,12 @@ class Memo: Object {
     @Persisted var title: String
     @Persisted var createDate = Date()
     @Persisted var UpdateDate: Date?
+    
+    convenience init(title: String) {
+        self.init()
+        self.title = title
+    }
+    
+    
 }
 

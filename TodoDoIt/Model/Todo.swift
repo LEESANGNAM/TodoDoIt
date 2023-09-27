@@ -14,4 +14,9 @@ class Todo: Object {
     @Persisted var finish: Bool = false
     @Persisted var createDate = Date()
     @Persisted var UpdateDate: Date?
+    
+    convenience init(title: String) {
+        self.init()
+        self.title = title
+    }
 }
