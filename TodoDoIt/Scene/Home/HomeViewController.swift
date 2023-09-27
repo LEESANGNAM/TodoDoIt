@@ -25,7 +25,7 @@ enum SectionType: Int, CaseIterable {
 }
 
 
-class HomeViewController: UIViewController {
+class HomeViewController: BaseViewController {
     private weak var fsCalendar: FSCalendar!
     
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
