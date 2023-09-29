@@ -40,26 +40,16 @@ class DoitAddView: BaseView {
     }()
     let startDateTextField = {
         let view = UITextField()
-        let picker = UIDatePicker()
-        view.inputView = picker
-        picker.datePickerMode = .date
-        picker.preferredDatePickerStyle = .wheels
         view.placeholder = "00.00.00"
         return view
     }()
     let endDateTextField = {
         let view = UITextField()
-        let picker = UIDatePicker()
-        view.inputView = picker
-        picker.datePickerMode = .dateAndTime
-        picker.preferredDatePickerStyle = .wheels
         view.placeholder = "00.00.00"
         return view
     }()
     let completeTextField = {
         let view = UITextField()
-        let picker = UIPickerView()
-        view.inputView = picker
         view.placeholder = "00회"
         return view
     }()

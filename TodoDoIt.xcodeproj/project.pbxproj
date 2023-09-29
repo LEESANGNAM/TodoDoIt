@@ -29,6 +29,7 @@
 		D6D92F0A2AC031DF0074236E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F092AC031DF0074236E /* HomeViewController.swift */; };
 		D6D92F0F2AC031E00074236E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6D92F0E2AC031E00074236E /* Assets.xcassets */; };
 		D6D92F122AC031E00074236E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6D92F102AC031E00074236E /* LaunchScreen.storyboard */; };
+		D6F0C6162AC5B5B100EE99AF /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0C6152AC5B5B100EE99AF /* Date+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		D6D92F0E2AC031E00074236E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6D92F112AC031E00074236E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D6D92F132AC031E00074236E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6F0C6152AC5B5B100EE99AF /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 		D6D92F042AC031DF0074236E /* TodoDoIt */ = {
 			isa = PBXGroup;
 			children = (
+				D6F0C6142AC5B59F00EE99AF /* Extension */,
 				D62B079E2AC45804002C7EAB /* Base */,
 				D62B079A2AC45599002C7EAB /* Scene */,
 				D62B07972AC3EAB5002C7EAB /* Service */,
@@ -179,6 +182,14 @@
 				D6D92F132AC031E00074236E /* Info.plist */,
 			);
 			path = TodoDoIt;
+			sourceTree = "<group>";
+		};
+		D6F0C6142AC5B59F00EE99AF /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D6F0C6152AC5B5B100EE99AF /* Date+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +282,7 @@
 				D62B07A62AC48D9F002C7EAB /* DoitAddView.swift in Sources */,
 				D62B07A02AC45813002C7EAB /* BaseViewController.swift in Sources */,
 				D62B07A22AC4581A002C7EAB /* BaseView.swift in Sources */,
+				D6F0C6162AC5B5B100EE99AF /* Date+Extension.swift in Sources */,
 				D62B07882AC2B252002C7EAB /* TabBarController.swift in Sources */,
 				D62B07962AC3E972002C7EAB /* Todo.swift in Sources */,
 				D62B079D2AC456B5002C7EAB /* DoitAddViewController.swift in Sources */,

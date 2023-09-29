@@ -34,7 +34,7 @@ class HomeViewController: BaseViewController {
     let testData2 = ["요기는", "메모", "들어갈껄?", "자리야" ,"나와라"]
     let testData3 = ["이칸은", "할일", "들어가야지", "자리", "나와야함"]
     
-    let repository = Repository()
+    let repository = Repository<DoIt>()
     
     override func viewDidLoad() {
          super.viewDidLoad()
@@ -43,19 +43,55 @@ class HomeViewController: BaseViewController {
         setConstraint()
         configureDataSource()
         
-        let testModel = DoIt(title: "테스트목표 데이터", startDate: Date(), endDate: Date(), complete: 30)
-        let testModel2 = DoIt(title: "목표데이터 완료결과 넣는것", startDate: Date(), endDate: Date(), complete: 20)
-        let testComplet = DoitCompleted(title: testModel2.title, impression: "목표2를1번달성~")
-        let testMemo = Memo(title: "물챙겨야함")
-        testModel2.doitComplete.append(testComplet)
-        repository.createItem(testModel)
-        repository.createItem(testModel2)
-        repository.createItem(testMemo)
+//        let testModel = DoIt(title: "테스트목표 데이터", startDate: Date(), endDate: Date(), complete: 30)
+//        let testModel2 = DoIt(title: "목표데이터 완료결과 넣는것", startDate: Date(), endDate: Date(), complete: 20)
+//        let testComplet = DoitCompleted(title: testModel2.title, impression: "목표2를1번달성~")
+//        let testMemo = Memo(title: "물챙겨야함")
+//        testModel2.doitComplete.append(testComplet)
+//        repository.createItem(testModel)
+//        repository.createItem(testModel2)
+//        repository.createItem(testMemo)
+//
+        let calendar = Calendar.current
+        var testDateComponents = DateComponents()
+        testDateComponents.year = 2023
+        testDateComponents.month = 10
+        testDateComponents.day = 13
+        if let testDate = calendar.date(from: testDateComponents){ //2023.10.13 일자가 포함된 목표 출력 테스트
+            let result = repository.fetchFilterContainsDate(date: testDate)
+            print(result)
+        }
         
         
         
      }
     
+   
+    
+    private func setCollectionView(){
+        view.addSubview(collectionView)
+        collectionView.register(ListCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "MySectionHeaderView")
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    }
+    
+    private func setConstraint() {
+        fsCalendar.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalToSuperview().multipliedBy(0.3)
+        }
+        
+        collectionView.snp.makeConstraints { make in
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.top.equalTo(fsCalendar.snp.bottom).offset(20)
+            make.bottom.greaterThanOrEqualTo(view.safeAreaLayoutGuide).offset(-20)
+        }
+        
+    }
+}
+
+//MARK: - collectionView, diffableDatasource
+extension HomeViewController {
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -138,29 +174,9 @@ class HomeViewController: BaseViewController {
         default: break
         }
     }
-    
-    private func setCollectionView(){
-        view.addSubview(collectionView)
-        collectionView.register(ListCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "MySectionHeaderView")
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    }
-    
-    private func setConstraint() {
-        fsCalendar.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(20)
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalToSuperview().multipliedBy(0.3)
-        }
-        
-        collectionView.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(20)
-            make.top.equalTo(fsCalendar.snp.bottom).offset(20)
-            make.bottom.greaterThanOrEqualTo(view.safeAreaLayoutGuide).offset(-20)
-        }
-        
-    }
 }
 
+// MARK: - FSCalendar
 extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
     private func setupCalendar() {
         let calendar = FSCalendar(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
