@@ -8,45 +8,31 @@
 import UIKit
 
 class DoitAddViewController: BaseViewController {
-    
-    var startDate: Date? {
-        didSet {
-            print("여긴 시작일 이에요")
-            print("startDate : ",startDate)
-            print("endDate : ",endDate)
-            print("------------------")
-        }
-    }
-    var endDate: Date?  {
-        didSet {
-            print("여긴 종료일 이에요")
-            print("startDate : ",startDate)
-            print("endDate : ",endDate)
-            print("------------------")
-        }
-    }
-    var completeCount: Int?
-    
-    var list: [Int] = []
-    var completeMaxCount: Int? {
-        didSet {
-            if let completeMaxCount{
-                print("리스트 값 들어감")
-                list = Array(1...completeMaxCount)
-            }
-        }
-    }
-    
     let mainview = DoitAddView()
-    let repository = Repository()
+    let completePicker = UIPickerView()
+    let viewmodel = DoitAddViewModel()
+    
     override func loadView() {
         view = mainview
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        bind()
         setupPickerView()
         setupNavigationBar()
+    }
+    func bind(){
+        viewmodel.startDate.bind { [weak self] data in
+            let dateString = data.changeFormatString(format: "yyyy.MM.dd")
+            self?.mainview.startDateTextField.text = dateString
+        }
+        viewmodel.endDate.bind {
+            print("종료일 바꾸는중",$0) // 시작일과 비교해서 경고창 띄우기
+        }
+        viewmodel.completMaxCount.bind {[weak self] _ in
+            self?.viewmodel.fetchListValue()
+        }
     }
     
     private func setupNavigationBar(){
@@ -56,47 +42,33 @@ class DoitAddViewController: BaseViewController {
     }
     @objc  private func saveButtonTapped(){
         guard let title = mainview.doitTextField.text else { return }
-        guard let startDate else { return }
-        guard let endDate else { return }
-        guard let completeCount else { return }
-        let data = DoIt(title: title, startDate: startDate, endDate: endDate, complete: completeCount)
-        repository.createItem(data)
+        viewmodel.saveData(title: title)
         navigationController?.popViewController(animated: true)
     }
     
 }
 
+//MARK: - UIPickerView
 extension DoitAddViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        guard let completeMaxCount else {
-            print("아직 입력된 날짜가 없습니다.")
-            return 0
-        }
-        
-        return list.count
+        return viewmodel.listCount()
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        completeCount = list[row]
+        print(row,"이건 인덱스번호임 몇번까지있나.보자 ")
+        print(viewmodel.listCount(),"이건 리스트 길이임 몇번까지인지보다")
+        print("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
+        viewmodel.fetchCompleteCount(index: row)
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(list[row])회"
-    }
-    
-    
-    
-   private func daysBetweenDate(startDate: Date, endDate: Date) -> Int?{
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.day], from: startDate, to: endDate)
-        
-        return components.day
+        let data = viewmodel.getListValue(index: row)
+        return "\(data)회"
     }
     private func setupCompletePickerView(){
-        let completePicker = UIPickerView()
         let toolBar = setupTollbar(tag: 2)
         completePicker.delegate = self
         completePicker.dataSource = self
@@ -105,11 +77,8 @@ extension DoitAddViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     }
     
 }
-
-
 //MARK: - datePicker,ToolBar
 extension DoitAddViewController {
-    
     private func setupPickerView(){
         setupStartDatePickerView()
         setupEndDatePickerView()
@@ -117,24 +86,17 @@ extension DoitAddViewController {
     }
     
     @objc private func startDateValueChanged(_ sender: UIDatePicker){
-        startDate = sender.date
+        viewmodel.startDate.value = sender.date
     }
     
     @objc private func endDateValueChanged(_ sender: UIDatePicker){
-        endDate = sender.date
+        viewmodel.endDate.value = sender.date
     }
-    
-    
+
     private func setupStartDatePickerView(){
-        let startDatePicker = UIDatePicker()
-        startDatePicker.datePickerMode = .date
-        startDatePicker.date = Date() // 오늘값 넣어놓기
-        startDatePicker.minimumDate = Date()
-        startDatePicker.preferredDatePickerStyle = .inline
-        startDatePicker.locale = Locale(identifier: "ko-KR") // 한국 시간
-        startDatePicker.timeZone = TimeZone(abbreviation: "KST") // 한국시간대
+        let startDatePicker = createDatePickerView()
+        startDatePicker.isEnabled = false // 시작날짜는 오늘로 고정
         startDatePicker.addTarget(self, action: #selector(startDateValueChanged), for: .valueChanged)
-        
         
         let toolBar = setupTollbar(tag: 0)
         
@@ -142,20 +104,25 @@ extension DoitAddViewController {
         mainview.startDateTextField.inputAccessoryView = toolBar
     }
     private func setupEndDatePickerView(){
-        let endDatePicker = UIDatePicker()
-        endDatePicker.datePickerMode = .date
-        endDatePicker.date = Date() // 오늘값 넣어놓기
-        endDatePicker.minimumDate = Date()
-        endDatePicker.preferredDatePickerStyle = .inline
-        endDatePicker.locale = Locale(identifier: "ko-KR") // 한국 시간
-        endDatePicker.timeZone = TimeZone(abbreviation: "KST") // 한국시간대
+        let endDatePicker = createDatePickerView()
         endDatePicker .addTarget(self, action: #selector(endDateValueChanged), for: .valueChanged)
         
         let toolBar = setupTollbar(tag: 1)
+        
         mainview.endDateTextField.inputView = endDatePicker
         mainview.endDateTextField.inputAccessoryView = toolBar
     }
 
+    private func createDatePickerView() -> UIDatePicker {
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        picker.date = Date() // 오늘값 넣어놓기
+        picker.minimumDate = Date()
+        picker.preferredDatePickerStyle = .inline
+        picker.locale = Locale(identifier: "ko-KR") // 한국 시간
+        picker.timeZone = TimeZone(abbreviation: "KST") // 한국시간대
+        return picker
+    }
     
     private func setupTollbar(tag: Int) -> UIToolbar{
         let toolbar = UIToolbar()
@@ -174,42 +141,30 @@ extension DoitAddViewController {
     @objc private func cancelButtonTapped(_ sender: UIBarButtonItem) {
            // 취소 버튼을 눌렀을 때 실행되는 함수
         if sender.tag == 0 {
-            startDate = nil
+            mainview.startDateTextField.text = ""
             mainview.startDateTextField.resignFirstResponder()
         } else if sender.tag == 1 {
-            endDate = nil
+            mainview.endDateTextField.text = ""
             mainview.endDateTextField.resignFirstResponder()
         } else if sender.tag == 2 {
-            completeCount = nil
+            mainview.completeTextField.text = ""
             mainview.completeTextField.resignFirstResponder()
         }
        }
     
     @objc private func doneButtonTapped(_ sender: UIBarButtonItem) {
         // 완료 버튼을 눌렀을 때 실행되는 함수
-        guard let startDate else {
-            print("시작일수를 먼저 적어주세요")
-            return
-        }
         if sender.tag == 0 {
             mainview.startDateTextField.resignFirstResponder()
-            let dateString = startDate.changeFormatString(format: "yyyy.MM.dd")
+            let dateString = viewmodel.startDate.value.changeFormatString(format: "yyyy.MM.dd")
             mainview.startDateTextField.text = dateString
         } else if sender.tag == 1 {
             mainview.endDateTextField.resignFirstResponder()
-            guard let endDate else {
-                print("종료 먼저 적어주세요")
-                return
-            }
-            mainview.endDateTextField.text = endDate.changeFormatString(format: "yyyy.MM.dd")
-            completeMaxCount = daysBetweenDate(startDate: startDate, endDate: endDate) //종료일까지 입력하면 최대횟수 지정
+            mainview.endDateTextField.text = viewmodel.endDate.value.changeFormatString(format: "yyyy.MM.dd")
+            viewmodel.fetchCompletMaxCount()
         } else if sender.tag == 2 {
             mainview.completeTextField.resignFirstResponder()
-            guard let completeCount else {
-                print("횟수 선택해주세요")
-                return
-            }
-            mainview.completeTextField.text = "\(completeCount)회"
+            mainview.completeTextField.text = "\(viewmodel.completeCount.value)회"
         }
     }
 }
