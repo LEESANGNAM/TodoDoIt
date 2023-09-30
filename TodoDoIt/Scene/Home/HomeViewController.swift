@@ -29,6 +29,10 @@ class HomeViewController: BaseViewController {
     private weak var fsCalendar: FSCalendar!
     
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+    
+    private typealias DoitCellRegistration = UICollectionView.CellRegistration<DoitCollectionViewCell,String>
+    
+    
     var dataSource: UICollectionViewDiffableDataSource<SectionType,String>?
     let testData1 = ["여기는", "목표", "들어가야함","자리임", "나오겠지"]
     let testData2 = ["요기는", "메모", "들어갈껄?", "자리야" ,"나와라"]
@@ -138,9 +142,25 @@ extension HomeViewController {
             backgroundConfig.cornerRadius = 10
             cell.backgroundConfiguration = backgroundConfig
         }
+        
+        let doitCellRegistration = DoitCellRegistration { cell, indexPath, identifier in
+            cell.titleLabel.text = "테스트요오오옹 목표에요~~"
+        }
+        
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
-            let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
-            return cell
+            guard let section = SectionType(rawValue: indexPath.section) else { return UICollectionViewCell()}
+            // 섹션별로 다른 셀
+            switch section {
+            case .one:
+                let cell = collectionView.dequeueConfiguredReusableCell(using: doitCellRegistration, for: indexPath, item: itemIdentifier)
+                return cell
+            case .two:
+                let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+                return cell
+            case .three:
+                let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+                return cell
+            }
         }
         
         dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
