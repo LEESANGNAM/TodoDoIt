@@ -9,36 +9,17 @@ import UIKit
 import FSCalendar
 import SnapKit
 
-enum SectionType: Int, CaseIterable {
-    case one, two, three
-    
-    var title: String {
-        switch self {
-        case .one:
-            return "목표"
-        case .two:
-            return "할일"
-        case .three:
-            return "메모"
-        }
-    }
-}
-
-
 class HomeViewController: BaseViewController {
     private weak var fsCalendar: FSCalendar!
     
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
     
-    private typealias DoitCellRegistration = UICollectionView.CellRegistration<DoitCollectionViewCell,String>
+    private typealias DoitCellRegistration = UICollectionView.CellRegistration<DoitCollectionViewCell,DoIt>
     
     
-    var dataSource: UICollectionViewDiffableDataSource<SectionType,String>?
-    let testData1 = ["여기는", "목표", "들어가야함","자리임", "나오겠지"]
-    let testData2 = ["요기는", "메모", "들어갈껄?", "자리야" ,"나와라"]
-    let testData3 = ["이칸은", "할일", "들어가야지", "자리", "나와야함"]
+    var dataSource: UICollectionViewDiffableDataSource<SectionType,DoIt>?
     
-    let repository = Repository<DoIt>()
+    let viewmodel = HomeViewModel()
     
     override func viewDidLoad() {
          super.viewDidLoad()
@@ -46,30 +27,17 @@ class HomeViewController: BaseViewController {
         setCollectionView()
         setConstraint()
         configureDataSource()
-        
-//        let testModel = DoIt(title: "테스트목표 데이터", startDate: Date(), endDate: Date(), complete: 30)
-//        let testModel2 = DoIt(title: "목표데이터 완료결과 넣는것", startDate: Date(), endDate: Date(), complete: 20)
-//        let testComplet = DoitCompleted(title: testModel2.title, impression: "목표2를1번달성~")
-//        let testMemo = Memo(title: "물챙겨야함")
-//        testModel2.doitComplete.append(testComplet)
-//        repository.createItem(testModel)
-//        repository.createItem(testModel2)
-//        repository.createItem(testMemo)
-//
-        let calendar = Calendar.current
-        var testDateComponents = DateComponents()
-        testDateComponents.year = 2023
-        testDateComponents.month = 10
-        testDateComponents.day = 13
-        if let testDate = calendar.date(from: testDateComponents){ //2023.10.13 일자가 포함된 목표 출력 테스트
-            let result = repository.fetchFilterContainsDate(date: testDate)
-            print(result)
-        }
-        
-        
-        
+        bind()
+        viewmodel.fetchData()
      }
-    
+    private func bind(){
+        viewmodel.result.bind { _ in
+            self.viewmodel.changeArray()
+        }
+        viewmodel.doItArray.bind {_ in
+            self.updateSnapshot()
+        }
+    }
    
     
     private func setCollectionView(){
@@ -131,10 +99,9 @@ extension HomeViewController {
     
     func configureDataSource() {
         
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, String> { (cell, indexPath, identifier) in
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, DoIt> { (cell, indexPath, identifier) in
             
             var content = UIListContentConfiguration.valueCell()
-            content.text = identifier
             cell.contentConfiguration = content
             
             var backgroundConfig = UIBackgroundConfiguration.listPlainCell()
@@ -144,20 +111,20 @@ extension HomeViewController {
         }
         
         let doitCellRegistration = DoitCellRegistration { cell, indexPath, identifier in
-            cell.titleLabel.text = "테스트요오오옹 목표에요~~"
+            cell.setupData(doit: identifier)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             guard let section = SectionType(rawValue: indexPath.section) else { return UICollectionViewCell()}
             // 섹션별로 다른 셀
             switch section {
-            case .one:
+            case .doit:
                 let cell = collectionView.dequeueConfiguredReusableCell(using: doitCellRegistration, for: indexPath, item: itemIdentifier)
                 return cell
-            case .two:
+            case .todo:
                 let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
                 return cell
-            case .three:
+            case .memo:
                 let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
                 return cell
             }
@@ -176,15 +143,12 @@ extension HomeViewController {
                 return nil
             }
         }
-        
-        // initial data
-        var snapshot = NSDiffableDataSourceSnapshot<SectionType, String>()
+    }
+    func updateSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<SectionType, DoIt>()
         snapshot.appendSections(SectionType.allCases)
-        snapshot.appendItems(testData1,toSection: SectionType.allCases[0])
-        snapshot.appendItems(testData2,toSection: SectionType.allCases[1])
-        snapshot.appendItems(testData3,toSection: SectionType.allCases[2])
+        snapshot.appendItems(viewmodel.getDoitArray(),toSection: .doit)
         dataSource?.apply(snapshot, animatingDifferences: false)
-        
     }
     @objc func addButtonTapped(_ sender: UIButton){
         switch sender.tag {
