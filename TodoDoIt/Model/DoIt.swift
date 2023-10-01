@@ -25,6 +25,20 @@ class DoIt: Object {
         self.complete = complete
     }
     
+    var dateString: String {
+        let startDate = startDate.changeFormatString(format: "yyyy.MM.dd")
+        let endDate = endDate.changeFormatString(format: "yyyy.MM.dd")
+        return "기간: \(startDate) ~ \(endDate)"
+    }
+    
+    func progress() -> Double {
+        let completeCount = doitComplete.count
+        let count = Double(completeCount)
+        let totalCount = Double(complete)
+        let totalprogress = count / totalCount
+        
+        return totalprogress
+    }
     
 }
 

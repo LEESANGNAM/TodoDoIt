@@ -68,6 +68,17 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
             make.top.equalTo(dateLabel.snp.bottom).offset(5)
             make.bottom.equalTo(safeAreaLayoutGuide).offset(-5)
         }
+    }
+    func setupData(doit: DoIt){
+        let progress = doit.progress()
+        let title = doit.title
+        let date = doit.dateString
+        
+        titleLabel.text = title
+        dateLabel.text = date
+        
+        progressView.progress = Float(progress)
+        progressLabel.text = "\(Int(progress * 100))%"
         
     }
 }
