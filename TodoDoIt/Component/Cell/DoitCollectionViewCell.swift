@@ -11,14 +11,14 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
     var titleLabel = {
         let view = UILabel()
         view.text = "목표 : 머ㅏㄴ옴너ㅏ옹ㄴㅁ오ㅓㅁㄴㅇ"
-        view.font = .boldSystemFont(ofSize: 18)
+        view.font = .boldSystemFont(ofSize: Design.titleFontSize)
         view.textColor = .white
         return view
     }()
     var dateLabel = {
         let view = UILabel()
         view.text = "기간: 2023.09.10 ~ 2023.10.23"
-        view.font = .systemFont(ofSize: 10)
+        view.font = .systemFont(ofSize: Design.dateFontSize)
         view.textColor = .systemGray5
         return view
     }()
@@ -33,6 +33,7 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
     var progressLabel = {
         let view = UILabel()
         view.text = "50%"
+        view.font = .boldSystemFont(ofSize: Design.titleFontSize)
         view.textColor = .white
         return view
     }()
