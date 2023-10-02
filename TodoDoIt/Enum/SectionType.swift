@@ -22,3 +22,18 @@ enum SectionType: Int, CaseIterable {
         }
     }
 }
+
+
+enum DoitSectionType: Int, CaseIterable {
+    case doing, complete
+    
+    var title: String {
+        switch self{
+        case .doing:
+            return "도전중인 목표"
+        case .complete:
+            return "완료한 목표"
+        }
+    }
+    
+}

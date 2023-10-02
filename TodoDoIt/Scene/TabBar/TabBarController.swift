@@ -9,10 +9,11 @@ import UIKit
 
 class TabbarController: UITabBarController {
     let HomeVC = UINavigationController(rootViewController: HomeViewController())
+    let DoitListVC = UINavigationController(rootViewController: DoitListViewController())
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewControllers = [HomeVC]
+        viewControllers = [HomeVC,DoitListVC]
         setupTabbar()
     }
     
@@ -25,6 +26,7 @@ class TabbarController: UITabBarController {
     
     private func setupTabbarItem(){
         HomeVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house.fill"), tag: 0)
+        DoitListVC.tabBarItem = UITabBarItem(title: "목표", image: UIImage(systemName: "book.fill"), tag: 1)
     }
     
     

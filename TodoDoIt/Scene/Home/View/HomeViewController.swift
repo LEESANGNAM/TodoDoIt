@@ -23,9 +23,6 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
          super.viewDidLoad()
-        setupCalendar()
-        setCollectionView()
-        setConstraint()
         configureDataSource()
         bind()
         viewmodel.fetchData()
@@ -45,8 +42,11 @@ class HomeViewController: BaseViewController {
         collectionView.register(ListCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "MySectionHeaderView")
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
-    
-    private func setConstraint() {
+    override func setHierarchy() {
+        setCollectionView()
+        setupCalendar()
+    }
+    override func setConstraints(){
         fsCalendar.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(20)
             make.top.equalTo(view.safeAreaLayoutGuide)
@@ -138,6 +138,8 @@ extension HomeViewController {
                 headerView.titleLabel.text = SectionType.allCases[indexPath.section].title
                 headerView.addButton.tag = indexPath.section
                 headerView.addButton.addTarget(self, action: #selector(self.addButtonTapped), for: .touchUpInside)
+                headerView.listButton.tag = indexPath.section
+                headerView.listButton.addTarget(self, action: #selector(self.listButtonTapped), for: .touchUpInside)
                 return headerView
             } else {
                 return nil
@@ -153,6 +155,17 @@ extension HomeViewController {
     @objc func addButtonTapped(_ sender: UIButton){
         switch sender.tag {
         case 0: navigationController?.pushViewController(DoitAddViewController(), animated: true)
+        case 1: break
+        case 2: break
+        default: break
+        }
+    }
+    @objc func listButtonTapped(_ sender: UIButton){
+        switch sender.tag {
+        case 0:
+            if let tabBarController = self.tabBarController {
+            tabBarController.selectedIndex = 1
+        }
         case 1: break
         case 2: break
         default: break

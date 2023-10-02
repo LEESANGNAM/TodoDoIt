@@ -27,6 +27,8 @@
 		D6835B492AC8900E00B0A488 /* DoitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B482AC8900E00B0A488 /* DoitCollectionViewCell.swift */; };
 		D6835B4D2AC9CC7500B0A488 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B4C2AC9CC7500B0A488 /* HomeViewModel.swift */; };
 		D6835B502AC9CCC200B0A488 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B4F2AC9CCC200B0A488 /* SectionType.swift */; };
+		D6835B552ACA7BCE00B0A488 /* DoitListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B542ACA7BCE00B0A488 /* DoitListViewModel.swift */; };
+		D6835B572ACA7BE000B0A488 /* DoitListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B562ACA7BE000B0A488 /* DoitListViewController.swift */; };
 		D6D92F062AC031DF0074236E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F052AC031DF0074236E /* AppDelegate.swift */; };
 		D6D92F082AC031DF0074236E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F072AC031DF0074236E /* SceneDelegate.swift */; };
 		D6D92F0A2AC031DF0074236E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F092AC031DF0074236E /* HomeViewController.swift */; };
@@ -52,6 +54,8 @@
 		D6835B482AC8900E00B0A488 /* DoitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitCollectionViewCell.swift; sourceTree = "<group>"; };
 		D6835B4C2AC9CC7500B0A488 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		D6835B4F2AC9CCC200B0A488 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
+		D6835B542ACA7BCE00B0A488 /* DoitListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitListViewModel.swift; sourceTree = "<group>"; };
+		D6835B562ACA7BE000B0A488 /* DoitListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitListViewController.swift; sourceTree = "<group>"; };
 		D6D92F022AC031DF0074236E /* TodoDoIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoDoIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D92F052AC031DF0074236E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6D92F072AC031DF0074236E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,8 +96,8 @@
 		D62B07892AC2B732002C7EAB /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				D6835B4B2AC9CC6200B0A488 /* ViewModel */,
 				D6835B4A2AC9CC5800B0A488 /* View */,
+				D6835B4B2AC9CC6200B0A488 /* ViewModel */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -146,6 +150,7 @@
 		D62B079B2AC45600002C7EAB /* Doit */ = {
 			isa = PBXGroup;
 			children = (
+				D6835B512ACA79E200B0A488 /* List */,
 				D6835B452AC882D900B0A488 /* Add */,
 			);
 			path = Doit;
@@ -209,6 +214,31 @@
 				D6835B4F2AC9CCC200B0A488 /* SectionType.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		D6835B512ACA79E200B0A488 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				D6835B522ACA79E800B0A488 /* View */,
+				D6835B532ACA79EF00B0A488 /* ViewModel */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		D6835B522ACA79E800B0A488 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D6835B562ACA7BE000B0A488 /* DoitListViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D6835B532ACA79EF00B0A488 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D6835B542ACA7BCE00B0A488 /* DoitListViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		D6D92EF92AC031DF0074236E = {
@@ -362,9 +392,11 @@
 				D6835B502AC9CCC200B0A488 /* SectionType.swift in Sources */,
 				D62B07962AC3E972002C7EAB /* Todo.swift in Sources */,
 				D62B079D2AC456B5002C7EAB /* DoitAddViewController.swift in Sources */,
+				D6835B552ACA7BCE00B0A488 /* DoitListViewModel.swift in Sources */,
 				D6D92F062AC031DF0074236E /* AppDelegate.swift in Sources */,
 				D62B07922AC3E1A5002C7EAB /* DoIt.swift in Sources */,
 				D6D92F082AC031DF0074236E /* SceneDelegate.swift in Sources */,
+				D6835B572ACA7BE000B0A488 /* DoitListViewController.swift in Sources */,
 				D62B078F2AC33CE3002C7EAB /* ListCollectionViewHeaderView.swift in Sources */,
 				D62B07A42AC4584A002C7EAB /* BaseCollectionViewCell.swift in Sources */,
 				D62B07992AC3EB1E002C7EAB /* RealmRepository.swift in Sources */,
@@ -435,7 +467,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -489,7 +521,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
