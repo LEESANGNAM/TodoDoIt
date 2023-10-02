@@ -8,6 +8,7 @@
 import UIKit
 import FSCalendar
 import SnapKit
+import RealmSwift
 
 class HomeViewController: BaseViewController {
     private weak var fsCalendar: FSCalendar!
@@ -15,9 +16,11 @@ class HomeViewController: BaseViewController {
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
     
     private typealias DoitCellRegistration = UICollectionView.CellRegistration<DoitCollectionViewCell,DoIt>
+    private typealias TodoCellRegistration = UICollectionView.CellRegistration<TodoCollectionViewCell,Todo>
+    private typealias MemoCellRegistration = UICollectionView.CellRegistration<MemoCollectionViewCell,Memo>
     
     
-    var dataSource: UICollectionViewDiffableDataSource<SectionType,DoIt>?
+    var dataSource: UICollectionViewDiffableDataSource<SectionType,Object>?
     
     let viewmodel = HomeViewModel()
     
@@ -28,10 +31,22 @@ class HomeViewController: BaseViewController {
         viewmodel.fetchData()
      }
     private func bind(){
-        viewmodel.result.bind { _ in
-            self.viewmodel.changeArray()
+        viewmodel.doitResult.bind { _ in
+            self.viewmodel.changeDoitArray()
         }
-        viewmodel.doItArray.bind {_ in
+        viewmodel.doitArray.bind {_ in
+            self.updateSnapshot()
+        }
+        viewmodel.todoResult.bind { _ in
+            self.viewmodel.changeTodoArray()
+        }
+        viewmodel.todoArray.bind {_ in
+            self.updateSnapshot()
+        }
+        viewmodel.memoResult.bind { _ in
+            self.viewmodel.changeMemoArray()
+        }
+        viewmodel.memoArray.bind {_ in
             self.updateSnapshot()
         }
     }
@@ -73,12 +88,21 @@ extension HomeViewController {
                                                   heightDimension: .fractionalHeight(1.0)))
             item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
             var containerGroup: NSCollectionLayoutGroup!
-            if sectionIndex == 0 {
+            
+            let sectionType = SectionType.allCases[sectionIndex]
+            
+            switch sectionType{
+            case .doit:
                 containerGroup = NSCollectionLayoutGroup.horizontal(
                     layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                        heightDimension: .fractionalHeight(0.3)),
                     subitem: item, count: 1)
-            } else {
+            case .todo:
+                containerGroup = NSCollectionLayoutGroup.horizontal(
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                       heightDimension: .fractionalHeight(0.2)),
+                    subitem: item, count: 1)
+            case .memo:
                 containerGroup = NSCollectionLayoutGroup.horizontal(
                     layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                        heightDimension: .fractionalHeight(0.2)),
@@ -99,19 +123,14 @@ extension HomeViewController {
     
     func configureDataSource() {
         
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, DoIt> { (cell, indexPath, identifier) in
-            
-            var content = UIListContentConfiguration.valueCell()
-            cell.contentConfiguration = content
-            
-            var backgroundConfig = UIBackgroundConfiguration.listPlainCell()
-            backgroundConfig.backgroundColor = UIColor(red: CGFloat(Int.random(in: 0...1)), green: CGFloat(Int.random(in: 0...1)), blue: CGFloat(Int.random(in: 0...1)), alpha: 1)
-            backgroundConfig.cornerRadius = 10
-            cell.backgroundConfiguration = backgroundConfig
-        }
-        
         let doitCellRegistration = DoitCellRegistration { cell, indexPath, identifier in
             cell.setupData(doit: identifier)
+        }
+        let todoCellRegistration = TodoCellRegistration { cell, indexPath, identifier in
+            cell.setupData(todo: identifier)
+        }
+        let memoCellRegistration = MemoCellRegistration { cell, indexPath, identifier in
+            cell.setupData(memo: identifier)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
@@ -119,13 +138,13 @@ extension HomeViewController {
             // 섹션별로 다른 셀
             switch section {
             case .doit:
-                let cell = collectionView.dequeueConfiguredReusableCell(using: doitCellRegistration, for: indexPath, item: itemIdentifier)
+                let cell = collectionView.dequeueConfiguredReusableCell(using: doitCellRegistration, for: indexPath, item: itemIdentifier as! DoIt)
                 return cell
             case .todo:
-                let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+                let cell = collectionView.dequeueConfiguredReusableCell(using: todoCellRegistration, for: indexPath, item: itemIdentifier as! Todo)
                 return cell
             case .memo:
-                let cell = collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+                let cell = collectionView.dequeueConfiguredReusableCell(using: memoCellRegistration, for: indexPath, item: itemIdentifier as! Memo)
                 return cell
             }
         }
@@ -147,9 +166,11 @@ extension HomeViewController {
         }
     }
     func updateSnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<SectionType, DoIt>()
+        var snapshot = NSDiffableDataSourceSnapshot<SectionType, Object>()
         snapshot.appendSections(SectionType.allCases)
         snapshot.appendItems(viewmodel.getDoitArray(),toSection: .doit)
+        snapshot.appendItems(viewmodel.getTodoArray(),toSection: .todo)
+        snapshot.appendItems(viewmodel.getMemoArray(),toSection: .memo)
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
     @objc func addButtonTapped(_ sender: UIButton){
