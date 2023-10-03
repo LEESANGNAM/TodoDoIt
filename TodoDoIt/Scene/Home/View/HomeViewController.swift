@@ -30,6 +30,10 @@ class HomeViewController: BaseViewController {
         bind()
         viewmodel.fetchData()
      }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewmodel.fetchData()
+    }
     private func bind(){
         viewmodel.doitResult.bind { _ in
             self.viewmodel.changeDoitArray()
@@ -176,7 +180,14 @@ extension HomeViewController {
     @objc func addButtonTapped(_ sender: UIButton){
         switch sender.tag {
         case 0: navigationController?.pushViewController(DoitAddViewController(), animated: true)
-        case 1: break
+        case 1:
+            let vc = TodoAddViewController()
+//            if let sheet = vc.sheetPresentationController{
+//                sheet.detents = [.medium(), .large()]
+//                sheet.prefersGrabberVisible = true
+//            }
+            vc.modalPresentationStyle = .overFullScreen
+            present(vc,animated: true)
         case 2: break
         default: break
         }
