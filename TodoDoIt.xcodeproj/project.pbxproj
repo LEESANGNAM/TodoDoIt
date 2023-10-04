@@ -25,6 +25,8 @@
 		D62B07A42AC4584A002C7EAB /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B07A32AC4584A002C7EAB /* BaseCollectionViewCell.swift */; };
 		D62B07A62AC48D9F002C7EAB /* DoitAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B07A52AC48D9F002C7EAB /* DoitAddView.swift */; };
 		D64BDCE72ACC063200C4F6FB /* TodoAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64BDCE62ACC063200C4F6FB /* TodoAddViewController.swift */; };
+		D64BDD132ACD61F900C4F6FB /* TodoAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64BDD122ACD61F900C4F6FB /* TodoAddViewModel.swift */; };
+		D64BDD152ACDAF2400C4F6FB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64BDD142ACDAF2400C4F6FB /* String+Extension.swift */; };
 		D6835B492AC8900E00B0A488 /* DoitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B482AC8900E00B0A488 /* DoitCollectionViewCell.swift */; };
 		D6835B4D2AC9CC7500B0A488 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B4C2AC9CC7500B0A488 /* HomeViewModel.swift */; };
 		D6835B502AC9CCC200B0A488 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B4F2AC9CCC200B0A488 /* SectionType.swift */; };
@@ -56,6 +58,8 @@
 		D62B07A32AC4584A002C7EAB /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		D62B07A52AC48D9F002C7EAB /* DoitAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitAddView.swift; sourceTree = "<group>"; };
 		D64BDCE62ACC063200C4F6FB /* TodoAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAddViewController.swift; sourceTree = "<group>"; };
+		D64BDD122ACD61F900C4F6FB /* TodoAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAddViewModel.swift; sourceTree = "<group>"; };
+		D64BDD142ACDAF2400C4F6FB /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		D6835B482AC8900E00B0A488 /* DoitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitCollectionViewCell.swift; sourceTree = "<group>"; };
 		D6835B4C2AC9CC7500B0A488 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		D6835B4F2AC9CCC200B0A488 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
@@ -190,9 +194,26 @@
 		D64BDCE52ACC062200C4F6FB /* Add */ = {
 			isa = PBXGroup;
 			children = (
-				D64BDCE62ACC063200C4F6FB /* TodoAddViewController.swift */,
+				D64BDD112ACD61F000C4F6FB /* ViewModel */,
+				D64BDD102ACD61E800C4F6FB /* View */,
 			);
 			path = Add;
+			sourceTree = "<group>";
+		};
+		D64BDD102ACD61E800C4F6FB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D64BDCE62ACC063200C4F6FB /* TodoAddViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D64BDD112ACD61F000C4F6FB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D64BDD122ACD61F900C4F6FB /* TodoAddViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		D6835B452AC882D900B0A488 /* Add */ = {
@@ -325,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				D6F0C6152AC5B5B100EE99AF /* Date+Extension.swift */,
+				D64BDD142ACDAF2400C4F6FB /* String+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -430,7 +452,9 @@
 				D6F0C6192AC8096B00EE99AF /* Observer.swift in Sources */,
 				D6D92F0A2AC031DF0074236E /* HomeViewController.swift in Sources */,
 				D6835B492AC8900E00B0A488 /* DoitCollectionViewCell.swift in Sources */,
+				D64BDD152ACDAF2400C4F6FB /* String+Extension.swift in Sources */,
 				D62B07A62AC48D9F002C7EAB /* DoitAddView.swift in Sources */,
+				D64BDD132ACD61F900C4F6FB /* TodoAddViewModel.swift in Sources */,
 				D62B07A02AC45813002C7EAB /* BaseViewController.swift in Sources */,
 				D6835B5E2ACAE8EF00B0A488 /* Design.swift in Sources */,
 				D62B07A22AC4581A002C7EAB /* BaseView.swift in Sources */,
