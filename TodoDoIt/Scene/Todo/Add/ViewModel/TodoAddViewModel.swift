@@ -16,7 +16,7 @@ class TodoAddViewModel {
         title.value = text
     }
     
-    func saveData(){
+    func saveData(date: Date){
         let text = title.value
         guard !text.isEmpty else {
             print("텍스트 비었음")
@@ -26,7 +26,7 @@ class TodoAddViewModel {
             print("텍스트 공백만 있음")
             return
         }
-            let todo = Todo(title: text)
+            let todo = Todo(title: text,createDate: date)
             repository.createItem(todo)
             print("아이템이 저장되었습니다.")
     }

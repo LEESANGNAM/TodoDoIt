@@ -21,7 +21,8 @@ class HomeViewController: BaseViewController {
     var dataSource: UICollectionViewDiffableDataSource<SectionType,Object>?
     
     let viewmodel = HomeViewModel()
-    let today = Date()
+    var selectDate = Date() // 선택날짜
+    let today = Date() // 오늘
     override func viewDidLoad() {
          super.viewDidLoad()
         configureDataSource()
@@ -83,7 +84,18 @@ class HomeViewController: BaseViewController {
         
     }
 }
-
+// MARK: - Modaldelegate
+extension HomeViewController: ModalPresentDelegate {
+    func sendDateToModal() -> Date {
+        return selectDate
+    }
+    
+    func disMissModal() {
+        viewmodel.fetchTodoData(date: selectDate)
+    }
+    
+    
+}
 
 // MARK: - FSCalendar
 extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
@@ -92,7 +104,7 @@ extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
         calendar.scrollDirection = .horizontal
         calendar.appearance.headerDateFormat = "YYYY년 M월"
         calendar.appearance.headerMinimumDissolvedAlpha = 0
-        calendar.appearance.todayColor = .clear
+//        calendar.appearance.todayColor = .clear
         calendar.appearance.titleTodayColor = .black //Today에 표시되는 특정 글자색
         
          self.fsCalendar = calendar
@@ -131,6 +143,7 @@ extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
     //날짜 선택
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         viewmodel.fetchData(date: date)
+        selectDate = date
         }
 }
 
@@ -227,6 +240,7 @@ extension HomeViewController {
             navigationController?.pushViewController(DoitAddViewController(), animated: true)
         case .todo:
             let vc = TodoAddViewController()
+            vc.delegate = self
             vc.modalPresentationStyle = .overFullScreen
             present(vc,animated: true)
         case .none:

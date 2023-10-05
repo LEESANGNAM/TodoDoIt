@@ -28,14 +28,20 @@ class TodoAddViewController: BaseViewController{
     }()
     
     let viewmodel = TodoAddViewModel()
+    
+    weak var delegate: ModalPresentDelegate?
+    var selectDate = Date() // 넘어온 데이트
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
-       
+        if let date = delegate?.sendDateToModal(){
+            print(date)
+            selectDate = date
+        }
     }
     private func bind(){
         viewmodel.title.bind {_ in
-            self.viewmodel.saveData()
+            self.viewmodel.saveData(date: self.selectDate)
             self.titleTextField.text = ""
         }
     }
@@ -62,6 +68,7 @@ class TodoAddViewController: BaseViewController{
     }
     @objc func tapgestureTapped(){
         titleTextField.resignFirstResponder()
+        delegate?.disMissModal()  // 닫힐때 호출
         dismiss(animated: false)
     }
     override func setConstraints() {
