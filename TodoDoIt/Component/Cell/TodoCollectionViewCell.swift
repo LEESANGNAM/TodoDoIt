@@ -21,7 +21,7 @@ class TodoCollectionViewCell: BaseCollectionViewCell{
        }()
     
     override func setHierarchy() {
-        backgroundColor = .blue
+//        backgroundColor = .blue
         addSubview(titleLabel)
         addSubview(checkboxButton)
     }

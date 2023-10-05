@@ -37,7 +37,8 @@ final class Repository<T: Object>: RepositoryType {
         return realm.objects(T.self).filter("createDate >= %@ AND createDate <= %@", startOfDay, endOfDay)
     }
     func fetchFilterContainsDate(date: Date) -> Results<T> {
-        return realm.objects(T.self).filter("startDate <= %@ AND endDate >= %@", date, date)
+        let endOfDay = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: date)!
+        return realm.objects(T.self).filter("startDate <= %@ AND endDate >= %@", endOfDay, endOfDay)
     }
     func createItem(_ item: T) {
         do {

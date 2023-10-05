@@ -11,6 +11,9 @@ class BaseCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        layer.cornerRadius = 10
+        layer.borderWidth = 1
+
         setHierarchy()
         setConstraints()
     }

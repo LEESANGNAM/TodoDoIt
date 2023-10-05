@@ -30,17 +30,17 @@ class HomeViewController: BaseViewController {
     var dataSource: UICollectionViewDiffableDataSource<SectionType,Object>?
     
     let viewmodel = HomeViewModel()
-    
+    let today = Date()
     override func viewDidLoad() {
          super.viewDidLoad()
         configureDataSource()
         setUpSwipeGusture()
         bind()
-        viewmodel.fetchData()
+        viewmodel.fetchData(date: today)
      }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewmodel.fetchData()
+        viewmodel.fetchData(date: today)
     }
    
     
@@ -109,7 +109,6 @@ extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
         calendar.appearance.headerMinimumDissolvedAlpha = 0
         calendar.appearance.todayColor = .clear
         calendar.appearance.titleTodayColor = .black //Today에 표시되는 특정 글자색
-//        calendar.scope = .week // 주간 달력 설정
         
          self.fsCalendar = calendar
         view.addSubview(fsCalendar)
@@ -146,7 +145,7 @@ extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
     }
     //날짜 선택
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-            print(date)
+        viewmodel.fetchData(date: date)
         }
 }
 

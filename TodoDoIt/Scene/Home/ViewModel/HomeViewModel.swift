@@ -19,18 +19,18 @@ class HomeViewModel {
     var memoResult = Observer<Results<Memo>?>(nil)
     var memoArray = Observer<[Memo]>([])
     
-    func fetchData(){
-        fetchDoitData()
-        fetchTodoData()
+    func fetchData(date: Date){
+        fetchDoitData(date: date)
+        fetchTodoData(date: date)
         fetchMemoData()
     }
     
-    func fetchDoitData(){
-        doitResult.value = doitRepository.fetch()
+    func fetchDoitData(date: Date){
+        doitResult.value = doitRepository.fetchFilterContainsDate(date: date)
     }
     
-    func fetchTodoData(){
-        todoResult.value = todoRepository.fetch()
+    func fetchTodoData(date: Date){
+        todoResult.value = todoRepository.fetchFilterDate(date: date)
     }
     func fetchMemoData(){
         memoResult.value = memoRepository.fetch()

@@ -39,7 +39,7 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
     }()
     
     override func setHierarchy() {
-        backgroundColor = .systemBlue
+        backgroundColor = .darkGray
         addSubview(titleLabel)
         addSubview(dateLabel)
         addSubview(progressView)
