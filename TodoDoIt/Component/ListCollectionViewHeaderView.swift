@@ -18,12 +18,14 @@ class ListCollectionViewHeaderView: UICollectionReusableView {
     let addButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "plus.circle"), for: .normal)
+        button.sizeToFit()
         button.tintColor = .black
         return button
     }()
     let listButton = {
         let button = UIButton()
         button.setTitle("모두보기", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: Design.Font.listButtonFontSize)
         button.setTitleColor(UIColor.systemGray, for: .normal)
         return button
     }()
@@ -49,14 +51,15 @@ class ListCollectionViewHeaderView: UICollectionReusableView {
         }
         
         addButton.snp.makeConstraints { make in
-            make.leading.equalTo(titleLabel.snp.trailing).offset(5)
+            make.leading.equalTo(titleLabel.snp.trailing)
             make.centerY.equalToSuperview()
-            make.size.equalTo(40)
+            make.size.equalTo(30)
         }
         
         listButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-10)
-            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(30)
         }
         
     }

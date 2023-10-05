@@ -11,6 +11,7 @@ class BaseCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = Design.Color.cell
         layer.cornerRadius = 10
         layer.borderWidth = 1
 

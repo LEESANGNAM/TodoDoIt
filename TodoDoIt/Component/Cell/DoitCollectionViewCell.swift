@@ -11,14 +11,14 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
     var titleLabel = {
         let view = UILabel()
         view.text = "목표 : 머ㅏㄴ옴너ㅏ옹ㄴㅁ오ㅓㅁㄴㅇ"
-        view.font = .boldSystemFont(ofSize: Design.titleFontSize)
+        view.font = .boldSystemFont(ofSize: Design.Font.titleFontSize)
         view.textColor = .white
         return view
     }()
     var dateLabel = {
         let view = UILabel()
         view.text = "기간: 2023.09.10 ~ 2023.10.23"
-        view.font = .systemFont(ofSize: Design.dateFontSize)
+        view.font = .systemFont(ofSize: Design.Font.dateFontSize)
         view.textColor = .systemGray5
         return view
     }()
@@ -33,13 +33,12 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
     var progressLabel = {
         let view = UILabel()
         view.text = "50%"
-        view.font = .boldSystemFont(ofSize: Design.titleFontSize)
+        view.font = .boldSystemFont(ofSize: Design.Font.titleFontSize)
         view.textColor = .white
         return view
     }()
     
     override func setHierarchy() {
-        backgroundColor = .darkGray
         addSubview(titleLabel)
         addSubview(dateLabel)
         addSubview(progressView)

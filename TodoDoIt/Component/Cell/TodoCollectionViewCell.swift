@@ -10,7 +10,7 @@ import UIKit
 class TodoCollectionViewCell: BaseCollectionViewCell{
     var titleLabel = {
         let view = UILabel()
-        view.font = .boldSystemFont(ofSize: Design.titleFontSize)
+        view.font = .boldSystemFont(ofSize: Design.Font.titleFontSize)
         return view
     }()
     let checkboxButton: UIButton = {
@@ -21,7 +21,6 @@ class TodoCollectionViewCell: BaseCollectionViewCell{
        }()
     
     override func setHierarchy() {
-//        backgroundColor = .blue
         addSubview(titleLabel)
         addSubview(checkboxButton)
     }

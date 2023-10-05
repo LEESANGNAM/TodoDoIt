@@ -13,12 +13,7 @@ class TodoAddViewController: BaseViewController{
         view.backgroundColor = .white
         return view
     }()
-    let titleLabel = {
-        let view = UILabel()
-        view.text = "할일 : "
-        view.font = .boldSystemFont(ofSize: Design.titleFontSize)
-        return view
-    }()
+    
     let titleTextField = {
         let view = UITextField()
         view.placeholder = "오늘의 할일을 입력해주세요.~~~"
@@ -46,13 +41,16 @@ class TodoAddViewController: BaseViewController{
     }
     override func setHierarchy() {
         bind()
-        titleView.addSubview(titleLabel)
         titleView.addSubview(titleTextField)
         titleView.addSubview(doneButton)
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         view.addSubview(titleView)
+        setUpTitleView()
         setUpGesture()
         setUpTitleTextfield()
+    }
+    func setUpTitleView(){
+        titleView.roundCorners(cornerRadius: 10, maskedCorners: [.layerMinXMinYCorner,.layerMaxXMinYCorner])
     }
     func setUpGesture(){
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapgestureTapped))
@@ -74,17 +72,13 @@ class TodoAddViewController: BaseViewController{
             make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
         }
         
-        titleLabel.snp.makeConstraints { make in
-            make.leading.top.bottom.equalToSuperview()
-            make.width.equalTo(50)
-        }
         titleTextField.snp.makeConstraints { make in
-            make.leading.equalTo(titleLabel.snp.trailing).offset(20)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
             make.top.bottom.equalToSuperview()
         }
         doneButton.snp.makeConstraints { make in
             make.trailing.top.bottom.equalToSuperview()
-            make.leading.equalTo(titleTextField.snp.trailing).offset(20)
+            make.leading.equalTo(titleTextField.snp.trailing).offset(30)
             
         }
     }

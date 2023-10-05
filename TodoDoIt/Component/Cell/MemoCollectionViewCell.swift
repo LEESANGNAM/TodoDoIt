@@ -10,7 +10,7 @@ import UIKit
 class MemoCollectionViewCell: BaseCollectionViewCell{
     var titleLabel = {
         let view = UILabel()
-        view.font = .boldSystemFont(ofSize: Design.titleFontSize)
+        view.font = .boldSystemFont(ofSize: Design.Font.titleFontSize)
         return view
     }()
     

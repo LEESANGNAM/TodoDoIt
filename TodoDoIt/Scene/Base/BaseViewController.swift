@@ -12,6 +12,7 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = Design.Color.background
         setHierarchy()
         setConstraints()
         // Do any additional setup after loading the view.

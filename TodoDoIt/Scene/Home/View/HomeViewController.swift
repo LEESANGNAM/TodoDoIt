@@ -15,15 +15,6 @@ class HomeViewController: BaseViewController {
     
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
     
-    var memoLabel = {
-       let view = UILabel()
-        view.text = "메모를 입력하세요"
-        view.backgroundColor = .cyan
-        view.numberOfLines = 0
-        return view
-    }()
-    
-    
     private typealias DoitCellRegistration = UICollectionView.CellRegistration<DoitCollectionViewCell,DoIt>
     private typealias TodoCellRegistration = UICollectionView.CellRegistration<TodoCollectionViewCell,Todo>
     
@@ -75,7 +66,6 @@ class HomeViewController: BaseViewController {
     }
     override func setHierarchy() {
         setCollectionView()
-        view.addSubview(memoLabel)
         setupCalendar()
     }
     override func setConstraints(){
@@ -84,13 +74,9 @@ class HomeViewController: BaseViewController {
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(300)
         }
-        memoLabel.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(20)
-            make.top.equalTo(fsCalendar.snp.bottom).offset(20)
-        }
         collectionView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(20)
-            make.top.equalTo(memoLabel.snp.bottom).offset(20)
+            make.top.equalTo(fsCalendar.snp.bottom).offset(20)
             make.height.equalTo(300)
             make.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide).offset(-10)
         }
@@ -103,7 +89,6 @@ class HomeViewController: BaseViewController {
 extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
     private func setupCalendar() {
         let calendar = FSCalendar(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.backgroundColor = .white
         calendar.scrollDirection = .horizontal
         calendar.appearance.headerDateFormat = "YYYY년 M월"
         calendar.appearance.headerMinimumDissolvedAlpha = 0
@@ -236,29 +221,29 @@ extension HomeViewController {
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
     @objc func addButtonTapped(_ sender: UIButton){
-        switch sender.tag {
-        case 0: navigationController?.pushViewController(DoitAddViewController(), animated: true)
-        case 1:
+        let section = SectionType(rawValue: sender.tag)
+        switch section {
+        case .doit:
+            navigationController?.pushViewController(DoitAddViewController(), animated: true)
+        case .todo:
             let vc = TodoAddViewController()
-//            if let sheet = vc.sheetPresentationController{
-//                sheet.detents = [.medium(), .large()]
-//                sheet.prefersGrabberVisible = true
-//            }
             vc.modalPresentationStyle = .overFullScreen
             present(vc,animated: true)
-        case 2: break
-        default: break
+        case .none:
+            print("Error")
         }
     }
     @objc func listButtonTapped(_ sender: UIButton){
-        switch sender.tag {
-        case 0:
+        let section = SectionType(rawValue: sender.tag)
+        switch section {
+        case .doit:
             if let tabBarController = self.tabBarController {
-            tabBarController.selectedIndex = 1
+                tabBarController.selectedIndex = 1
+            }
+        case .todo: break
+        case .none:
+            print("Error")
         }
-        case 1: break
-        case 2: break
-        default: break
-        }
+       
     }
 }
