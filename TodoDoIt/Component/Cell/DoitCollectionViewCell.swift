@@ -19,7 +19,7 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
         let view = UILabel()
         view.text = "기간: 2023.09.10 ~ 2023.10.23"
         view.font = .systemFont(ofSize: Design.Font.dateFontSize)
-        view.textColor = .systemGray5
+        view.textColor = .black
         return view
     }()
     lazy var progressView = {
@@ -48,24 +48,24 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
     override func setConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(20)
-            make.height.equalTo(30)
+//            make.height.equalTo(30)
             make.top.equalToSuperview().offset(10)
         }
         dateLabel.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(20)
-            make.height.equalTo(30)
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+//            make.height.equalTo(30)
+            make.top.equalTo(titleLabel.snp.bottom).offset(5)
         }
         progressView.snp.makeConstraints { make in
             make.leading.equalTo(safeAreaLayoutGuide).offset(20)
             make.height.equalTo(2)
-            make.top.equalTo(dateLabel.snp.bottom).offset(20)
+            make.top.equalTo(dateLabel.snp.bottom).offset(10)
         }
         progressLabel.snp.makeConstraints { make in
             make.leading.equalTo(progressView.snp.trailing).offset(5)
             make.trailing.equalToSuperview().offset(-5)
             make.height.equalTo(20)
-            make.top.equalTo(dateLabel.snp.bottom).offset(5)
+            make.top.equalTo(dateLabel.snp.bottom)
             make.bottom.equalTo(safeAreaLayoutGuide).offset(-5)
         }
     }

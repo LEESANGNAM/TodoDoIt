@@ -167,12 +167,12 @@ extension HomeViewController {
             case .doit:
                 containerGroup = NSCollectionLayoutGroup.horizontal(
                     layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                       heightDimension: .fractionalHeight(0.4)),
+                                                       heightDimension: .fractionalHeight(0.3)),
                     subitem: item, count: 1)
             case .todo:
                 containerGroup = NSCollectionLayoutGroup.horizontal(
                     layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                       heightDimension: .fractionalHeight(0.3)),
+                                                       heightDimension: .fractionalHeight(0.25)),
                     subitem: item, count: 1)
             }
             
@@ -231,7 +231,7 @@ extension HomeViewController {
         snapshot.appendSections(SectionType.allCases)
         snapshot.appendItems(viewmodel.getDoitArray(),toSection: .doit)
         snapshot.appendItems(viewmodel.getTodoArray(),toSection: .todo)
-        dataSource?.apply(snapshot, animatingDifferences: false)
+        dataSource?.apply(snapshot, animatingDifferences: true)
     }
     @objc func addButtonTapped(_ sender: UIButton){
         let section = SectionType(rawValue: sender.tag)
