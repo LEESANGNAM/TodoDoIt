@@ -9,7 +9,7 @@ import Foundation
 
 
 enum SectionType: Int, CaseIterable {
-    case doit, todo
+    case doit, todo, memo
     
     var title: String {
         switch self {
@@ -17,6 +17,8 @@ enum SectionType: Int, CaseIterable {
             return "목표"
         case .todo:
             return "할일"
+        case .memo:
+            return "메모"
         }
     }
 }

@@ -17,6 +17,7 @@ class HomeViewController: BaseViewController {
     
     private typealias DoitCellRegistration = UICollectionView.CellRegistration<DoitCollectionViewCell,DoIt>
     private typealias TodoCellRegistration = UICollectionView.CellRegistration<TodoCollectionViewCell,Todo>
+    private typealias MemoCellRegistration = UICollectionView.CellRegistration<MemoCollectionViewCell,Memo>
     
     var dataSource: UICollectionViewDiffableDataSource<SectionType,Object>?
     
@@ -78,8 +79,7 @@ class HomeViewController: BaseViewController {
         collectionView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(20)
             make.top.equalTo(fsCalendar.snp.bottom).offset(20)
-            make.height.equalTo(300)
-            make.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide).offset(-10)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
         }
         
     }
@@ -167,12 +167,17 @@ extension HomeViewController {
             case .doit:
                 containerGroup = NSCollectionLayoutGroup.horizontal(
                     layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                       heightDimension: .fractionalHeight(0.3)),
+                                                       heightDimension: .absolute(90)),
                     subitem: item, count: 1)
             case .todo:
                 containerGroup = NSCollectionLayoutGroup.horizontal(
                     layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                       heightDimension: .fractionalHeight(0.25)),
+                                                       heightDimension: .absolute(75)),
+                    subitem: item, count: 1)
+            case .memo:
+                containerGroup = NSCollectionLayoutGroup.horizontal(
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                       heightDimension: .absolute(75)),
                     subitem: item, count: 1)
             }
             
@@ -196,16 +201,22 @@ extension HomeViewController {
         let todoCellRegistration = TodoCellRegistration { cell, indexPath, identifier in
             cell.setupData(todo: identifier)
         }
+        let memoCellRegistration = MemoCellRegistration { cell, indexPath, identifier in
+            cell.setupData(memo: identifier)
+        }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             guard let section = SectionType(rawValue: indexPath.section) else { return UICollectionViewCell()}
             // 섹션별로 다른 셀
             switch section {
             case .doit:
-                let cell = collectionView.dequeueConfiguredReusableCell(using: doitCellRegistration, for: indexPath, item: itemIdentifier as! DoIt)
+                let cell = collectionView.dequeueConfiguredReusableCell(using: doitCellRegistration, for: indexPath, item: itemIdentifier as? DoIt)
                 return cell
             case .todo:
-                let cell = collectionView.dequeueConfiguredReusableCell(using: todoCellRegistration, for: indexPath, item: itemIdentifier as! Todo)
+                let cell = collectionView.dequeueConfiguredReusableCell(using: todoCellRegistration, for: indexPath, item: itemIdentifier as? Todo)
+                return cell
+            case .memo:
+                let cell = collectionView.dequeueConfiguredReusableCell(using: memoCellRegistration, for: indexPath, item: itemIdentifier as? Memo)
                 return cell
             }
         }
@@ -231,6 +242,7 @@ extension HomeViewController {
         snapshot.appendSections(SectionType.allCases)
         snapshot.appendItems(viewmodel.getDoitArray(),toSection: .doit)
         snapshot.appendItems(viewmodel.getTodoArray(),toSection: .todo)
+        snapshot.appendItems(viewmodel.getMemoArray(),toSection: .memo)
         dataSource?.apply(snapshot, animatingDifferences: true)
     }
     @objc func addButtonTapped(_ sender: UIButton){
@@ -243,8 +255,10 @@ extension HomeViewController {
             vc.delegate = self
             vc.modalPresentationStyle = .overFullScreen
             present(vc,animated: true)
+        case .memo:
+            break
         case .none:
-            print("Error")
+            print("error")
         }
     }
     @objc func listButtonTapped(_ sender: UIButton){
@@ -255,6 +269,7 @@ extension HomeViewController {
                 tabBarController.selectedIndex = 1
             }
         case .todo: break
+        case .memo: break
         case .none:
             print("Error")
         }

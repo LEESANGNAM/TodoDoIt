@@ -22,7 +22,7 @@ class HomeViewModel {
     func fetchData(date: Date){
         fetchDoitData(date: date)
         fetchTodoData(date: date)
-        fetchMemoData()
+        fetchMemoData(date: date)
     }
     
     func fetchDoitData(date: Date){
@@ -32,8 +32,8 @@ class HomeViewModel {
     func fetchTodoData(date: Date){
         todoResult.value = todoRepository.fetchFilterDate(date: date)
     }
-    func fetchMemoData(){
-        memoResult.value = memoRepository.fetch()
+    func fetchMemoData(date: Date){
+        memoResult.value = memoRepository.fetchFilterDate(date: date)
     }
     
     func changeDoitArray(){

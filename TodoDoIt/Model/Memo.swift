@@ -11,12 +11,13 @@ import RealmSwift
 class Memo: Object {
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var title: String
-    @Persisted var createDate = Date()
+    @Persisted var createDate: Date
     @Persisted var UpdateDate: Date?
     
-    convenience init(title: String) {
+    convenience init(title: String, date: Date) {
         self.init()
         self.title = title
+        self.createDate = date
     }
     
     
