@@ -9,6 +9,7 @@ import UIKit
 import FSCalendar
 import SnapKit
 import RealmSwift
+import Toast
 
 class HomeViewController: BaseViewController {
     private weak var fsCalendar: FSCalendar!
@@ -256,7 +257,9 @@ extension HomeViewController {
             vc.modalPresentationStyle = .overFullScreen
             present(vc,animated: true)
         case .memo:
-            break
+            if let memo = viewmodel.getMemoArray().first{
+                self.view.makeToast("메모는 하루에 한개만 가능합니다. 메모가 이미 있습니다.") 
+            }
         case .none:
             print("error")
         }

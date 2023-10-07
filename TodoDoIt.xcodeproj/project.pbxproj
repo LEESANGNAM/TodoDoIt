@@ -175,6 +175,7 @@
 		D62B079B2AC45600002C7EAB /* Doit */ = {
 			isa = PBXGroup;
 			children = (
+				D64BDD232AD1799000C4F6FB /* Detail */,
 				D6835B512ACA79E200B0A488 /* List */,
 				D6835B452AC882D900B0A488 /* Add */,
 			);
@@ -248,6 +249,13 @@
 				D64BDD1F2ACF41F800C4F6FB /* TodoListViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D64BDD232AD1799000C4F6FB /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		D6835B452AC882D900B0A488 /* Add */ = {
