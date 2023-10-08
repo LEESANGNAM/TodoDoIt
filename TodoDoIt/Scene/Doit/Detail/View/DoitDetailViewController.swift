@@ -6,21 +6,12 @@
 //
 
 import UIKit
-import RealmSwift
-
-
 
 class DoitDetailViewController: BaseViewController {
     
     let mainview = DoitDetailView()
-    var doitcompleteList = List<DoitCompleted>()
-    var doit: DoIt? {
-        didSet {
-            guard let doit else { return }
-            doitcompleteList = doit.doitComplete
-        }
-    }
     
+    let viewmodel = DoitDetailViewModel()
     override func loadView() {
         view = mainview
     }
@@ -29,12 +20,20 @@ class DoitDetailViewController: BaseViewController {
         super.viewDidLoad()
         setNavigationBar()
         setTableView()
+        bind()
         DispatchQueue.main.asyncAfter(deadline: .now()){
-            self.mainview.test.value = self.doit?.progress()
+            self.mainview.circularProgressbar.value = self.viewmodel.getDoitProgress()
         }
     }
+    
+    func bind(){
+        viewmodel.doit.bind {[weak self] _ in
+            self?.viewmodel.fetchdoitCompleteList()
+        }
+    }
+    
     func setNavigationBar() {
-        navigationItem.title = doit?.title
+        navigationItem.title = viewmodel.getDoitTitle()
     }
     
     func setTableView() {
@@ -48,13 +47,14 @@ class DoitDetailViewController: BaseViewController {
 extension DoitDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return doitcompleteList.count
+        return viewmodel.ListCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = mainview.completeTableView.dequeueReusableCell(withIdentifier: DoitDetailTableViewCell.identifier, for: indexPath) as? DoitDetailTableViewCell else { return UITableViewCell()}
-        let totalcount = doitcompleteList.count
-        let data = doitcompleteList[totalcount - indexPath.row - 1]
+        let totalcount = viewmodel.ListCount()
+        let index = totalcount - indexPath.row - 1
+        let data = viewmodel.getListData(index: index)
         cell.setData(data: data, totalcount: totalcount, index: indexPath.row)
         return cell
     }

@@ -10,7 +10,7 @@ import UIKit
 
 
 class DoitDetailView: BaseView {
-    var test = CircularProgressView()
+    var circularProgressbar = CircularProgressView()
     
     var completeTableView = {
         let view = UITableView()
@@ -19,20 +19,20 @@ class DoitDetailView: BaseView {
     
     override func setHierarchy() {
         super.setHierarchy()
-        addSubview(test)
-        test.backgroundColor = .systemBackground
+        addSubview(circularProgressbar)
+        circularProgressbar.backgroundColor = .systemBackground
         addSubview(completeTableView)
     }
     
     override func setConstraints() {
-        test.snp.makeConstraints { make in
+        circularProgressbar.snp.makeConstraints { make in
             make.centerX.equalTo(self.safeAreaLayoutGuide)
             make.top.equalTo(self.safeAreaLayoutGuide).offset(10)
             make.size.equalTo(150)
         }
         completeTableView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
-            make.top.equalTo(test.snp.bottom).offset(10)
+            make.top.equalTo(circularProgressbar.snp.bottom).offset(10)
             make.bottom.equalTo(self.safeAreaLayoutGuide)
         }
     }

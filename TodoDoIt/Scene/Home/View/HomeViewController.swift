@@ -156,7 +156,7 @@ extension HomeViewController: UICollectionViewDelegate {
         case .doit:
             if let selecteItem = dataSource?.itemIdentifier(for: indexPath) as? DoIt{
                 let vc = DoitDetailViewController()
-                vc.doit = selecteItem
+                vc.viewmodel.doit.value = selecteItem
                 navigationController?.pushViewController(vc, animated: true)
             }
         case .todo:
