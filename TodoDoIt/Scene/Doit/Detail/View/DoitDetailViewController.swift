@@ -6,12 +6,20 @@
 //
 
 import UIKit
+import RealmSwift
 
 
 
 class DoitDetailViewController: BaseViewController {
     
     let mainview = DoitDetailView()
+    var doitcompleteList = List<DoitCompleted>()
+    var doit: DoIt? {
+        didSet {
+            guard let doit else { return }
+            doitcompleteList = doit.doitComplete
+        }
+    }
     
     override func loadView() {
         view = mainview
@@ -19,12 +27,14 @@ class DoitDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationBar()
         setTableView()
         DispatchQueue.main.asyncAfter(deadline: .now()){
-            self.mainview.test.value = 0.58
+            self.mainview.test.value = self.doit?.progress()
         }
-        
-        
+    }
+    func setNavigationBar() {
+        navigationItem.title = doit?.title
     }
     
     func setTableView() {
@@ -38,12 +48,14 @@ class DoitDetailViewController: BaseViewController {
 extension DoitDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return doitcompleteList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = mainview.completeTableView.dequeueReusableCell(withIdentifier: DoitDetailTableViewCell.identifier, for: indexPath) as? DoitDetailTableViewCell else { return UITableViewCell()}
-        cell.completeImageView.layer.cornerRadius = 10
+        let totalcount = doitcompleteList.count
+        let data = doitcompleteList[totalcount - indexPath.row - 1]
+        cell.setData(data: data, totalcount: totalcount, index: indexPath.row)
         return cell
     }
     

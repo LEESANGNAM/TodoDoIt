@@ -154,8 +154,11 @@ extension HomeViewController: UICollectionViewDelegate {
         let section = SectionType(rawValue: indexPath.section)
         switch section {
         case .doit:
-            let vc = DoitDetailViewController()
-            navigationController?.pushViewController(vc, animated: true)
+            if let selecteItem = dataSource?.itemIdentifier(for: indexPath) as? DoIt{
+                let vc = DoitDetailViewController()
+                vc.doit = selecteItem
+                navigationController?.pushViewController(vc, animated: true)
+            }
         case .todo:
             break
         case .memo:

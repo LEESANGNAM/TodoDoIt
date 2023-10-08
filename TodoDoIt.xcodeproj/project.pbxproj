@@ -266,10 +266,26 @@
 		D64BDD232AD1799000C4F6FB /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				D64BDD2F2AD3361900C4F6FB /* View */,
+				D64BDD2E2AD3360F00C4F6FB /* Viewmodel */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		D64BDD2E2AD3360F00C4F6FB /* Viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Viewmodel;
+			sourceTree = "<group>";
+		};
+		D64BDD2F2AD3361900C4F6FB /* View */ = {
+			isa = PBXGroup;
+			children = (
 				D64BDD242AD17D0D00C4F6FB /* DoitDetailViewController.swift */,
 				D64BDD262AD1BCC900C4F6FB /* DoitDetailView.swift */,
 			);
-			path = Detail;
+			path = View;
 			sourceTree = "<group>";
 		};
 		D6835B452AC882D900B0A488 /* Add */ = {

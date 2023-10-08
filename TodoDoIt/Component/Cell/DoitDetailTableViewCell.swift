@@ -14,6 +14,7 @@ class DoitDetailTableViewCell: UITableViewCell {
        let view = UIImageView()
         view.image = UIImage(systemName: "star.fill")
         view.backgroundColor = .red
+        view.layer.cornerRadius = 30
         view.contentMode = .scaleToFill
         return view
     }()
@@ -66,9 +67,11 @@ class DoitDetailTableViewCell: UITableViewCell {
             make.trailing.equalTo(self.safeAreaLayoutGuide).offset(-10)
             make.bottom.lessThanOrEqualTo(self.safeAreaLayoutGuide).offset(-10)
         }
-        
-        
-        
+    }
+    
+    func setData(data: DoitCompleted, totalcount: Int, index: Int){
+        memoLabel.text = data.impression
+        countLabel.text = "\(totalcount - index)회차"
     }
     
 }
