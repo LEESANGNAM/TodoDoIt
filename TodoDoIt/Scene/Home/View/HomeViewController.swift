@@ -66,6 +66,7 @@ class HomeViewController: BaseViewController {
         collectionView.register(ListCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "MySectionHeaderView")
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.isScrollEnabled = false
+        collectionView.delegate = self
     }
     override func setHierarchy() {
         setCollectionView()
@@ -148,7 +149,22 @@ extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
         }
 }
 
-
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let section = SectionType(rawValue: indexPath.section)
+        switch section {
+        case .doit:
+            let vc = DoitDetailViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        case .todo:
+            break
+        case .memo:
+            break
+        case .none:
+            view.makeToast("잘못된 섹션입니다.")
+        }
+    }
+}
 
 //MARK: - collectionView, diffableDatasource
 extension HomeViewController {
