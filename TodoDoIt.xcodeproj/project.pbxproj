@@ -34,6 +34,8 @@
 		D64BDD252AD17D0D00C4F6FB /* DoitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64BDD242AD17D0D00C4F6FB /* DoitDetailViewController.swift */; };
 		D64BDD272AD1BCC900C4F6FB /* DoitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64BDD262AD1BCC900C4F6FB /* DoitDetailView.swift */; };
 		D64BDD292AD2BC9300C4F6FB /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64BDD282AD2BC9300C4F6FB /* CircularProgressView.swift */; };
+		D64BDD2B2AD2DB7900C4F6FB /* DoitDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64BDD2A2AD2DB7900C4F6FB /* DoitDetailTableViewCell.swift */; };
+		D64BDD2D2AD2FC8E00C4F6FB /* ReusableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64BDD2C2AD2FC8E00C4F6FB /* ReusableProtocol.swift */; };
 		D6835B492AC8900E00B0A488 /* DoitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B482AC8900E00B0A488 /* DoitCollectionViewCell.swift */; };
 		D6835B4D2AC9CC7500B0A488 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B4C2AC9CC7500B0A488 /* HomeViewModel.swift */; };
 		D6835B502AC9CCC200B0A488 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B4F2AC9CCC200B0A488 /* SectionType.swift */; };
@@ -74,6 +76,8 @@
 		D64BDD242AD17D0D00C4F6FB /* DoitDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitDetailViewController.swift; sourceTree = "<group>"; };
 		D64BDD262AD1BCC900C4F6FB /* DoitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitDetailView.swift; sourceTree = "<group>"; };
 		D64BDD282AD2BC9300C4F6FB /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		D64BDD2A2AD2DB7900C4F6FB /* DoitDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitDetailTableViewCell.swift; sourceTree = "<group>"; };
+		D64BDD2C2AD2FC8E00C4F6FB /* ReusableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableProtocol.swift; sourceTree = "<group>"; };
 		D6835B482AC8900E00B0A488 /* DoitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitCollectionViewCell.swift; sourceTree = "<group>"; };
 		D6835B4C2AC9CC7500B0A488 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		D6835B4F2AC9CCC200B0A488 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 				D6835B482AC8900E00B0A488 /* DoitCollectionViewCell.swift */,
 				D6835B582ACAE70F00B0A488 /* TodoCollectionViewCell.swift */,
 				D6835B5A2ACAE71A00B0A488 /* MemoCollectionViewCell.swift */,
+				D64BDD2A2AD2DB7900C4F6FB /* DoitDetailTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				D64BDD1A2ACF350400C4F6FB /* ModalPresentDelegate.swift */,
+				D64BDD2C2AD2FC8E00C4F6FB /* ReusableProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -512,6 +518,7 @@
 				D64BDD152ACDAF2400C4F6FB /* String+Extension.swift in Sources */,
 				D62B07A62AC48D9F002C7EAB /* DoitAddView.swift in Sources */,
 				D64BDD132ACD61F900C4F6FB /* TodoAddViewModel.swift in Sources */,
+				D64BDD2D2AD2FC8E00C4F6FB /* ReusableProtocol.swift in Sources */,
 				D62B07A02AC45813002C7EAB /* BaseViewController.swift in Sources */,
 				D6835B5E2ACAE8EF00B0A488 /* Design.swift in Sources */,
 				D62B07A22AC4581A002C7EAB /* BaseView.swift in Sources */,
@@ -523,6 +530,7 @@
 				D62B079D2AC456B5002C7EAB /* DoitAddViewController.swift in Sources */,
 				D6835B552ACA7BCE00B0A488 /* DoitListViewModel.swift in Sources */,
 				D6D92F062AC031DF0074236E /* AppDelegate.swift in Sources */,
+				D64BDD2B2AD2DB7900C4F6FB /* DoitDetailTableViewCell.swift in Sources */,
 				D62B07922AC3E1A5002C7EAB /* DoIt.swift in Sources */,
 				D64BDD1B2ACF350400C4F6FB /* ModalPresentDelegate.swift in Sources */,
 				D6D92F082AC031DF0074236E /* SceneDelegate.swift in Sources */,

@@ -14,7 +14,6 @@ class DoitDetailView: BaseView {
     
     var completeTableView = {
         let view = UITableView()
-        view.backgroundColor = .blue
         return view
     }()
     
@@ -32,7 +31,7 @@ class DoitDetailView: BaseView {
             make.size.equalTo(150)
         }
         completeTableView.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(20)
+            make.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
             make.top.equalTo(test.snp.bottom).offset(10)
             make.bottom.equalTo(self.safeAreaLayoutGuide)
         }
