@@ -34,16 +34,19 @@ class HomeViewController: BaseViewController {
      }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewmodel.fetchData(date: today)
+        viewmodel.fetchData(date: selectDate)
+//        collectionView.reloadData()
     }
    
     
     
     private func bind(){
         viewmodel.doitResult.bind { _ in
+            print("두잇 결과 바뀜 배열로 바꿀 예쩡")
             self.viewmodel.changeDoitArray()
         }
         viewmodel.doitArray.bind {_ in
+            print("두잇 어레이 바뀜 업데이트 스냅샷 예정")
             self.updateSnapshot()
         }
         viewmodel.todoResult.bind { _ in
@@ -263,7 +266,9 @@ extension HomeViewController {
         snapshot.appendItems(viewmodel.getDoitArray(),toSection: .doit)
         snapshot.appendItems(viewmodel.getTodoArray(),toSection: .todo)
         snapshot.appendItems(viewmodel.getMemoArray(),toSection: .memo)
-        dataSource?.apply(snapshot, animatingDifferences: true)
+//        dataSource?.apply(snapshot, animatingDifferences: true)
+        dataSource?.applySnapshotUsingReloadData(snapshot)
+        print("업데이트 스냅샷짜자잔")
         
     }
     @objc func addButtonTapped(_ sender: UIButton){

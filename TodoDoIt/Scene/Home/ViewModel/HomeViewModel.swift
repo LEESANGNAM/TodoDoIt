@@ -53,6 +53,8 @@ class HomeViewModel {
     }
 
     func getDoitArray() -> [DoIt] {
+        print(#function)
+        print(doitArray.value)
         return doitArray.value
     }
     func getTodoArray() -> [Todo] {

@@ -70,6 +70,7 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
         }
     }
     func setupData(doit: DoIt){
+        print("두잇 셀 데이터 다시 넣는중")
         let progress = doit.progress()
         let title = doit.title
         let date = doit.dateString
