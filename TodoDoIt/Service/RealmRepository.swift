@@ -27,6 +27,11 @@ final class Repository<T: Object>: RepositoryType {
     func fetch() -> Results<T> {
         return realm.objects(T.self)
     }
+    func fetchFilterKey(id: ObjectId) -> T? {
+        let data = realm.object(ofType: T.self, forPrimaryKey: id)
+        
+        return data
+    }
     func fetchFilterDate(date: Date) -> Results<T> {
         //날짜 의 00:00:00
         let startOfDay = Calendar.current.startOfDay(for: date)

@@ -156,8 +156,7 @@ extension HomeViewController: UICollectionViewDelegate {
         case .doit:
             if let selecteItem = dataSource?.itemIdentifier(for: indexPath) as? DoIt{
                 let vc = DoitDetailViewController()
-                print("여긴 컬렉션뷰에서 선택된 doit ID : ",selecteItem._id)
-                vc.viewmodel.doit.value = selecteItem
+                vc.viewmodel.doitkey.value = selecteItem._id
                 navigationController?.pushViewController(vc, animated: true)
             }
         case .todo:
@@ -265,6 +264,7 @@ extension HomeViewController {
         snapshot.appendItems(viewmodel.getTodoArray(),toSection: .todo)
         snapshot.appendItems(viewmodel.getMemoArray(),toSection: .memo)
         dataSource?.apply(snapshot, animatingDifferences: true)
+        
     }
     @objc func addButtonTapped(_ sender: UIButton){
         let section = SectionType(rawValue: sender.tag)

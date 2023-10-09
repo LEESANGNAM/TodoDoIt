@@ -9,10 +9,16 @@ import Foundation
 import RealmSwift
 
 class DoitDetailViewModel {
-    
+    let repository = Repository<DoIt>()
     var doit = Observer<DoIt?>(nil)
+    var doitkey = Observer<ObjectId?>(nil)
     var doitcompleteList = Observer<[DoitCompleted]>([])
     
+    func fetchDoit(){
+        guard let id = doitkey.value else { return}
+        let realmDoit = repository.fetchFilterKey(id: id)
+        doit.value = realmDoit
+    }
     func getDoitTitle() -> String {
         guard let doit = doit.value else { return "" }
         return doit.title

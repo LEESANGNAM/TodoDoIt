@@ -49,11 +49,6 @@ class DoitAddViewModel {
         return doit.value
     }
     func updateDate(doit: DoIt, title: String) {
-//        doit.endDate = endDate.value
-//        doit.complete = completeCount.value
-//        doit.title = title
-        print("여긴 업데이트 되기 직전 Doit ID: ",doit._id)
         repository.updateItem(value: ["_id": doit._id,"title": title ,"endDate": endDate.value, "complete": completeCount.value])
-//        repository.updateItem(doit)
     }
 }

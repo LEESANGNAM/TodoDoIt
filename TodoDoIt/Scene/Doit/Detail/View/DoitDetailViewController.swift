@@ -18,23 +18,27 @@ class DoitDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewmodel.fetchDoit()
         setNavigationBar()
         setTableView()
         bind()
-        print("여기는 컬렉션뷰 -> 디테일뷰 넘어온 Doit ID: ", viewmodel.doit.value?._id)
         DispatchQueue.main.asyncAfter(deadline: .now()){
             self.mainview.circularProgressbar.value = self.viewmodel.getDoitProgress()
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewmodel.fetchDoit()
+    }
     
     private func bind(){
-        viewmodel.doit.bind {[weak self] _ in
+        viewmodel.doit.bind {[weak self] doit in
             self?.viewmodel.fetchdoitCompleteList()
+            self?.navigationItem.title = doit?.title
         }
     }
     
     private func setNavigationBar() {
-        navigationItem.title = viewmodel.getDoitTitle()
         let menuElement = setUIAction()
         let menu = UIMenu(children: menuElement)
         let menuButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),menu: menu)
@@ -50,7 +54,6 @@ class DoitDetailViewController: BaseViewController {
         let update = UIAction(title: "수정") { _ in
             let vc = DoitAddViewController()
             vc.viewmodel.doit.value = self.viewmodel.doit.value
-            print("여긴 디테일뷰 -> 추가/수정 화면 넘어갈 Doit ID: ", self.viewmodel.doit.value?._id)
             self.navigationController?.pushViewController(vc, animated: true)
         }
         let remove = UIAction(title: "삭제") { _ in
