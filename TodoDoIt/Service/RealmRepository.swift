@@ -12,7 +12,7 @@ protocol RepositoryType {
     associatedtype T: RealmCollectionValue
     func fetch() -> Results<T>
     func createItem(_ item: T)
-    func updateItem(_ item: T)
+    func updateItem(value: Any)
     func removeItem(_ item: T)
 }
 
@@ -50,10 +50,11 @@ final class Repository<T: Object>: RepositoryType {
         }
     }
     
-    func updateItem(_ item: T) {
+    func updateItem(value: Any = [String: Any]()) {
         do {
             try realm.write {
-                realm.add(item, update: .modified)
+//                realm.add(item, update: .modified)
+                realm.create(T.self, value: value, update: .modified)
             }
         } catch {
             print(error)

@@ -21,6 +21,7 @@ class DoitDetailViewController: BaseViewController {
         setNavigationBar()
         setTableView()
         bind()
+        print("여기는 컬렉션뷰 -> 디테일뷰 넘어온 Doit ID: ", viewmodel.doit.value?._id)
         DispatchQueue.main.asyncAfter(deadline: .now()){
             self.mainview.circularProgressbar.value = self.viewmodel.getDoitProgress()
         }
@@ -47,7 +48,10 @@ class DoitDetailViewController: BaseViewController {
             print("완료버튼")
         }
         let update = UIAction(title: "수정") { _ in
-            print("수정버튼")
+            let vc = DoitAddViewController()
+            vc.viewmodel.doit.value = self.viewmodel.doit.value
+            print("여긴 디테일뷰 -> 추가/수정 화면 넘어갈 Doit ID: ", self.viewmodel.doit.value?._id)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         let remove = UIAction(title: "삭제") { _ in
             print("삭제버튼")

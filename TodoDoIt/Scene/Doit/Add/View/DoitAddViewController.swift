@@ -33,16 +33,40 @@ class DoitAddViewController: BaseViewController {
         viewmodel.completMaxCount.bind {[weak self] _ in
             self?.viewmodel.fetchListValue()
         }
+        viewmodel.doit.bind {[weak self] doit in
+            guard let doit else { return }
+            print("여긴 디테일뷰 -> 추가/생성으로 넘어온 Doit ID: ",doit._id)
+            self?.mainview.doitTextField.text = doit.title
+            self?.mainview.endDateTextField.text = doit.endDate.changeFormatString(format: "yyyy.MM.dd")
+            self?.mainview.completeTextField.text = "\(doit.complete)회"
+            self?.viewmodel.setDoitData()
+            
+        }
     }
     
     private func setupNavigationBar(){
-        navigationItem.title = "추가하기"
-        let savebutton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
-        navigationItem.rightBarButtonItem = savebutton
+        if let doit = viewmodel.getDoitData(){
+            self.navigationItem.title = "수정하기"
+            let updateButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(updateButtonTapped))
+            self.navigationItem.rightBarButtonItem = updateButton
+        }else {
+            navigationItem.title = "추가하기"
+            let savebutton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
+            navigationItem.rightBarButtonItem = savebutton
+        }
     }
     @objc  private func saveButtonTapped(){
         guard let title = mainview.doitTextField.text else { return }
         viewmodel.saveData(title: title)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc  private func updateButtonTapped(){
+        guard let title = mainview.doitTextField.text else { return }
+        if let doit = viewmodel.getDoitData(){
+            print("여긴 업데이트 버튼 누를때 전달되는 Doit ID :",doit._id)
+            viewmodel.updateDate(doit: doit,title: title)
+        }
         navigationController?.popViewController(animated: true)
     }
     

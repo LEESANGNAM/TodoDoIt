@@ -156,6 +156,7 @@ extension HomeViewController: UICollectionViewDelegate {
         case .doit:
             if let selecteItem = dataSource?.itemIdentifier(for: indexPath) as? DoIt{
                 let vc = DoitDetailViewController()
+                print("여긴 컬렉션뷰에서 선택된 doit ID : ",selecteItem._id)
                 vc.viewmodel.doit.value = selecteItem
                 navigationController?.pushViewController(vc, animated: true)
             }
