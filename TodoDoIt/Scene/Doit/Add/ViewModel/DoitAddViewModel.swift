@@ -23,7 +23,7 @@ class DoitAddViewModel {
          completMaxCount.value = dayCount
      }
     func fetchListValue(){
-        guard let maxcount = completMaxCount.value else { return }
+        guard let maxcount = completMaxCount.value, maxcount != 0 else { return }
         list.value = Array(1...maxcount)
     }
     func fetchCompleteCount(index: Int){
