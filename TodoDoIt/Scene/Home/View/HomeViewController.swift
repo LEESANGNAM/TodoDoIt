@@ -26,19 +26,21 @@ class HomeViewController: BaseViewController {
     var selectDate = Date() // 선택날짜
     let today = Date() // 오늘
     override func viewDidLoad() {
-         super.viewDidLoad()
+        super.viewDidLoad()
         configureDataSource()
         setUpSwipeGusture()
         bind()
         viewmodel.fetchData(date: today)
-     }
+        setNavigationBar(title: today.changeFormatString(format: "yyyy년MM월"))
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewmodel.fetchData(date: selectDate)
-//        collectionView.reloadData()
     }
-   
     
+    func setNavigationBar(title: String){
+        navigationItem.title = title
+    }
     
     private func bind(){
         viewmodel.doitResult.bind { _ in
@@ -62,7 +64,7 @@ class HomeViewController: BaseViewController {
             self.updateSnapshot()
         }
     }
-   
+    
     
     private func setCollectionView(){
         view.addSubview(collectionView)
@@ -70,6 +72,7 @@ class HomeViewController: BaseViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.isScrollEnabled = false
         collectionView.delegate = self
+        collectionView.backgroundColor = Design.Color.background
     }
     override func setHierarchy() {
         setCollectionView()
@@ -77,14 +80,14 @@ class HomeViewController: BaseViewController {
     }
     override func setConstraints(){
         fsCalendar.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(20)
+            make.horizontalEdges.equalToSuperview().inset(10)
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(300)
+            make.height.equalTo(250)
         }
         collectionView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(20)
-            make.top.equalTo(fsCalendar.snp.bottom).offset(20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.top.equalTo(fsCalendar.snp.bottom).offset(10)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
         }
         
     }
@@ -108,11 +111,32 @@ extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
         let calendar = FSCalendar(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         calendar.scrollDirection = .horizontal
         calendar.appearance.headerDateFormat = "YYYY년 M월"
+        calendar.headerHeight = 0.0
         calendar.appearance.headerMinimumDissolvedAlpha = 0
-//        calendar.appearance.todayColor = .clear
-        calendar.appearance.titleTodayColor = .black //Today에 표시되는 특정 글자색
+
+        // Weekday 폰트 설정
+        calendar.appearance.weekdayFont = UIFont(name: "NotoSansKR-Regular", size: 14)
+        // 각각의 일(날짜) 폰트 설정 (ex. 1 2 3 4 5 6 ...)
+        calendar.appearance.titleFont = UIFont(name: "NotoSansKR-Regular", size: 14)
         
-         self.fsCalendar = calendar
+        //요일 글자색
+        calendar.appearance.weekdayTextColor = Design.Color.blackFont
+        calendar.appearance.titleDefaultColor = Design.Color.blackFont
+        // 상단 요일을 한글로 변경
+        calendar.locale = Locale(identifier: "ko_KR")
+//        calendar.calendarWeekdayView.weekdayLabels[0].text = "일"
+//        calendar.calendarWeekdayView.weekdayLabels[1].text = "월"
+//        calendar.calendarWeekdayView.weekdayLabels[2].text = "화"
+//        calendar.calendarWeekdayView.weekdayLabels[3].text = "수"
+//        calendar.calendarWeekdayView.weekdayLabels[4].text = "목"
+//        calendar.calendarWeekdayView.weekdayLabels[5].text = "금"
+//        calendar.calendarWeekdayView.weekdayLabels[6].text = "토"
+        
+
+      
+        
+        
+        self.fsCalendar = calendar
         view.addSubview(fsCalendar)
         fsCalendar.delegate = self
         fsCalendar.dataSource = self
@@ -122,13 +146,13 @@ extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeEvent(_:)))
         swipeUp.direction = .up
         self.view.addGestureRecognizer(swipeUp)
-
+        
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeEvent(_:)))
         swipeDown.direction = .down
         self.view.addGestureRecognizer(swipeDown)
     }
     @objc func swipeEvent(_ swipe: UISwipeGestureRecognizer) {
-
+        
         if swipe.direction == .up {
             fsCalendar.setScope(.week, animated: true)
         }
@@ -149,7 +173,12 @@ extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         viewmodel.fetchData(date: date)
         selectDate = date
-        }
+    }
+    // 페이지변경
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        let pageTitle = calendar.currentPage.changeFormatString(format: "yyyy년MM월")
+        setNavigationBar(title: pageTitle)
+    }
 }
 
 extension HomeViewController: UICollectionViewDelegate {
@@ -180,7 +209,7 @@ extension HomeViewController {
             
             let item = NSCollectionLayoutItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                  heightDimension: .fractionalHeight(1.0)))
+                                                   heightDimension: .fractionalHeight(1.0)))
             item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
             var containerGroup: NSCollectionLayoutGroup!
             
@@ -211,7 +240,7 @@ extension HomeViewController {
             section.orthogonalScrollingBehavior = .groupPagingCentered
             section.boundarySupplementaryItems = [sectionHeader]
             return section
-
+            
         }
         return layout
     }
@@ -266,7 +295,7 @@ extension HomeViewController {
         snapshot.appendItems(viewmodel.getDoitArray(),toSection: .doit)
         snapshot.appendItems(viewmodel.getTodoArray(),toSection: .todo)
         snapshot.appendItems(viewmodel.getMemoArray(),toSection: .memo)
-//        dataSource?.apply(snapshot, animatingDifferences: true)
+        //        dataSource?.apply(snapshot, animatingDifferences: true)
         dataSource?.applySnapshotUsingReloadData(snapshot)
         print("업데이트 스냅샷짜자잔")
         
@@ -283,7 +312,7 @@ extension HomeViewController {
             present(vc,animated: true)
         case .memo:
             if let memo = viewmodel.getMemoArray().first{
-                self.view.makeToast("메모는 하루에 한개만 가능합니다. 메모가 이미 있습니다.") 
+                self.view.makeToast("메모는 하루에 한개만 가능합니다. 메모가 이미 있습니다.")
             }
         case .none:
             print("error")
@@ -301,6 +330,6 @@ extension HomeViewController {
         case .none:
             print("Error")
         }
-       
+        
     }
 }

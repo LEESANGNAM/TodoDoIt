@@ -23,7 +23,9 @@ class DoitListViewController: BaseViewController {
     
     private func setNavibar(){
         navigationItem.title = "목표리스트"
+        navigationItem.titleView?.tintColor = Design.Color.blackFont
         let button = UIBarButtonItem(image:UIImage(systemName: "plus.circle"), style: .done, target: self, action: #selector(addButtonTapped))
+        button.tintColor = Design.Color.blackFont
         navigationItem.rightBarButtonItem = button
     }
     
@@ -40,8 +42,9 @@ class DoitListViewController: BaseViewController {
     }
     override func setHierarchy() {
         view.addSubview(collectionView)
-        view.backgroundColor = .white
+        view.backgroundColor = Design.Color.background
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.backgroundColor = Design.Color.background
     }
     override func setConstraints() {
         collectionView.snp.makeConstraints { make in

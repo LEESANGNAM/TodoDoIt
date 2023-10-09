@@ -50,6 +50,7 @@ class TodoListViewController: BaseViewController {
         view.addSubview(collectionView)
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = Design.Color.background
     }
     override func setHierarchy() {
         setCollectionView()
@@ -89,9 +90,20 @@ extension TodoListViewController: FSCalendarDelegate, FSCalendarDataSource{
         calendar.scrollDirection = .horizontal
         calendar.appearance.headerDateFormat = "YYYY년 M월"
         calendar.appearance.headerMinimumDissolvedAlpha = 0
-//        calendar.appearance.todayColor = .clear
         calendar.appearance.titleTodayColor = .black //Today에 표시되는 특정 글자색
         calendar.scope = .week
+        
+        // Weekday 폰트 설정
+        calendar.appearance.weekdayFont = UIFont(name: "NotoSansKR-Regular", size: 14)
+        // 각각의 일(날짜) 폰트 설정 (ex. 1 2 3 4 5 6 ...)
+        calendar.appearance.titleFont = UIFont(name: "NotoSansKR-Regular", size: 14)
+        
+        //요일 글자색
+        calendar.appearance.headerTitleColor = Design.Color.blackFont
+        calendar.appearance.weekdayTextColor = Design.Color.blackFont
+        calendar.appearance.titleDefaultColor = Design.Color.blackFont
+        // 상단 요일을 한글로 변경
+        calendar.locale = Locale(identifier: "ko_KR")
         
          self.fsCalendar = calendar
         view.addSubview(fsCalendar)
@@ -99,24 +111,6 @@ extension TodoListViewController: FSCalendarDelegate, FSCalendarDataSource{
         fsCalendar.dataSource = self
         
     }
-//    private func setUpSwipeGusture(){
-//        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeEvent(_:)))
-//        swipeUp.direction = .up
-//        self.view.addGestureRecognizer(swipeUp)
-//
-//        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeEvent(_:)))
-//        swipeDown.direction = .down
-//        self.view.addGestureRecognizer(swipeDown)
-//    }
-//    @objc func swipeEvent(_ swipe: UISwipeGestureRecognizer) {
-//
-//        if swipe.direction == .up {
-//            fsCalendar.setScope(.week, animated: true)
-//        }
-//        else if swipe.direction == .down {
-//            fsCalendar.setScope(.month, animated: true)
-//        }
-//    }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         calendar.snp.updateConstraints { make in

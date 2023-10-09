@@ -22,12 +22,14 @@ class DoitDetailTableViewCell: UITableViewCell {
     let countLabel = {
        let view = UILabel()
         view.text = "00회차"
+        view.tintColor = Design.Color.blackFont
         return view
     }()
     let memoLabel = {
        let view = UILabel()
         view.text = "메모메모메모메모메모메모메모메모메모메모메모메모메모메모메모메모메모메모메모메"
         view.textAlignment = .left
+        view.tintColor = Design.Color.blackFont
         view.numberOfLines = 0
         return view
     }()
@@ -35,6 +37,7 @@ class DoitDetailTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = Design.Color.background
         setHierarchy()
         setConstraints()
     }

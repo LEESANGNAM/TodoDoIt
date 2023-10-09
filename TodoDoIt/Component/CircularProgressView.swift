@@ -42,10 +42,9 @@ class CircularProgressView: UIView {
         shapeLayer.path = bezierPath.cgPath
         shapeLayer.lineCap = .round    // 프로그래스 바의 끝을 둥글게 설정
 
-        let color: UIColor = .systemBlue
-
+        let color: UIColor = Design.Color.cell
         shapeLayer.strokeColor = color.cgColor
-        shapeLayer.fillColor = UIColor.white.cgColor
+        shapeLayer.fillColor = Design.Color.background?.cgColor
         shapeLayer.lineWidth = lineWidth
 
         self.layer.addSublayer(shapeLayer)

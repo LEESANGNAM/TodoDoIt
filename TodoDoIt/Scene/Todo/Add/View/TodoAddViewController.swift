@@ -21,9 +21,7 @@ class TodoAddViewController: BaseViewController{
     }()
     let doneButton = {
         let view = UIButton()
-        view.setTitle("완료", for: .normal)
-        view.backgroundColor = .systemBlue
-        view.tintColor = .white
+        view.setImage(Design.Image.todoAdd, for: .normal)
         return view
     }()
     
@@ -85,7 +83,9 @@ class TodoAddViewController: BaseViewController{
         }
         doneButton.snp.makeConstraints { make in
             make.trailing.top.bottom.equalToSuperview()
-            make.leading.equalTo(titleTextField.snp.trailing).offset(30)
+            make.trailing.equalToSuperview().offset(-20)
+            make.leading.equalTo(titleTextField.snp.trailing)
+            make.size.equalTo(40)
             
         }
     }

@@ -12,6 +12,7 @@ class ListCollectionViewHeaderView: UICollectionReusableView {
     var titleLabel = {
         let view = UILabel()
         view.text = "여기가 헤더뷰 타이틀"
+        view.textColor = Design.Color.blackFont
         return view
     }()
     
@@ -19,7 +20,7 @@ class ListCollectionViewHeaderView: UICollectionReusableView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "plus.circle"), for: .normal)
         button.sizeToFit()
-        button.tintColor = .black
+        button.tintColor = Design.Color.blackFont
         return button
     }()
     let listButton = {

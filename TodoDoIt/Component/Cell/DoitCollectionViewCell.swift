@@ -12,21 +12,21 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
         let view = UILabel()
         view.text = "목표 : 머ㅏㄴ옴너ㅏ옹ㄴㅁ오ㅓㅁㄴㅇ"
         view.font = .boldSystemFont(ofSize: Design.Font.titleFontSize)
-        view.textColor = .white
+        view.textColor = Design.Color.whiteFont
         return view
     }()
     var dateLabel = {
         let view = UILabel()
         view.text = "기간: 2023.09.10 ~ 2023.10.23"
         view.font = .systemFont(ofSize: Design.Font.dateFontSize)
-        view.textColor = .black
+        view.textColor = Design.Color.whiteFont
         return view
     }()
     lazy var progressView = {
        let view = UIProgressView()
         view.progress = 0.4
-        view.progressTintColor = .white
-        view.trackTintColor = .systemBlue
+        view.progressTintColor = Design.Color.whiteFont
+        view.trackTintColor = .systemGray
         
         return view
     }()
@@ -34,7 +34,7 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
         let view = UILabel()
         view.text = "50%"
         view.font = .boldSystemFont(ofSize: Design.Font.titleFontSize)
-        view.textColor = .white
+        view.textColor = Design.Color.whiteFont
         return view
     }()
     

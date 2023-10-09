@@ -14,13 +14,14 @@ class DoitDetailView: BaseView {
     
     var completeTableView = {
         let view = UITableView()
+        view.backgroundColor = Design.Color.background
         return view
     }()
     
     override func setHierarchy() {
         super.setHierarchy()
         addSubview(circularProgressbar)
-        circularProgressbar.backgroundColor = .systemBackground
+        circularProgressbar.backgroundColor = Design.Color.background
         addSubview(completeTableView)
     }
     

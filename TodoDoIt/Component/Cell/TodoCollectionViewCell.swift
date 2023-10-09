@@ -10,13 +10,16 @@ import UIKit
 class TodoCollectionViewCell: BaseCollectionViewCell{
     var titleLabel = {
         let view = UILabel()
-        view.font = .boldSystemFont(ofSize: Design.Font.titleFontSize)
+        view.font = .systemFont(ofSize: Design.Font.contentFontSize)
+        view.textColor = Design.Color.whiteFont
         return view
     }()
     let checkboxButton: UIButton = {
            let button = UIButton(type: .system)
            button.setImage(UIImage(systemName: "square"), for: .normal)
+            button.tintColor = Design.Color.whiteFont
            button.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
+        
            return button
        }()
     
