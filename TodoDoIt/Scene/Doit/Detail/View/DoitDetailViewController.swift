@@ -26,17 +26,37 @@ class DoitDetailViewController: BaseViewController {
         }
     }
     
-    func bind(){
+    private func bind(){
         viewmodel.doit.bind {[weak self] _ in
             self?.viewmodel.fetchdoitCompleteList()
         }
     }
     
-    func setNavigationBar() {
+    private func setNavigationBar() {
         navigationItem.title = viewmodel.getDoitTitle()
+        let menuElement = setUIAction()
+        let menu = UIMenu(children: menuElement)
+        let menuButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),menu: menu)
+        menuButton.tintColor = .label
+        navigationItem.rightBarButtonItem = menuButton
+        
     }
     
-    func setTableView() {
+    private func setUIAction() -> [UIAction] {
+        let complete = UIAction(title: "완료") { _ in
+            print("완료버튼")
+        }
+        let update = UIAction(title: "수정") { _ in
+            print("수정버튼")
+        }
+        let remove = UIAction(title: "삭제") { _ in
+            print("삭제버튼")
+        }
+        
+        return [complete,update,remove]
+    }
+    
+    private func setTableView() {
         mainview.completeTableView.register(DoitDetailTableViewCell.self, forCellReuseIdentifier: DoitDetailTableViewCell.identifier)
         mainview.completeTableView.dataSource = self
         mainview.completeTableView.delegate = self
