@@ -41,11 +41,13 @@ class TodoCollectionViewCell: BaseCollectionViewCell{
     }
     
     func setupData(todo: Todo){
-        titleLabel.text = todo.title
         if todo.finish {
             checkboxButton.isSelected = true
+            titleLabel.attributedText = todo.title.strikeThrough()
         }else {
             checkboxButton.isSelected = false
+            titleLabel.attributedText = nil
+            titleLabel.text = todo.title
         }
     }
 }
