@@ -27,6 +27,10 @@ final class Repository<T: Object>: RepositoryType {
     func fetch() -> Results<T> {
         return realm.objects(T.self)
     }
+    func fetchFilterDateSortByFinish(date: Date) -> Results<T>{
+        let filterDate = fetchFilterDate(date: date)
+        return filterDate.sorted(byKeyPath: "finish",ascending: true)
+    }
     func fetchFilterKey(id: ObjectId) -> T? {
         let data = realm.object(ofType: T.self, forPrimaryKey: id)
         

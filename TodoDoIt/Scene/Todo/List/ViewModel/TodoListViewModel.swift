@@ -13,15 +13,17 @@ class TodoListViewModel {
     var todoArray = Observer<[Todo]>([])
     
     func fetchData(date: Date){
-        todoResult.value = todoRepository.fetchFilterDate(date: date)
+        todoResult.value = todoRepository.fetchFilterDateSortByFinish(date: date)
     }
     func changeTodoArray(){
         if let result = todoResult.value{
             todoArray.value = Array(result)
         }
     }
-
     func getTodoArray() -> [Todo] {
         return todoArray.value
+    }
+    func updateTodo(todo: Todo,finish: Bool) {
+        todoRepository.updateItem(value: ["_id":todo._id,"finish": finish])
     }
 }

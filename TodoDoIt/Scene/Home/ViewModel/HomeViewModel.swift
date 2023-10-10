@@ -30,7 +30,7 @@ class HomeViewModel {
     }
     
     func fetchTodoData(date: Date){
-        todoResult.value = todoRepository.fetchFilterDate(date: date)
+        todoResult.value = todoRepository.fetchFilterDateSortByFinish(date: date)
     }
     func fetchMemoData(date: Date){
         memoResult.value = memoRepository.fetchFilterDate(date: date)

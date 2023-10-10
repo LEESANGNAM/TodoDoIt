@@ -154,6 +154,8 @@ extension TodoListViewController {
     func configureDataSource() {
         let todoCellRegistration = TodoCellRegistration { cell, indexPath, identifier in
             cell.setupData(todo: identifier)
+            cell.checkboxButton.tag = indexPath.item
+            cell.checkboxButton.addTarget(self, action: #selector(self.checkButtonTapped), for: .touchUpInside)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
@@ -167,7 +169,17 @@ extension TodoListViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Int, Todo>()
         snapshot.appendSections([0])
         snapshot.appendItems(viewmodel.getTodoArray())
-        dataSource?.apply(snapshot, animatingDifferences: false)
+        dataSource?.applySnapshotUsingReloadData(snapshot)
+    }
+    
+    @objc func checkButtonTapped(_ sender: UIButton){
+        let index = IndexPath(item: sender.tag, section: 0)
+        if let selecteItem = dataSource?.itemIdentifier(for: index){
+            var finish = selecteItem.finish
+            finish.toggle()
+            viewmodel.updateTodo(todo: selecteItem,finish: finish)
+            viewmodel.fetchData(date: selectDate)
+        }
     }
 }
 
