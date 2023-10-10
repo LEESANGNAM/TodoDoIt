@@ -309,6 +309,7 @@ extension HomeViewController {
             let vc = TodoAddViewController()
             vc.delegate = self
             vc.modalPresentationStyle = .overFullScreen
+            vc.modalTransitionStyle = .crossDissolve
             present(vc,animated: true)
         case .memo:
             if let memo = viewmodel.getMemoArray().first{
