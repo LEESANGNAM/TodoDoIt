@@ -25,7 +25,7 @@ class TodoListViewController: BaseViewController {
     override func viewDidLoad() {
          super.viewDidLoad()
         configureDataSource()
-        title = "할일리스트"
+        setNavibar()
         bind()
         viewmodel.fetchData(date: today)
      }
@@ -34,7 +34,20 @@ class TodoListViewController: BaseViewController {
         viewmodel.fetchData(date: today)
     }
    
-    
+    private func setNavibar(){
+        navigationItem.title = "할일목록"
+        navigationItem.titleView?.tintColor = Design.Color.blackFont
+        let button = UIBarButtonItem(image:UIImage(systemName: "plus.circle"), style: .done, target: self, action: #selector(addButtonTapped))
+        button.tintColor = Design.Color.blackFont
+        navigationItem.rightBarButtonItem = button
+    }
+    @objc private func addButtonTapped(){
+        let vc = TodoAddViewController()
+        vc.delegate = self
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc,animated: true)
+    }
     
     private func bind(){
         viewmodel.todoResult.bind { _ in
