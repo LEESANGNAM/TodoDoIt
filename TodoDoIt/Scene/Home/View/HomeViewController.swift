@@ -330,7 +330,10 @@ extension HomeViewController {
             if let tabBarController = self.tabBarController {
                 tabBarController.selectedIndex = 1
             }
-        case .todo: break
+        case .todo:
+            if let tabBarController = self.tabBarController {
+                tabBarController.selectedIndex = 2
+            }
         case .memo: break
         case .none:
             print("Error")
