@@ -19,8 +19,6 @@ class TodoCollectionViewCell: BaseCollectionViewCell{
            button.setImage(UIImage(systemName: "square"), for: .normal)
             button.tintColor = Design.Color.whiteFont
         button.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
-        button.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
-        
            return button
        }()
     
@@ -46,14 +44,8 @@ class TodoCollectionViewCell: BaseCollectionViewCell{
         titleLabel.text = todo.title
         if todo.finish {
             checkboxButton.isSelected = true
-            checkboxButton.isUserInteractionEnabled = false
         }else {
             checkboxButton.isSelected = false
         }
     }
-    
-   @objc func checkButtonTapped(){
-       checkboxButton.isSelected.toggle()
-    }
-    
 }

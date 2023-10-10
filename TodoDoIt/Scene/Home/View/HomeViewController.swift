@@ -186,7 +186,8 @@ extension HomeViewController: UICollectionViewDelegate {
         let section = SectionType(rawValue: indexPath.section)
         switch section {
         case .doit:
-            if let selecteItem = dataSource?.itemIdentifier(for: indexPath) as? DoIt{
+            if let selecteItem =
+                dataSource?.itemIdentifier(for: indexPath) as? DoIt{
                 let vc = DoitDetailViewController()
                 vc.viewmodel.doitkey.value = selecteItem._id
                 navigationController?.pushViewController(vc, animated: true)
@@ -252,6 +253,9 @@ extension HomeViewController {
         }
         let todoCellRegistration = TodoCellRegistration { cell, indexPath, identifier in
             cell.setupData(todo: identifier)
+            cell.checkboxButton.tag = indexPath.item
+            cell.checkboxButton.addTarget(self, action: #selector(self.checkButtonTapped), for: .touchUpInside)
+            
         }
         let memoCellRegistration = MemoCellRegistration { cell, indexPath, identifier in
             cell.setupData(memo: identifier)
@@ -331,6 +335,15 @@ extension HomeViewController {
         case .none:
             print("Error")
         }
-        
+    }
+    
+    @objc func checkButtonTapped(_ sender: UIButton){
+        let index = IndexPath(item: sender.tag, section: 1)
+        if let selecteItem = dataSource?.itemIdentifier(for: index) as? Todo {
+            var finish = selecteItem.finish
+            finish.toggle()
+            viewmodel.updateTodo(todo: selecteItem,finish: finish)
+            viewmodel.fetchTodoData(date: selectDate)
+        }
     }
 }

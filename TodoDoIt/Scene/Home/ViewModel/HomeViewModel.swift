@@ -53,8 +53,6 @@ class HomeViewModel {
     }
 
     func getDoitArray() -> [DoIt] {
-        print(#function)
-        print(doitArray.value)
         return doitArray.value
     }
     func getTodoArray() -> [Todo] {
@@ -62,5 +60,9 @@ class HomeViewModel {
     }
     func getMemoArray() -> [Memo] {
         return memoArray.value
+    }
+    
+    func updateTodo(todo: Todo,finish: Bool) {
+        todoRepository.updateItem(value: ["_id":todo._id,"finish": finish])
     }
 }
