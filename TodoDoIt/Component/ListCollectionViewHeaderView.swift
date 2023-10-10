@@ -9,18 +9,23 @@ import UIKit
 import SnapKit
 
 class ListCollectionViewHeaderView: UICollectionReusableView {
-    var titleLabel = {
-        let view = UILabel()
-        view.text = "여기가 헤더뷰 타이틀"
-        view.textColor = Design.Color.blackFont
-        return view
-    }()
-    
     let addButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "plus.circle"), for: .normal)
+        button.setTitle("test", for: .normal)
+        button.setImage(Design.Image.plusButton, for: .normal)
+        
+        var configuration = UIButton.Configuration.gray()
+        // 이미지와 타이틀을 아래로 배치
+        configuration.imagePlacement = NSDirectionalRectEdge.trailing
+        configuration.baseForegroundColor = Design.Color.blackFont
+        configuration.buttonSize = .mini
+        configuration.titlePadding = -10
+        configuration.imagePadding = 10
+        configuration.cornerStyle = .capsule
+        
+        button.configuration = configuration
         button.sizeToFit()
-        button.tintColor = Design.Color.blackFont
+        
         return button
     }()
     let listButton = {
@@ -41,20 +46,13 @@ class ListCollectionViewHeaderView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     func setHierarchy(){
-        addSubview(titleLabel)
         addSubview(addButton)
         addSubview(listButton)
     }
-    func setConstraints(){
-        titleLabel.snp.makeConstraints { make in
+    func setConstraints(){        
+        addButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)
             make.centerY.equalToSuperview()
-        }
-        
-        addButton.snp.makeConstraints { make in
-            make.leading.equalTo(titleLabel.snp.trailing)
-            make.centerY.equalToSuperview()
-            make.size.equalTo(30)
         }
         
         listButton.snp.makeConstraints { make in

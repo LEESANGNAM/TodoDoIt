@@ -289,7 +289,8 @@ extension HomeViewController {
                 // 섹션 헤더를 만들고 반환
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MySectionHeaderView", for: indexPath) as! ListCollectionViewHeaderView
                 // headerView의 내용 설정
-                headerView.titleLabel.text = SectionType.allCases[indexPath.section].title
+                let title = SectionType.allCases[indexPath.section].title
+                headerView.addButton.setTitle(title, for: .normal)
                 headerView.addButton.tag = indexPath.section
                 headerView.addButton.addTarget(self, action: #selector(self.addButtonTapped), for: .touchUpInside)
                 headerView.listButton.tag = indexPath.section
