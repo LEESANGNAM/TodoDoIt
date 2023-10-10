@@ -25,6 +25,9 @@ enum Design{
     
     enum Image {
         static let todoAdd = UIImage(systemName: "arrow.up.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(Design.Color.cell) // 탭바에 넣었을때 원하는 ui가 안나올경우
+        static let todoUpdate = UIImage(systemName: "pencil.line")!.withRenderingMode(.alwaysOriginal).withTintColor(.systemIndigo) // 탭바에 넣었을때 원하는 ui가 안나올경우
+        static let todoDelete = UIImage(systemName: "trash.square.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.systemRed) // 탭바에 넣었을때 원하는 ui가 안나올경우
+        static let todoTomorrow = UIImage(systemName: "arrow.uturn.right.circle.fill")!.withRenderingMode(.alwaysOriginal).withTintColor(.systemIndigo) // 탭바에 넣었을때 원하는 ui가 안나올경우
     }
 
 }

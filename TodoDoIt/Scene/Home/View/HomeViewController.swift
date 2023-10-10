@@ -193,7 +193,14 @@ extension HomeViewController: UICollectionViewDelegate {
                 navigationController?.pushViewController(vc, animated: true)
             }
         case .todo:
-            break
+            if let selectItem = dataSource?.itemIdentifier(for: indexPath) as? Todo {
+                let vc = TodoDetailViewcontroller()
+                if  let sheet = vc.sheetPresentationController {
+                    sheet.detents = [.medium()]
+                    sheet.prefersGrabberVisible = true
+                }
+                present(vc, animated: true)
+            }
         case .memo:
             break
         case .none:
