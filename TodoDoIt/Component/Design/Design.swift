@@ -20,6 +20,7 @@ enum Design{
         static let whiteFont = UIColor.white
         static let blackFont = UIColor.label
         static let cell = UIColor(named: "cell")!
+        static let progress = UIColor(named: "progress")!
     }
     
     enum Image {

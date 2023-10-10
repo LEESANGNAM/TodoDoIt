@@ -26,14 +26,14 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
        let view = UIProgressView()
         view.progress = 0.4
         view.progressTintColor = Design.Color.whiteFont
-        view.trackTintColor = .systemGray
+        view.trackTintColor = Design.Color.progress
         
         return view
     }()
     var progressLabel = {
         let view = UILabel()
         view.text = "50%"
-        view.font = .boldSystemFont(ofSize: Design.Font.titleFontSize)
+        view.font = .boldSystemFont(ofSize: Design.Font.contentFontSize)
         view.textColor = Design.Color.whiteFont
         return view
     }()

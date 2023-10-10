@@ -13,10 +13,6 @@ class BaseCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         backgroundColor = Design.Color.cell
         layer.cornerRadius = 10
-        layer.shadowColor = Design.Color.blackFont.cgColor
-        layer.shadowOpacity = 0.5
-        layer.shadowOffset = CGSize(width: 0, height: 3)
-        layer.shadowRadius = 5
 
         setHierarchy()
         setConstraints()

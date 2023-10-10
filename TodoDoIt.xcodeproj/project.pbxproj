@@ -189,9 +189,9 @@
 		D62B079B2AC45600002C7EAB /* Doit */ = {
 			isa = PBXGroup;
 			children = (
-				D64BDD232AD1799000C4F6FB /* Detail */,
-				D6835B512ACA79E200B0A488 /* List */,
 				D6835B452AC882D900B0A488 /* Add */,
+				D6835B512ACA79E200B0A488 /* List */,
+				D64BDD232AD1799000C4F6FB /* Detail */,
 			);
 			path = Doit;
 			sourceTree = "<group>";
@@ -209,8 +209,9 @@
 		D64BDCE42ACC05EF00C4F6FB /* Todo */ = {
 			isa = PBXGroup;
 			children = (
-				D64BDD1C2ACF41D400C4F6FB /* List */,
 				D64BDCE52ACC062200C4F6FB /* Add */,
+				D64BDD1C2ACF41D400C4F6FB /* List */,
+				D64BDD332AD59A1700C4F6FB /* Detail */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -289,6 +290,13 @@
 				D64BDD262AD1BCC900C4F6FB /* DoitDetailView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D64BDD332AD59A1700C4F6FB /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		D6835B452AC882D900B0A488 /* Add */ = {

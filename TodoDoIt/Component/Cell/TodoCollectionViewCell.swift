@@ -43,10 +43,12 @@ class TodoCollectionViewCell: BaseCollectionViewCell{
     func setupData(todo: Todo){
         if todo.finish {
             checkboxButton.isSelected = true
+            titleLabel.textColor = Design.Color.progress
             titleLabel.attributedText = todo.title.strikeThrough()
         }else {
             checkboxButton.isSelected = false
             titleLabel.attributedText = nil
+            titleLabel.textColor = Design.Color.whiteFont
             titleLabel.text = todo.title
         }
     }

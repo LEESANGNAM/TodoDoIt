@@ -22,7 +22,7 @@ class CircularProgressView: UIView {
         bezierPath.addArc(withCenter: CGPoint(x: rect.midX, y: rect.midY), radius: rect.midX - ((lineWidth - 1) / 2), startAngle: 0, endAngle: .pi * 2, clockwise: true)
 
         bezierPath.lineWidth = 3
-        UIColor.systemGray4.set()
+        Design.Color.progress.set()
         bezierPath.stroke()
     }
     
