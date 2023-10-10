@@ -66,8 +66,8 @@ class TodoAddViewController: BaseViewController{
     }
     @objc func tapgestureTapped(){
         titleTextField.resignFirstResponder()
+        dismiss(animated: true)
         delegate?.disMissModal()  // 닫힐때 호출
-        dismiss(animated: false)
     }
     override func setConstraints() {
         
