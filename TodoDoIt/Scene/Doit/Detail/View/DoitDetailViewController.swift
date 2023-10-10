@@ -35,6 +35,7 @@ class DoitDetailViewController: BaseViewController {
         viewmodel.doit.bind {[weak self] doit in
             self?.viewmodel.fetchdoitCompleteList()
             self?.navigationItem.title = doit?.title
+            self?.mainview.circularProgressbar.value = doit?.progress()
         }
     }
     
