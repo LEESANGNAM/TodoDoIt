@@ -20,6 +20,10 @@ class DoitListViewController: BaseViewController {
         bind()
         viewmodel.fetch()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewmodel.fetch()
+    }
     
     private func setNavibar(){
         navigationItem.title = "목표리스트"
@@ -45,6 +49,7 @@ class DoitListViewController: BaseViewController {
         view.backgroundColor = Design.Color.background
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = Design.Color.background
+        collectionView.delegate = self
     }
     override func setConstraints() {
         collectionView.snp.makeConstraints { make in
@@ -53,6 +58,18 @@ class DoitListViewController: BaseViewController {
         }
     }
 }
+
+extension DoitListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let selecteItem =
+            dataSource?.itemIdentifier(for: indexPath){
+            let vc = DoitDetailViewController()
+            vc.viewmodel.doitkey.value = selecteItem._id
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}
+
 
 //MARK: CollectionView
 extension DoitListViewController{
