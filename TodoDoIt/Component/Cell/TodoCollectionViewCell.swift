@@ -15,10 +15,11 @@ class TodoCollectionViewCell: BaseCollectionViewCell{
         return view
     }()
     let checkboxButton: UIButton = {
-           let button = UIButton(type: .system)
+        let button = UIButton(type: .custom)
            button.setImage(UIImage(systemName: "square"), for: .normal)
             button.tintColor = Design.Color.whiteFont
-           button.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
+        button.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
+        button.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         
            return button
        }()
@@ -34,14 +35,25 @@ class TodoCollectionViewCell: BaseCollectionViewCell{
             make.leading.equalToSuperview().offset(20)
         }
         checkboxButton.snp.makeConstraints { make in
-            make.verticalEdges.equalToSuperview().inset(10)
-            make.trailing.equalToSuperview().offset(-20)
+            make.verticalEdges.equalToSuperview().inset(5)
+            make.trailing.equalToSuperview()
             make.leading.greaterThanOrEqualTo(titleLabel.snp.trailing).offset(10)
+            make.size.equalTo(50)
         }
     }
     
     func setupData(todo: Todo){
         titleLabel.text = todo.title
+        if todo.finish {
+            checkboxButton.isSelected = true
+            checkboxButton.isUserInteractionEnabled = false
+        }else {
+            checkboxButton.isSelected = false
+        }
+    }
+    
+   @objc func checkButtonTapped(){
+       checkboxButton.isSelected.toggle()
     }
     
 }

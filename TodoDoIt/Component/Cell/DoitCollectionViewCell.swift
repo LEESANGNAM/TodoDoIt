@@ -48,12 +48,12 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
     override func setConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(20)
-//            make.height.equalTo(30)
+            make.height.equalTo(30)
             make.top.equalToSuperview().offset(10)
         }
         dateLabel.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(20)
-//            make.height.equalTo(30)
+            make.height.equalTo(30)
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
         }
         progressView.snp.makeConstraints { make in
@@ -80,6 +80,5 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
         
         progressView.progress = Float(progress)
         progressLabel.text = "\(Int(progress * 100))%"
-        
     }
 }

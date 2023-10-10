@@ -9,6 +9,7 @@ import UIKit
 
 class CircularProgressView: UIView {
     var lineWidth: CGFloat = 10
+    var circleShapeLayer: CAShapeLayer?
     var value: Double? {
         didSet {
             guard let _ = value else { return }
@@ -23,6 +24,17 @@ class CircularProgressView: UIView {
         bezierPath.lineWidth = 3
         UIColor.systemGray4.set()
         bezierPath.stroke()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // ✅ 지정된 특성 컬렉션(previousTraitCollection)과 현재 특성 컬렉션 간의 변경이 색상 값에 영향을 미치는지 여부를 묻는다.
+                guard traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) else { return }
+        // ✅ 이전 traitCollection 의 userInterfaceStyle 와 비교.
+                guard traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle else { return }
+        circleShapeLayer?.fillColor =  Design.Color.background.cgColor
+        circleShapeLayer?.strokeColor = Design.Color.cell.cgColor
+        
     }
     func setProgress(_ rect: CGRect) {
         guard let value = self.value else {
@@ -44,10 +56,11 @@ class CircularProgressView: UIView {
 
         let color: UIColor = Design.Color.cell
         shapeLayer.strokeColor = color.cgColor
-        shapeLayer.fillColor = Design.Color.background?.cgColor
+        shapeLayer.fillColor = Design.Color.background.cgColor
         shapeLayer.lineWidth = lineWidth
-
-        self.layer.addSublayer(shapeLayer)
+        
+        circleShapeLayer = shapeLayer
+        self.layer.addSublayer(circleShapeLayer!)
 
         // 프로그래스바 중심에 수치 입력을 위해 UILabel 추가
         let label = UILabel()
