@@ -46,8 +46,7 @@ class TodoAddViewController: BaseViewController{
                 if let todo = self.viewmodel.getTodo(){
                     self.viewmodel.updateData()
                     self.view.makeToast("할일이 변경되었습니다.")
-                    self.titleTextField.resignFirstResponder()
-                    self.dismiss(animated: true)
+                    self.dismissModal()
                 }else {
                     self.viewmodel.saveData(date: self.selectDate)
                     self.view.makeToast("할일이 저장되었습니다.",position: .top)
@@ -82,6 +81,9 @@ class TodoAddViewController: BaseViewController{
         }
     }
     @objc func tapgestureTapped(){
+        dismissModal()
+    }
+    private func dismissModal(){
         titleTextField.resignFirstResponder()
         dismiss(animated: true)
         delegate?.disMissModal()  // 닫힐때 호출

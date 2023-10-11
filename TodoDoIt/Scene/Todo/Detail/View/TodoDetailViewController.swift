@@ -24,7 +24,6 @@ class TodoDetailViewcontroller: BaseViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(#function)
         viewmodel.fetchTodo()
     }
     
@@ -36,6 +35,7 @@ class TodoDetailViewcontroller: BaseViewController {
     
     @objc private func updateButtonTapped() {
         let vc = TodoAddViewController()
+        vc.delegate = self
         vc.viewmodel.todo.value = viewmodel.getTodo()
         vc.modalPresentationStyle = .overFullScreen
         vc.modalTransitionStyle = .crossDissolve
@@ -56,4 +56,13 @@ class TodoDetailViewcontroller: BaseViewController {
     }
     
     
+}
+
+extension TodoDetailViewcontroller: ModalPresentDelegate {
+    func sendDateToModal() -> Date {
+        return viewmodel.todo.value?.createDate ?? Date()
+    }
+    func disMissModal() {
+        viewmodel.fetchTodo()
+    }
 }
