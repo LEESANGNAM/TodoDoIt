@@ -199,6 +199,7 @@ extension HomeViewController: UICollectionViewDelegate {
                     sheet.detents = [.medium()]
                     sheet.prefersGrabberVisible = true
                 }
+                vc.viewmodel.todokey.value = selectItem._id
                 present(vc, animated: true)
             }
         case .memo:

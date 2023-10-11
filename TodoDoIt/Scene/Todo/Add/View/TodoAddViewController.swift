@@ -6,17 +6,17 @@
 //
 
 import UIKit
+import Toast
 
 class TodoAddViewController: BaseViewController{
     let titleView = {
-       let view = UIView()
+        let view = UIView()
         view.backgroundColor = .white
         return view
     }()
     
     let titleTextField = {
         let view = UITextField()
-        view.placeholder = "오늘의 할일을 입력해주세요.~~~"
         return view
     }()
     let doneButton = {
@@ -39,8 +39,20 @@ class TodoAddViewController: BaseViewController{
     }
     private func bind(){
         viewmodel.title.bind {_ in
-            self.viewmodel.saveData(date: self.selectDate)
-            self.titleTextField.text = ""
+            self.viewmodel.checkvaild()
+        }
+        viewmodel.vaild.bind { valid in
+            if valid {
+                if let todo = self.viewmodel.getTodo(){
+                    self.viewmodel.updateData()
+                    self.view.makeToast("할일이 변경되었습니다.")
+                    self.titleTextField.resignFirstResponder()
+                    self.dismiss(animated: true)
+                }else {
+                    self.viewmodel.saveData(date: self.selectDate)
+                    self.view.makeToast("할일이 저장되었습니다.",position: .top)
+                }
+            }
         }
     }
     override func setHierarchy() {
@@ -63,6 +75,11 @@ class TodoAddViewController: BaseViewController{
     func setUpTitleTextfield(){
         titleTextField.becomeFirstResponder()
         titleTextField.delegate = self
+        if let todo = viewmodel.getTodo() {
+            titleTextField.placeholder = todo.title + "에서 변경할 할일을 입력해주세요."
+        }else{
+            titleTextField.placeholder = "오늘의 할일을 입력해주세요."
+        }
     }
     @objc func tapgestureTapped(){
         titleTextField.resignFirstResponder()
@@ -95,41 +112,20 @@ class TodoAddViewController: BaseViewController{
 extension TodoAddViewController: UITextFieldDelegate {
     @objc func doneButtonTapped() {
         guard let title = titleTextField.text else {
-            print("텍스트를 입력해주세요")
+            view.makeToast("텍스트를 입력해주세요",position: .top)
             return
         }
-        guard !title.isEmpty else {
-            print("텍스트가 비었습니다.")
-            return
-        }
-        guard !title.removeSpace().isEmpty else {
-            print(#function)
-            print("텍스트 공백만 있음")
-            titleTextField.text = ""
-            return
-        }
-
         viewmodel.setTitle(text: title)
+        titleTextField.text = ""
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let text = textField.text else {
-            print("텍스트를 입력해주세요")
+            view.makeToast("텍스트를 입력해주세요",position: .top)
             return true
         }
-        guard !text.isEmpty else {
-            print("텍스트가 비었습니다.")
-            return true
-        }
-        guard !text.removeSpace().isEmpty else {
-            print(#function)
-            print("텍스트 공백만 있음")
-            textField.text = ""
-            return true
-        }
-
         viewmodel.setTitle(text: text)
-        
+        titleTextField.text = ""
         return true
     }
 }

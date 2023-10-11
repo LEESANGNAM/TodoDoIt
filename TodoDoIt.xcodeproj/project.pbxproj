@@ -39,6 +39,7 @@
 		D64BDD312AD339FC00C4F6FB /* DoitDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64BDD302AD339FC00C4F6FB /* DoitDetailViewModel.swift */; };
 		D64BDD352AD5C58F00C4F6FB /* TodoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64BDD342AD5C58F00C4F6FB /* TodoDetailViewController.swift */; };
 		D64BDD382AD5C75400C4F6FB /* TodoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64BDD372AD5C75400C4F6FB /* TodoDetailView.swift */; };
+		D64BDD3B2AD675EE00C4F6FB /* TodoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64BDD3A2AD675EE00C4F6FB /* TodoDetailViewModel.swift */; };
 		D6835B492AC8900E00B0A488 /* DoitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B482AC8900E00B0A488 /* DoitCollectionViewCell.swift */; };
 		D6835B4D2AC9CC7500B0A488 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B4C2AC9CC7500B0A488 /* HomeViewModel.swift */; };
 		D6835B502AC9CCC200B0A488 /* SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B4F2AC9CCC200B0A488 /* SectionType.swift */; };
@@ -84,6 +85,7 @@
 		D64BDD302AD339FC00C4F6FB /* DoitDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitDetailViewModel.swift; sourceTree = "<group>"; };
 		D64BDD342AD5C58F00C4F6FB /* TodoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailViewController.swift; sourceTree = "<group>"; };
 		D64BDD372AD5C75400C4F6FB /* TodoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailView.swift; sourceTree = "<group>"; };
+		D64BDD3A2AD675EE00C4F6FB /* TodoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailViewModel.swift; sourceTree = "<group>"; };
 		D6835B482AC8900E00B0A488 /* DoitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitCollectionViewCell.swift; sourceTree = "<group>"; };
 		D6835B4C2AC9CC7500B0A488 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		D6835B4F2AC9CCC200B0A488 /* SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionType.swift; sourceTree = "<group>"; };
@@ -152,10 +154,9 @@
 		D62B078D2AC33C7F002C7EAB /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				D64BDD3C2AD6788000C4F6FB /* View */,
 				D6835B5C2ACAE8D500B0A488 /* Design */,
 				D62B078C2AC2BA31002C7EAB /* Cell */,
-				D62B078E2AC33CE3002C7EAB /* ListCollectionViewHeaderView.swift */,
-				D64BDD282AD2BC9300C4F6FB /* CircularProgressView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -299,6 +300,7 @@
 		D64BDD332AD59A1700C4F6FB /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				D64BDD392AD675DE00C4F6FB /* ViewModel */,
 				D64BDD362AD5C74800C4F6FB /* View */,
 			);
 			path = Detail;
@@ -309,6 +311,23 @@
 			children = (
 				D64BDD342AD5C58F00C4F6FB /* TodoDetailViewController.swift */,
 				D64BDD372AD5C75400C4F6FB /* TodoDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D64BDD392AD675DE00C4F6FB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D64BDD3A2AD675EE00C4F6FB /* TodoDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D64BDD3C2AD6788000C4F6FB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D62B078E2AC33CE3002C7EAB /* ListCollectionViewHeaderView.swift */,
+				D64BDD282AD2BC9300C4F6FB /* CircularProgressView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -572,6 +591,7 @@
 				D62B079D2AC456B5002C7EAB /* DoitAddViewController.swift in Sources */,
 				D6835B552ACA7BCE00B0A488 /* DoitListViewModel.swift in Sources */,
 				D6D92F062AC031DF0074236E /* AppDelegate.swift in Sources */,
+				D64BDD3B2AD675EE00C4F6FB /* TodoDetailViewModel.swift in Sources */,
 				D64BDD2B2AD2DB7900C4F6FB /* DoitDetailTableViewCell.swift in Sources */,
 				D62B07922AC3E1A5002C7EAB /* DoIt.swift in Sources */,
 				D64BDD1B2ACF350400C4F6FB /* ModalPresentDelegate.swift in Sources */,

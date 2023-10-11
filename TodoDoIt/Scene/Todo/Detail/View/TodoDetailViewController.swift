@@ -10,7 +10,7 @@ import Foundation
 class TodoDetailViewcontroller: BaseViewController {
     
     let mainView = TodoDetailView()
-    
+    let viewmodel = TodoDetailViewModel()
     override func loadView() {
         view = mainView
     }
@@ -18,6 +18,42 @@ class TodoDetailViewcontroller: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
+        viewmodel.fetchTodo()
+        setButtonAction()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print(#function)
+        viewmodel.fetchTodo()
+    }
+    
+    private func setButtonAction() {
+        mainView.updateButton.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
+        mainView.deleteButton.addTarget(self, action: #selector(deleteButtonapped), for: .touchUpInside)
+        mainView.tomorrowButton.addTarget(self, action: #selector(tomorrowButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func updateButtonTapped() {
+        let vc = TodoAddViewController()
+        vc.viewmodel.todo.value = viewmodel.getTodo()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc,animated: true)
+    }
+    @objc private func deleteButtonapped() {
+        
+    }
+    @objc private func tomorrowButtonTapped() {
+        
+    }
+    
+    private func bind() {
+        viewmodel.todo.bind { [weak self] todo in
+            guard let todo else { return }
+            self?.mainView.titleLabel.text = todo.title
+        }
+    }
+    
     
 }
