@@ -51,6 +51,8 @@ class DoitDetailViewController: BaseViewController {
     private func setUIAction() -> [UIAction] {
         let complete = UIAction(title: "완료") { _ in
             print("완료버튼")
+            let vc = DoitCompleteAddViewController()
+            self.present(vc, animated: true)
         }
         let update = UIAction(title: "수정") { _ in
             let vc = DoitAddViewController()
