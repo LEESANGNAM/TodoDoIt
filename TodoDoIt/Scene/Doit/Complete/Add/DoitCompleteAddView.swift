@@ -25,6 +25,7 @@ class DoitCompleteAddView: BaseView {
     let imageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
         view.layer.cornerRadius = 10
         view.backgroundColor = .systemGray5
         return view
@@ -58,7 +59,7 @@ class DoitCompleteAddView: BaseView {
             make.top.equalTo(self.safeAreaLayoutGuide).offset(20)
         }
         imageView.snp.makeConstraints { make in
-            make.height.equalToSuperview().multipliedBy(0.35)
+            make.height.equalTo(self.safeAreaLayoutGuide ).multipliedBy(0.35)
             make.horizontalEdges.equalToSuperview().inset(10)
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
         }
