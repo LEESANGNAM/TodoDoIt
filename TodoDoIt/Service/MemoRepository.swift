@@ -1,5 +1,5 @@
 //
-//  DoitRepository.swift
+//  MemoRepository.swift
 //  TodoDoIt
 //
 //  Created by 이상남 on 2023/10/13.
@@ -8,17 +8,12 @@
 import Foundation
 import RealmSwift
 
-final class DoitRepository: RepositoryTypeProtocol {
-    typealias T = DoIt
-    
+final class MemoRepository: RepositoryTypeProtocol {
+    typealias T = Memo
     private let realm = try! Realm()
     
     func fetch() -> Results<T> {
         return realm.objects(T.self)
-    }
-    func fetchFilterDateSortByFinish(date: Date) -> Results<T>{
-        let filterDate = fetchFilterDate(date: date)
-        return filterDate.sorted(byKeyPath: "finish",ascending: true)
     }
     func fetchFilterKey(id: ObjectId) -> T? {
         let data = realm.object(ofType: T.self, forPrimaryKey: id)
@@ -33,10 +28,6 @@ final class DoitRepository: RepositoryTypeProtocol {
         
         // 해당 일자에 속하는 데이터 가져오기
         return realm.objects(T.self).filter("createDate >= %@ AND createDate <= %@", startOfDay, endOfDay)
-    }
-    func fetchFilterContainsDate(date: Date) -> Results<T> {
-        let endOfDay = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: date)!
-        return realm.objects(T.self).filter("startDate <= %@ AND endDate >= %@", endOfDay, endOfDay)
     }
     func createItem(_ item: T) {
         do {
@@ -58,22 +49,6 @@ final class DoitRepository: RepositoryTypeProtocol {
         }
     }
     
-    func appendCompletedItem(doItId: ObjectId, completedItem: DoitCompleted) {
-        do {
-            try realm.write {
-                // 해당 doItId에 해당하는 Doit 객체 가져오기
-                if let doIt = fetchFilterKey(id: doItId) {
-                    // Doit 객체의 completed 속성에 새로운 Completed 객체 추가
-                    doIt.doitComplete.append(completedItem)
-                } else {
-                    print("해당하는 Doit 객체를 찾을 수 없습니다.")
-                }
-            }
-        } catch {
-            print(error)
-        }
-    }
-    
     func removeItem(_ item: T) {
         do {
             try realm.write {
@@ -83,9 +58,4 @@ final class DoitRepository: RepositoryTypeProtocol {
             print(error)
         }
     }
-    
-    
-    
-    
-    
 }

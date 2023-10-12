@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class DoitListViewModel {
-    let reposiroty = Repository<DoIt>()
+    let reposiroty = DoitRepository()
     var doitresult = Observer<Results<DoIt>?>(nil)
     var doitList = Observer<[DoIt]>([])
     

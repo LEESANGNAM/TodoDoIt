@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class DoitDetailViewModel {
-    let repository = Repository<DoIt>()
+    let repository = DoitRepository()
     var doit = Observer<DoIt?>(nil)
     var doitkey = Observer<ObjectId?>(nil)
     var doitcompleteList = Observer<[DoitCompleted]>([])

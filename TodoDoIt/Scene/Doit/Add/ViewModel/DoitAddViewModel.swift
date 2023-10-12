@@ -8,7 +8,7 @@
 import Foundation
 
 class DoitAddViewModel {
-    let repository = Repository<DoIt>()
+    let repository = DoitRepository()
     var startDate = Observer(Date())
     var endDate = Observer(Date())
     var completeCount = Observer(0)

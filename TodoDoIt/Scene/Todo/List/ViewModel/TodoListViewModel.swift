@@ -8,7 +8,7 @@ import Foundation
 import RealmSwift
 
 class TodoListViewModel {
-    let todoRepository = Repository<Todo>()
+    let todoRepository = TodoRepository()
     var todoResult = Observer<Results<Todo>?>(nil)
     var todoArray = Observer<[Todo]>([])
     

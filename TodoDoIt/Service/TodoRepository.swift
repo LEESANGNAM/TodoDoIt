@@ -1,30 +1,17 @@
 //
-//  RealmRepository.swift
+//  TodoRepository.swift
 //  TodoDoIt
 //
-//  Created by 이상남 on 2023/09/27.
+//  Created by 이상남 on 2023/10/13.
 //
 
 import Foundation
 import RealmSwift
 
-protocol RepositoryType {
-    associatedtype T: RealmCollectionValue
-    func fetch() -> Results<T>
-    func fetchFilterKey(id: ObjectId) -> T?
-    func createItem(_ item: T)
-    func updateItem(value: Any)
-    func removeItem(_ item: T)
-   
-}
-
-final class Repository<T: Object>: RepositoryType {
+final class TodoRepository: RepositoryTypeProtocol {
+    typealias T = Todo
     
     private let realm = try! Realm()
-    
-    init(){
-        print(realm.configuration.fileURL!)
-    }
     
     func fetch() -> Results<T> {
         return realm.objects(T.self)
@@ -35,7 +22,6 @@ final class Repository<T: Object>: RepositoryType {
     }
     func fetchFilterKey(id: ObjectId) -> T? {
         let data = realm.object(ofType: T.self, forPrimaryKey: id)
-        
         return data
     }
     func fetchFilterDate(date: Date) -> Results<T> {
@@ -47,10 +33,7 @@ final class Repository<T: Object>: RepositoryType {
         // 해당 일자에 속하는 데이터 가져오기
         return realm.objects(T.self).filter("createDate >= %@ AND createDate <= %@", startOfDay, endOfDay)
     }
-    func fetchFilterContainsDate(date: Date) -> Results<T> {
-        let endOfDay = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: date)!
-        return realm.objects(T.self).filter("startDate <= %@ AND endDate >= %@", endOfDay, endOfDay)
-    }
+
     func createItem(_ item: T) {
         do {
             try realm.write {
@@ -64,7 +47,6 @@ final class Repository<T: Object>: RepositoryType {
     func updateItem(value: Any = [String: Any]()) {
         do {
             try realm.write {
-//                realm.add(item, update: .modified)
                 realm.create(T.self, value: value, update: .modified)
             }
         } catch {

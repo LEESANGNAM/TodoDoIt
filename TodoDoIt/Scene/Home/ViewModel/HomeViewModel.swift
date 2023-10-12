@@ -9,9 +9,9 @@ import Foundation
 import RealmSwift
 
 class HomeViewModel {
-    let doitRepository = Repository<DoIt>()
-    let todoRepository = Repository<Todo>()
-    let memoRepository = Repository<Memo>()
+    let doitRepository = DoitRepository()
+    let todoRepository = TodoRepository()
+    let memoRepository = MemoRepository()
     var doitResult = Observer<Results<DoIt>?>(nil)
     var doitArray = Observer<[DoIt]>([])
     var todoResult = Observer<Results<Todo>?>(nil)
