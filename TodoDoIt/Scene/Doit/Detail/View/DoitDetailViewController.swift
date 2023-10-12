@@ -52,6 +52,7 @@ class DoitDetailViewController: BaseViewController {
         let complete = UIAction(title: "완료") { _ in
             print("완료버튼")
             let vc = DoitCompleteAddViewController()
+            vc.viewmodel.doitKey.value = self.viewmodel.getDoitKey()
             self.present(vc, animated: true)
         }
         let update = UIAction(title: "수정") { _ in

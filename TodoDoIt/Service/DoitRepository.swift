@@ -1,30 +1,17 @@
 //
-//  RealmRepository.swift
+//  DoitRepository.swift
 //  TodoDoIt
 //
-//  Created by 이상남 on 2023/09/27.
+//  Created by 이상남 on 2023/10/13.
 //
 
 import Foundation
 import RealmSwift
 
-protocol RepositoryType {
-    associatedtype T: RealmCollectionValue
-    func fetch() -> Results<T>
-    func fetchFilterKey(id: ObjectId) -> T?
-    func createItem(_ item: T)
-    func updateItem(value: Any)
-    func removeItem(_ item: T)
-   
-}
-
-final class Repository<T: Object>: RepositoryType {
+final class DoitRepository: RepositoryType {
+    typealias T = DoIt
     
     private let realm = try! Realm()
-    
-    init(){
-        print(realm.configuration.fileURL!)
-    }
     
     func fetch() -> Results<T> {
         return realm.objects(T.self)
@@ -64,8 +51,23 @@ final class Repository<T: Object>: RepositoryType {
     func updateItem(value: Any = [String: Any]()) {
         do {
             try realm.write {
-//                realm.add(item, update: .modified)
                 realm.create(T.self, value: value, update: .modified)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func appendCompletedItem(doItId: ObjectId, completedItem: DoitCompleted) {
+        do {
+            try realm.write {
+                // 해당 doItId에 해당하는 Doit 객체 가져오기
+                if let doIt = fetchFilterKey(id: doItId) {
+                    // Doit 객체의 completed 속성에 새로운 Completed 객체 추가
+                    doIt.doitComplete.append(completedItem)
+                } else {
+                    print("해당하는 Doit 객체를 찾을 수 없습니다.")
+                }
             }
         } catch {
             print(error)
@@ -81,4 +83,9 @@ final class Repository<T: Object>: RepositoryType {
             print(error)
         }
     }
+    
+    
+    
+    
+    
 }

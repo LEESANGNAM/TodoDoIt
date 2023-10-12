@@ -27,6 +27,9 @@ class DoitDetailViewModel {
         guard let doit = doit.value else { return 0.0}
         return doit.progress()
     }
+    func getDoitKey() -> ObjectId?{
+        return doitkey.value
+    }
     
     func fetchdoitCompleteList() {
         guard let doit = doit.value else { return }

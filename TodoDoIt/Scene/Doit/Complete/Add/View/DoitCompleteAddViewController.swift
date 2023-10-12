@@ -12,7 +12,9 @@ class DoitCompleteAddViewController: BaseViewController {
     
     private let mainView = DoitCompleteAddView()
     var picker: PHPickerViewController!
+    let viewmodel = DoitCompleteAddViewModel()
     let textViewPlaceHolder = "메모를 입력해주세요"
+    var memoText = ""
     override func loadView() {
         view = mainView
     }
@@ -22,6 +24,7 @@ class DoitCompleteAddViewController: BaseViewController {
         setPHPicker()
         setmemoTextView()
         setTapGesture()
+        setSaveButton()
     }
     
     private func setPHPicker(){
@@ -31,6 +34,17 @@ class DoitCompleteAddViewController: BaseViewController {
         picker.delegate = self
     }
     
+    private func setSaveButton(){
+        mainView.saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func saveButtonTapped(){
+        let completed = DoitCompleted(title: "text", impression: memoText)
+        
+        viewmodel.updateValue(complete: completed)
+        dismiss(animated: true)
+        
+    }
     
     private func setmemoTextView(){
         mainView.memoTextView.text = textViewPlaceHolder
@@ -72,6 +86,8 @@ extension DoitCompleteAddViewController: UITextViewDelegate {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = textViewPlaceHolder
             textView.textColor = .lightGray
+        }else {
+            memoText = textView.text
         }
     }
     
