@@ -14,6 +14,7 @@ class DoitCompleteAddViewController: BaseViewController {
     var picker: PHPickerViewController!
     let viewmodel = DoitCompleteAddViewModel()
     let textViewPlaceHolder = "메모를 입력해주세요"
+    var originImage: UIImage?
     var memoText = ""
     override func loadView() {
         view = mainView
@@ -42,6 +43,7 @@ class DoitCompleteAddViewController: BaseViewController {
         let completed = DoitCompleted(title: "text", impression: memoText)
         
         viewmodel.updateValue(complete: completed)
+        viewmodel.saveImage(image: originImage)
         dismiss(animated: true)
         
     }
@@ -104,6 +106,7 @@ extension DoitCompleteAddViewController: PHPickerViewControllerDelegate {
                    itemProvider.canLoadObject(ofClass: UIImage.self) { // 3
                     itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in // 4
                         DispatchQueue.main.async {
+                            self.originImage = image as? UIImage
                             self.mainView.imageView.image = image as? UIImage // 5
                             self.mainView.plusImageView.isHidden = true
                         }

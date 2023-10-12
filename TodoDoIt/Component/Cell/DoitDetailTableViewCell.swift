@@ -73,6 +73,7 @@ class DoitDetailTableViewCell: UITableViewCell {
     }
     
     func setData(data: DoitCompleted, totalcount: Int, index: Int){
+        completeImageView.image = FileManager.loadImageFromDocumentDirectory(fileName: "test.jpg")
         memoLabel.text = data.impression
         countLabel.text = "\(totalcount - index)회차"
     }

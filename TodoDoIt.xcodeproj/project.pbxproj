@@ -54,6 +54,8 @@
 		D6A80F1B2AD859FB00364CF5 /* DoitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F1A2AD859FB00364CF5 /* DoitRepository.swift */; };
 		D6A80F1D2AD85DEA00364CF5 /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F1C2AD85DEA00364CF5 /* TodoRepository.swift */; };
 		D6A80F1F2AD85DF200364CF5 /* MemoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F1E2AD85DF200364CF5 /* MemoRepository.swift */; };
+		D6A80F212AD870DC00364CF5 /* FileManager + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F202AD870DC00364CF5 /* FileManager + Extension.swift */; };
+		D6A80F232AD87BA100364CF5 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F222AD87BA100364CF5 /* UIImage+Extension.swift */; };
 		D6D92F062AC031DF0074236E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F052AC031DF0074236E /* AppDelegate.swift */; };
 		D6D92F082AC031DF0074236E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F072AC031DF0074236E /* SceneDelegate.swift */; };
 		D6D92F0A2AC031DF0074236E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F092AC031DF0074236E /* HomeViewController.swift */; };
@@ -106,6 +108,8 @@
 		D6A80F1A2AD859FB00364CF5 /* DoitRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitRepository.swift; sourceTree = "<group>"; };
 		D6A80F1C2AD85DEA00364CF5 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
 		D6A80F1E2AD85DF200364CF5 /* MemoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoRepository.swift; sourceTree = "<group>"; };
+		D6A80F202AD870DC00364CF5 /* FileManager + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager + Extension.swift"; sourceTree = "<group>"; };
+		D6A80F222AD87BA100364CF5 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		D6D92F022AC031DF0074236E /* TodoDoIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoDoIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D92F052AC031DF0074236E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6D92F072AC031DF0074236E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -516,6 +520,8 @@
 				D6F0C6152AC5B5B100EE99AF /* Date+Extension.swift */,
 				D64BDD142ACDAF2400C4F6FB /* String+Extension.swift */,
 				D64BDD182ACF0A5800C4F6FB /* UIView+Extension.swift */,
+				D6A80F202AD870DC00364CF5 /* FileManager + Extension.swift */,
+				D6A80F222AD87BA100364CF5 /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -640,6 +646,7 @@
 				D62B07882AC2B252002C7EAB /* TabBarController.swift in Sources */,
 				D6835B5B2ACAE71A00B0A488 /* MemoCollectionViewCell.swift in Sources */,
 				D6A80F192AD8541100364CF5 /* DoitCompleteAddViewModel.swift in Sources */,
+				D6A80F212AD870DC00364CF5 /* FileManager + Extension.swift in Sources */,
 				D6835B502AC9CCC200B0A488 /* SectionType.swift in Sources */,
 				D62B07962AC3E972002C7EAB /* Todo.swift in Sources */,
 				D64BDD402AD6DDAF00C4F6FB /* DoitCompleteAddViewController.swift in Sources */,
@@ -648,6 +655,7 @@
 				D6D92F062AC031DF0074236E /* AppDelegate.swift in Sources */,
 				D64BDD3B2AD675EE00C4F6FB /* TodoDetailViewModel.swift in Sources */,
 				D64BDD2B2AD2DB7900C4F6FB /* DoitDetailTableViewCell.swift in Sources */,
+				D6A80F232AD87BA100364CF5 /* UIImage+Extension.swift in Sources */,
 				D62B07922AC3E1A5002C7EAB /* DoIt.swift in Sources */,
 				D64BDD1B2ACF350400C4F6FB /* ModalPresentDelegate.swift in Sources */,
 				D6D92F082AC031DF0074236E /* SceneDelegate.swift in Sources */,
