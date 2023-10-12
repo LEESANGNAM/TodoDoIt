@@ -58,16 +58,19 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
         }
         progressView.snp.makeConstraints { make in
             make.leading.equalTo(safeAreaLayoutGuide).offset(20)
-            make.height.equalTo(2)
+            make.height.equalTo(4)
             make.top.equalTo(dateLabel.snp.bottom).offset(10)
         }
         progressLabel.snp.makeConstraints { make in
-            make.leading.equalTo(progressView.snp.trailing).offset(5)
+            make.leading.equalTo(progressView.snp.trailing).offset(8)
             make.trailing.equalToSuperview().offset(-5)
             make.height.equalTo(20)
             make.top.equalTo(dateLabel.snp.bottom)
             make.bottom.equalTo(safeAreaLayoutGuide).offset(-5)
         }
+    }
+    override func prepareForReuse() {
+        progressView.setProgress(0, animated: true)
     }
     func setupData(doit: DoIt){
         print("두잇 셀 데이터 다시 넣는중")
@@ -77,8 +80,10 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
         
         titleLabel.text = title
         dateLabel.text = date
-        
-        progressView.progress = Float(progress)
+        DispatchQueue.main.async {
+            self.progressView.setProgress(Float(progress), animated: true)
+        }
+//        progressView.progress = Float(progress)
         progressLabel.text = "\(Int(progress * 100))%"
     }
 }

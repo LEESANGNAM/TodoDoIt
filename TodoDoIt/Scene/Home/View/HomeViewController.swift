@@ -160,6 +160,11 @@ extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
             fsCalendar.setScope(.month, animated: true)
         }
     }
+    // 날짜 표시
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        let event = viewmodel.getTodoitems(date: date)
+        return event.count
+        }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         calendar.snp.updateConstraints { make in

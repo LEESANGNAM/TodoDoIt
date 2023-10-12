@@ -35,7 +35,9 @@ class HomeViewModel {
     func fetchMemoData(date: Date){
         memoResult.value = memoRepository.fetchFilterDate(date: date)
     }
-    
+    func getTodoitems(date: Date) -> Results<Todo>{
+        return todoRepository.fetchFilterDate(date: date)
+    }
     func changeDoitArray(){
         if let result = doitResult.value{
             doitArray.value = Array(result)
