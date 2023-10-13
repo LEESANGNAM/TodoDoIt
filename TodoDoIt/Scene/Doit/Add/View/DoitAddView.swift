@@ -65,6 +65,9 @@ class DoitAddView: BaseView {
         addSubview(endDateTextField)
         addSubview(completeTextField)
     }
+    deinit {
+        print("메인뷰 사라지")
+    }
     override func setConstraints() {
         doitLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)

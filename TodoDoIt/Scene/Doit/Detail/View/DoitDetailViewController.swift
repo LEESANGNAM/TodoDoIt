@@ -16,14 +16,18 @@ class DoitDetailViewController: BaseViewController {
         view = mainview
     }
     
+    deinit {
+        print("목표 상세뷰 삭제")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewmodel.fetchDoit()
         setNavigationBar()
         setTableView()
         bind()
-        DispatchQueue.main.asyncAfter(deadline: .now()){
-            self.mainview.circularProgressbar.value = self.viewmodel.getDoitProgress()
+        DispatchQueue.main.asyncAfter(deadline: .now()){ [weak self] in
+            self?.mainview.circularProgressbar.value = self?.viewmodel.getDoitProgress()
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -49,18 +53,18 @@ class DoitDetailViewController: BaseViewController {
     }
     
     private func setUIAction() -> [UIAction] {
-        let complete = UIAction(title: "완료") { _ in
+        let complete = UIAction(title: "완료") {[weak self] _ in
             print("완료버튼")
             let vc = DoitCompleteAddViewController()
-            vc.viewmodel.doitKey.value = self.viewmodel.getDoitKey()
-            self.present(vc, animated: true)
+            vc.viewmodel.doitKey.value = self?.viewmodel.getDoitKey()
+            self?.present(vc, animated: true)
         }
-        let update = UIAction(title: "수정") { _ in
+        let update = UIAction(title: "수정") {[weak self] _ in
             let vc = DoitAddViewController()
-            vc.viewmodel.doit.value = self.viewmodel.doit.value
-            self.navigationController?.pushViewController(vc, animated: true)
+            vc.viewmodel.doit.value = self?.viewmodel.doit.value
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
-        let remove = UIAction(title: "삭제") { _ in
+        let remove = UIAction(title: "삭제") {[weak self] _ in
             print("삭제버튼")
         }
         

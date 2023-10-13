@@ -15,7 +15,8 @@ class DoitDetailTableViewCell: UITableViewCell {
         view.image = UIImage(systemName: "star.fill")
         view.backgroundColor = .red
         view.layer.cornerRadius = 30
-        view.contentMode = .scaleToFill
+        view.contentMode = .scaleAspectFit
+        view.clipsToBounds = true
         return view
     }()
     
@@ -33,7 +34,7 @@ class DoitDetailTableViewCell: UITableViewCell {
         view.numberOfLines = 0
         return view
     }()
-    
+
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -41,6 +42,11 @@ class DoitDetailTableViewCell: UITableViewCell {
         setHierarchy()
         setConstraints()
     }
+    
+    deinit {
+        print("테이블뷰 사라짐")
+    }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -73,7 +79,9 @@ class DoitDetailTableViewCell: UITableViewCell {
     }
     
     func setData(data: DoitCompleted, totalcount: Int, index: Int){
-        completeImageView.image = FileManager.loadImageFromDocumentDirectory(fileName: "test.jpg")
+        if let fileImage = FileManager.loadImageFromDocumentDirectory(fileName: "test.jpg"){
+            completeImageView.image = fileImage
+        }
         memoLabel.text = data.impression
         countLabel.text = "\(totalcount - index)회차"
     }
