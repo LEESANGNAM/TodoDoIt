@@ -183,8 +183,21 @@ extension TodoListViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(viewmodel.getTodoArray())
         dataSource?.applySnapshotUsingReloadData(snapshot)
+//        dataSource?.apply(snapshot,animatingDifferences: true)
     }
-    
+//    func reloadDatashnpshot(index: IndexPath){
+//        guard let updateSection = dataSource?.itemIdentifier(for: index) else {
+//            print("오류")
+//            return
+//        }
+//        let newArray = viewmodel.getTodoArray()
+//        var snapshot = NSDiffableDataSourceSnapshot<Int, Todo>()
+//        var newsnapshot = dataSource?.snapshot()
+//        newsnapshot?.reloadItems(newArray)
+//        dataSource?.apply(newsnapshot!)
+//
+//    }
+
     @objc func checkButtonTapped(_ sender: UIButton){
         let index = IndexPath(item: sender.tag, section: 0)
         if let selecteItem = dataSource?.itemIdentifier(for: index){
@@ -192,6 +205,7 @@ extension TodoListViewController {
             finish.toggle()
             viewmodel.updateTodo(todo: selecteItem,finish: finish)
             viewmodel.fetchData(date: selectDate)
+//            reloadDatashnpshot(index: index)
         }
     }
 }
