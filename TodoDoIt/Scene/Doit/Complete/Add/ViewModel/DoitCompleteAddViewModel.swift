@@ -18,8 +18,8 @@ class DoitCompleteAddViewModel {
         repository.appendCompletedItem(doItId: key, completedItem: complete)
     }
     
-    func saveImage(image: UIImage?){
+    func saveImage(image: UIImage?,imageName: String){
         guard let image else { return }
-        print(FileManager.saveImageToDocumentDirectory(image: image, fileName: "test5.jpg"))
+        print(FileManager.saveImageToDocumentDirectory(image: image, fileName: imageName))
     }
 }

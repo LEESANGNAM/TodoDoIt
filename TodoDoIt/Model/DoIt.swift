@@ -44,16 +44,14 @@ class DoIt: Object {
 
 class DoitCompleted: Object {
     @Persisted(primaryKey: true) var _id: ObjectId
-    @Persisted var title: String
     @Persisted var impression: String
     @Persisted var imageTitle: String
     @Persisted var createDate =  Date()
     @Persisted var updateDate: Date?
     
-    convenience init(title: String, impression: String) {
+    convenience init(impression: String) {
         self.init()
-        self.title = title + "\(_id)"
         self.impression = impression
-        self.imageTitle = self.title + "\(createDate)"
+        self.imageTitle = "\(_id)"
     }
 }

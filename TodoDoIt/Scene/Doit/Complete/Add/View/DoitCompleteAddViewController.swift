@@ -40,10 +40,10 @@ class DoitCompleteAddViewController: BaseViewController {
     }
     
     @objc private func saveButtonTapped(){
-        let completed = DoitCompleted(title: "text", impression: memoText)
-        
+        let completed = DoitCompleted(impression: memoText)
+        let imagename = completed.imageTitle + ".jpg"
         viewmodel.updateValue(complete: completed)
-        viewmodel.saveImage(image: originImage)
+        viewmodel.saveImage(image: originImage,imageName: imagename)
         dismiss(animated: true)
         
     }

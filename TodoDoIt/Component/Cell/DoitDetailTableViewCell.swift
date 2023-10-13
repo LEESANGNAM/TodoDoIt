@@ -79,8 +79,9 @@ class DoitDetailTableViewCell: UITableViewCell {
     }
     
     func setData(data: DoitCompleted, totalcount: Int, index: Int){
+        let filename = data.imageTitle + ".jpg"
         DispatchQueue.global().async {
-            if let fileImage = FileManager.loadImageFromDocumentDirectory(fileName: "test5.jpg"){
+            if let fileImage = FileManager.loadImageFromDocumentDirectory(fileName: filename){
                 DispatchQueue.main.async {
                     let size = CGSize(width: self.completeImageView.frame.width, height: self.completeImageView.frame.height)
                     self.completeImageView.image = fileImage.downsampling(to: size)
