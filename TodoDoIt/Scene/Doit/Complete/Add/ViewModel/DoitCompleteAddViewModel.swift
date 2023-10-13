@@ -20,11 +20,6 @@ class DoitCompleteAddViewModel {
     
     func saveImage(image: UIImage?){
         guard let image else { return }
-        let downImage = image.downsampling(to: CGSize(width: 100, height: 100))
-        print(FileManager.saveImageToDocumentDirectory(image: downImage, fileName: "test.jpg"))
-    }
-    
-    func fetchImage() {
-        
+        print(FileManager.saveImageToDocumentDirectory(image: image, fileName: "test5.jpg"))
     }
 }

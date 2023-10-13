@@ -15,7 +15,7 @@ class DoitDetailTableViewCell: UITableViewCell {
         view.image = UIImage(systemName: "star.fill")
         view.backgroundColor = .red
         view.layer.cornerRadius = 30
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         return view
     }()
@@ -79,11 +79,17 @@ class DoitDetailTableViewCell: UITableViewCell {
     }
     
     func setData(data: DoitCompleted, totalcount: Int, index: Int){
-        if let fileImage = FileManager.loadImageFromDocumentDirectory(fileName: "test.jpg"){
-            completeImageView.image = fileImage
+        DispatchQueue.global().async {
+            if let fileImage = FileManager.loadImageFromDocumentDirectory(fileName: "test5.jpg"){
+                DispatchQueue.main.async {
+                    let size = CGSize(width: self.completeImageView.frame.width, height: self.completeImageView.frame.height)
+                    self.completeImageView.image = fileImage.downsampling(to: size)
+                    self.memoLabel.text = data.impression
+                    self.countLabel.text = "\(totalcount - index)회차"
+                }
         }
-        memoLabel.text = data.impression
-        countLabel.text = "\(totalcount - index)회차"
+        }
+       
     }
     
 }
