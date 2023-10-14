@@ -31,6 +31,7 @@ class DoitDetailViewController: BaseViewController {
         }
     }
     override func viewWillAppear(_ animated: Bool) {
+        print(#function)
         super.viewWillAppear(animated)
         viewmodel.fetchDoit()
     }
@@ -40,6 +41,7 @@ class DoitDetailViewController: BaseViewController {
             self?.viewmodel.fetchdoitCompleteList()
             self?.navigationItem.title = doit?.title
             self?.mainview.circularProgressbar.value = doit?.progress()
+            self?.mainview.completeTableView.reloadData()
         }
     }
     
@@ -57,6 +59,7 @@ class DoitDetailViewController: BaseViewController {
             print("완료버튼")
             let vc = DoitCompleteAddViewController()
             vc.viewmodel.doitKey.value = self?.viewmodel.getDoitKey()
+            vc.delegate = self
             self?.present(vc, animated: true)
         }
         let update = UIAction(title: "수정") {[weak self] _ in
@@ -76,6 +79,18 @@ class DoitDetailViewController: BaseViewController {
         mainview.completeTableView.dataSource = self
         mainview.completeTableView.delegate = self
     }
+}
+
+extension DoitDetailViewController: ModalPresentDelegate {
+    func sendDateToModal() -> Date {
+        return Date()
+    }
+    
+    func disMissModal() {
+        viewmodel.fetchDoit()
+    }
+    
+    
 }
 
 

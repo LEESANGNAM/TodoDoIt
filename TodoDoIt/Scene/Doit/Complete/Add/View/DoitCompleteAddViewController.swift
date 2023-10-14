@@ -12,6 +12,7 @@ class DoitCompleteAddViewController: BaseViewController {
     
     private let mainView = DoitCompleteAddView()
     var picker: PHPickerViewController!
+    weak var delegate: ModalPresentDelegate?
     let viewmodel = DoitCompleteAddViewModel()
     let textViewPlaceHolder = "메모를 입력해주세요"
     var originImage: UIImage?
@@ -45,6 +46,7 @@ class DoitCompleteAddViewController: BaseViewController {
         viewmodel.updateValue(complete: completed)
         viewmodel.saveImage(image: originImage,imageName: imagename)
         dismiss(animated: true)
+        delegate?.disMissModal()
         
     }
     
