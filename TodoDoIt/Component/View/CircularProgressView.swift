@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CircularProgressView: UIView {
+class CircularProgressView: UIView, CAAnimationDelegate {
     var lineWidth: CGFloat = 10
     var circleShapeLayer: CAShapeLayer?
     var value: Double? {
@@ -61,6 +61,16 @@ class CircularProgressView: UIView {
         
         circleShapeLayer = shapeLayer
         self.layer.addSublayer(circleShapeLayer!)
+        
+        //애니메이션
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = 0
+        animation.toValue = 1
+        animation.duration = 0.5
+        animation.delegate = self
+        circleShapeLayer!.add(animation, forKey: animation.keyPath)
+        
+        
 
         // 프로그래스바 중심에 수치 입력을 위해 UILabel 추가
         let label = UILabel()
@@ -74,5 +84,7 @@ class CircularProgressView: UIView {
         label.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
+
+    
     
 }
