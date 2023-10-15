@@ -99,7 +99,7 @@ extension HomeViewController: ModalPresentDelegate {
     }
     
     func disMissModal() {
-        viewmodel.fetchTodoData(date: selectDate)
+        viewmodel.fetchData(date: selectDate)
     }
     
     
@@ -332,6 +332,14 @@ extension HomeViewController {
         case .memo:
             if let memo = viewmodel.getMemoArray().first{
                 self.view.makeToast("메모는 하루에 한개만 가능합니다. 메모가 이미 있습니다.")
+            }else {
+                let vc = MemoAddViewController()
+                vc.delegate = self
+                if let sheet = vc.sheetPresentationController {
+                    sheet.detents = [.medium(),.large()]
+                    sheet.prefersGrabberVisible = true
+                }
+                present(vc, animated: true)
             }
         case .none:
             print("error")
