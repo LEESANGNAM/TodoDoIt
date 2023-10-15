@@ -43,6 +43,16 @@ class DoitDetailViewModel {
         return doitcompleteList.value[index]
     }
     
+    func removeDoit() {
+        guard let doit = doit.value else { return }
+        let completed = doit.doitComplete
+        completed.forEach {
+            let fileName = $0.imageTitle + ".jpg"
+            FileManager.deleteImageFromDocumentDirectory(imageName: fileName )
+        }
+        repository.removeItem(doit)
+        
+    }
     
     
     

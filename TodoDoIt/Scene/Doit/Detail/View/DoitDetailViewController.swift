@@ -68,9 +68,11 @@ class DoitDetailViewController: BaseViewController {
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         let remove = UIAction(title: "삭제") {[weak self] _ in
-            print("삭제버튼")
+            self?.showAlert(text: "삭제하시겠습니까?", addButtonText: "확인") {[weak self] in
+                self?.viewmodel.removeDoit()
+                self?.navigationController?.popViewController(animated: true)
+            }
         }
-        
         return [complete,update,remove]
     }
     
