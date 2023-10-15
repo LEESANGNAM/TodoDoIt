@@ -38,7 +38,7 @@ class TodoListViewController: BaseViewController {
     private func setNavibar(){
         navigationItem.title = "할일목록"
         navigationItem.titleView?.tintColor = Design.Color.blackFont
-        let button = UIBarButtonItem(image:UIImage(systemName: "plus.circle"), style: .done, target: self, action: #selector(addButtonTapped))
+        let button = UIBarButtonItem(image:UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addButtonTapped))
         button.tintColor = Design.Color.blackFont
         navigationItem.rightBarButtonItem = button
     }
