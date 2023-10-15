@@ -47,8 +47,10 @@ class TodoDetailViewcontroller: BaseViewController {
         present(vc,animated: true)
     }
     @objc private func deleteButtonapped() {
-        viewmodel.deleteTodo()
-        dismiss(animated: true)
+        showAlert(text: "삭제하시겠습니까?", addButtonText: "확인") { [weak self] in
+            self?.viewmodel.deleteTodo()
+            self?.dismiss(animated: true)
+        }
     }
     @objc private func tomorrowButtonTapped() {
         

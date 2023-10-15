@@ -81,8 +81,10 @@ class MemoAddViewController: BaseViewController {
     }
     
     @objc private func removeButtonTapped(){
-        viewmodel.removeMemodata()
-        dismiss(animated: true)
+        showAlert(text: "삭제하시겠습니까?", addButtonText: "확인") { [weak self] in
+            self?.viewmodel.removeMemodata()
+            self?.dismiss(animated: true)
+        }
     }
     @objc private func updateButtonTapped(){
         if viewmodel.checkvaild() {
