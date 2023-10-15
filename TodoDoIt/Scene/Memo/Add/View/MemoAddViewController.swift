@@ -14,7 +14,7 @@ class MemoAddViewController: BaseViewController {
     
     weak var delegate: ModalPresentDelegate?
     let viewmodel = MemoAddViewModel()
-    private let textViewPlaceHolder = "오늘 기억해야 할 것을 기록해보세요~~"
+    
     override func loadView() {
         view = mainView
     }
@@ -36,7 +36,12 @@ class MemoAddViewController: BaseViewController {
     
     private func bind(){
         viewmodel.memo.bind { [weak self] memo in
-            self?.mainView.memoTextView.text = memo?.title
+            guard let memo else { return }
+            self?.mainView.memoTextView.text = memo.title
+            self?.viewmodel.title.value = memo.title
+        }
+        viewmodel.title.bind { [weak self] _ in
+            self?.viewmodel.checkvaild()
         }
     }
     
@@ -80,7 +85,11 @@ class MemoAddViewController: BaseViewController {
         dismiss(animated: true)
     }
     @objc private func updateButtonTapped(){
-        viewmodel.updateMemoData()
+        if viewmodel.checkvaild() {
+            viewmodel.updateMemoData()
+        }else {
+            print("아무것도 안일어남")
+        }
         dismiss(animated: true)
     }
     
@@ -88,18 +97,23 @@ class MemoAddViewController: BaseViewController {
         dismiss(animated: true)
     }
     @objc private func doneButtonTapped(){
-        viewmodel.saveMemoData(date: selectDate)
+        if viewmodel.checkvaild() {
+            viewmodel.saveMemoData(date: selectDate)
+        }else {
+            print("아무것도 안일어남")
+        }
         dismiss(animated: true)
     }
+    
 }
 
 extension MemoAddViewController: UITextViewDelegate {
     private func memoTextViewPlaceHolder(){
-        mainView.memoTextView.text = textViewPlaceHolder
+        mainView.memoTextView.text = viewmodel.textViewPlaceHolder
         mainView.memoTextView.textColor = .lightGray
     }
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == textViewPlaceHolder{
+        if textView.text == viewmodel.textViewPlaceHolder{
             textView.text = nil
             textView.textColor = Design.Color.blackFont
         }
