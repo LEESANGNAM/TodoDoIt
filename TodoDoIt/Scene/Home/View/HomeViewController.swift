@@ -208,7 +208,16 @@ extension HomeViewController: UICollectionViewDelegate {
                 present(vc, animated: true)
             }
         case .memo:
-            break
+            if let selectItem = dataSource?.itemIdentifier(for: indexPath) as? Memo {
+                let vc = MemoAddViewController()
+                vc.delegate = self
+                if  let sheet = vc.sheetPresentationController {
+                    sheet.detents = [.medium(), .large()]
+                    sheet.prefersGrabberVisible = true
+                }
+                vc.viewmodel.memoKey.value = selectItem._id
+                present(vc, animated: true)
+            }
         case .none:
             view.makeToast("잘못된 섹션입니다.")
         }
