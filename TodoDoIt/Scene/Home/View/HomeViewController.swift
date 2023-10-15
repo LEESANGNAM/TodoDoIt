@@ -98,8 +98,15 @@ extension HomeViewController: ModalPresentDelegate {
         return selectDate
     }
     
-    func disMissModal() {
-        viewmodel.fetchData(date: selectDate)
+    func disMissModal(section: SectionType) {
+        switch section {
+        case .doit:
+            viewmodel.fetchDoitData(date: selectDate)
+        case .todo:
+            viewmodel.fetchTodoData(date: selectDate)
+        case .memo:
+            viewmodel.fetchMemoData(date: selectDate)
+        }
     }
     
     
@@ -200,6 +207,7 @@ extension HomeViewController: UICollectionViewDelegate {
         case .todo:
             if let selectItem = dataSource?.itemIdentifier(for: indexPath) as? Todo {
                 let vc = TodoDetailViewcontroller()
+                vc.delegate = self
                 if  let sheet = vc.sheetPresentationController {
                     sheet.detents = [.medium()]
                     sheet.prefersGrabberVisible = true

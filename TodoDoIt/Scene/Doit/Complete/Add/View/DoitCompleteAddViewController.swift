@@ -46,7 +46,7 @@ class DoitCompleteAddViewController: BaseViewController {
         viewmodel.updateValue(complete: completed)
         viewmodel.saveImage(image: originImage,imageName: imagename)
         dismiss(animated: true)
-        delegate?.disMissModal()
+        delegate?.disMissModal(section: .doit)
         
     }
     

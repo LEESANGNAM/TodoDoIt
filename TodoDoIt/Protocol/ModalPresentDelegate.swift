@@ -9,5 +9,5 @@ import Foundation
 
 protocol ModalPresentDelegate: AnyObject {
     func sendDateToModal() -> Date
-    func disMissModal()
+    func disMissModal(section: SectionType)
 }

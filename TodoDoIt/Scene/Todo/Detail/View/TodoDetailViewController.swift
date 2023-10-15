@@ -11,6 +11,8 @@ class TodoDetailViewcontroller: BaseViewController {
     
     let mainView = TodoDetailView()
     let viewmodel = TodoDetailViewModel()
+    
+    weak var delegate: ModalPresentDelegate?
     override func loadView() {
         view = mainView
     }
@@ -26,7 +28,10 @@ class TodoDetailViewcontroller: BaseViewController {
         super.viewWillAppear(animated)
         viewmodel.fetchTodo()
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        delegate?.disMissModal(section: .todo)
+    }
     private func setButtonAction() {
         mainView.updateButton.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
         mainView.deleteButton.addTarget(self, action: #selector(deleteButtonapped), for: .touchUpInside)
@@ -42,7 +47,8 @@ class TodoDetailViewcontroller: BaseViewController {
         present(vc,animated: true)
     }
     @objc private func deleteButtonapped() {
-        
+        viewmodel.deleteTodo()
+        dismiss(animated: true)
     }
     @objc private func tomorrowButtonTapped() {
         
@@ -62,7 +68,7 @@ extension TodoDetailViewcontroller: ModalPresentDelegate {
     func sendDateToModal() -> Date {
         return viewmodel.todo.value?.createDate ?? Date()
     }
-    func disMissModal() {
+    func disMissModal(section: SectionType) {
         viewmodel.fetchTodo()
     }
 }

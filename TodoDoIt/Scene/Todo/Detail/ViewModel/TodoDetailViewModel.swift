@@ -22,5 +22,12 @@ class TodoDetailViewModel {
     func getTodo() -> Todo? {
         return todo.value
     }
-
+    
+    func deleteTodo() {
+        guard let tododata = todo.value else { return }
+        
+        repository.removeItem(tododata)
+        
+    }
+    
 }

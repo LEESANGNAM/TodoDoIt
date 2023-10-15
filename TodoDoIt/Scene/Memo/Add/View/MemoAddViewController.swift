@@ -31,7 +31,7 @@ class MemoAddViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        delegate?.disMissModal()
+        delegate?.disMissModal(section: .memo)
     }
     
     private func bind(){
@@ -76,6 +76,7 @@ class MemoAddViewController: BaseViewController {
     }
     
     @objc private func removeButtonTapped(){
+        viewmodel.removeMemodata()
         dismiss(animated: true)
     }
     @objc private func updateButtonTapped(){

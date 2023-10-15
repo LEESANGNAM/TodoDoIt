@@ -86,7 +86,7 @@ extension DoitDetailViewController: ModalPresentDelegate {
         return Date()
     }
     
-    func disMissModal() {
+    func disMissModal(section: SectionType) {
         viewmodel.fetchDoit()
     }
     

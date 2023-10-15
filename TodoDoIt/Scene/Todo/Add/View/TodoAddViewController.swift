@@ -86,7 +86,7 @@ class TodoAddViewController: BaseViewController{
     private func dismissModal(){
         titleTextField.resignFirstResponder()
         dismiss(animated: true)
-        delegate?.disMissModal()  // 닫힐때 호출
+        delegate?.disMissModal(section: .todo)  // 닫힐때 호출
     }
     override func setConstraints() {
         

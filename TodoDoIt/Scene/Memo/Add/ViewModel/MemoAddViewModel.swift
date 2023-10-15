@@ -23,10 +23,16 @@ class MemoAddViewModel {
         return memo.value
     }
     
+    func removeMemodata() {
+        guard let memo = memo.value else { return }
+        repository.removeItem(memo)
+    }
+    
     func updateMemoData(){
         guard let memo = memo.value else { return }
         let title = title.value
         repository.updateItem(value: ["_id":memo._id,"title": title])
+        
     }
     
     func saveMemoData(date:Date) {
