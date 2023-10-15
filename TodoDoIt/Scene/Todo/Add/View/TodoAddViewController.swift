@@ -49,7 +49,7 @@ class TodoAddViewController: BaseViewController{
                     self.dismissModal()
                 }else {
                     self.viewmodel.saveData(date: self.selectDate)
-                    self.view.makeToast("할일이 저장되었습니다.",position: .top)
+                    self.view.makeToast("할일이 저장되었습니다.",position: .center)
                 }
             }
         }
