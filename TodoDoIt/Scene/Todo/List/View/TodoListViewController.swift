@@ -32,6 +32,7 @@ class TodoListViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewmodel.fetchData(date: today)
+        fsCalendar.reloadData()
     }
    
     private func setNavibar(){
@@ -92,6 +93,7 @@ extension TodoListViewController: ModalPresentDelegate {
     
     func disMissModal(section: SectionType) {
         viewmodel.fetchData(date: selectDate)
+        fsCalendar.reloadData()
     }
     
     
@@ -104,13 +106,12 @@ extension TodoListViewController: FSCalendarDelegate, FSCalendarDataSource{
         calendar.scrollDirection = .horizontal
         calendar.appearance.headerDateFormat = "YYYY년 M월"
         calendar.appearance.headerMinimumDissolvedAlpha = 0
-        calendar.appearance.titleTodayColor = .black //Today에 표시되는 특정 글자색
         calendar.scope = .week
-        
+
         // Weekday 폰트 설정
         calendar.appearance.weekdayFont = UIFont(name: "NotoSansKR-Regular", size: 14)
         // 각각의 일(날짜) 폰트 설정 (ex. 1 2 3 4 5 6 ...)
-        calendar.appearance.titleFont = UIFont(name: "NotoSansKR-Regular", size: 14)
+        calendar.appearance.titleFont = UIFont(name: "NotoSansKR-Regular", size: 16)
         
         //요일 글자색
         calendar.appearance.headerTitleColor = Design.Color.blackFont
@@ -119,12 +120,23 @@ extension TodoListViewController: FSCalendarDelegate, FSCalendarDataSource{
         // 상단 요일을 한글로 변경
         calendar.locale = Locale(identifier: "ko_KR")
         
-         self.fsCalendar = calendar
+        // 이벤트 표시 색상
+        calendar.appearance.eventDefaultColor = Design.Color.cell
+        calendar.appearance.todayColor = Design.Color.cell
+        calendar.appearance.selectionColor = Design.Color.cell
+        
+
+        
+        self.fsCalendar = calendar
         view.addSubview(fsCalendar)
         fsCalendar.delegate = self
         fsCalendar.dataSource = self
         
     }
+    // 날짜 이벤트 표시
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        return viewmodel.dateOfCountItem(date: date)
+        }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         calendar.snp.updateConstraints { make in
@@ -134,11 +146,13 @@ extension TodoListViewController: FSCalendarDelegate, FSCalendarDataSource{
             self.view.layoutIfNeeded()
         }
     }
-    //날짜 선택
+    //날짜 선택 이벤트
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        calendar.appearance.todayColor = .clear
+        calendar.appearance.titleTodayColor = Design.Color.blackFont
         viewmodel.fetchData(date: date)
         selectDate = date
-        }
+    }
 }
 
 

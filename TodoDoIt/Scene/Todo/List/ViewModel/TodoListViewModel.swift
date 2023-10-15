@@ -26,4 +26,7 @@ class TodoListViewModel {
     func updateTodo(todo: Todo,finish: Bool) {
         todoRepository.updateItem(value: ["_id":todo._id,"finish": finish])
     }
+    func dateOfCountItem(date: Date) -> Int {
+        return todoRepository.fetchFilterDate(date: date).count
+    }
 }
