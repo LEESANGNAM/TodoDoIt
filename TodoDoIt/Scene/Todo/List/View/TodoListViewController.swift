@@ -65,6 +65,7 @@ class TodoListViewController: BaseViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = Design.Color.background
+        collectionView.delegate = self
     }
     override func setHierarchy() {
         setCollectionView()
@@ -98,6 +99,23 @@ extension TodoListViewController: ModalPresentDelegate {
     
     
 }
+
+extension TodoListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let selectItem = dataSource?.itemIdentifier(for: indexPath){
+            let vc = TodoDetailViewcontroller()
+            vc.delegate = self
+            if  let sheet = vc.sheetPresentationController {
+                sheet.detents = [.medium()]
+                sheet.prefersGrabberVisible = true
+            }
+            vc.viewmodel.todokey.value = selectItem._id
+            present(vc, animated: true)
+        }
+
+    }
+}
+
 
 // MARK: - FSCalendar
 extension TodoListViewController: FSCalendarDelegate, FSCalendarDataSource{
@@ -207,7 +225,6 @@ extension TodoListViewController {
             finish.toggle()
             viewmodel.updateTodo(todo: selecteItem,finish: finish)
             viewmodel.fetchData(date: selectDate)
-//            reloadDatashnpshot(index: index)
         }
     }
 }
