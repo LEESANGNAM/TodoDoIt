@@ -35,8 +35,22 @@ class HomeViewModel {
     func fetchMemoData(date: Date){
         memoResult.value = memoRepository.fetchFilterDate(date: date)
     }
-    func getTodoitems(date: Date) -> Results<Todo>{
-        return todoRepository.fetchFilterDate(date: date)
+    // 비어있는지 검사
+    func dateOfCountItem(date: Date) -> Int{
+        var count = 0
+        let doitEmpty = doitRepository.fetchFilterContainsDate(date: date).isEmpty
+        let todoEmpty = todoRepository.fetchFilterDate(date: date).isEmpty
+        let memoEmpty =  memoRepository.fetchFilterDate(date: date).isEmpty
+        if !doitEmpty {
+            count += 1
+        }
+        if !todoEmpty {
+            count += 1
+        }
+        if !memoEmpty {
+            count += 1
+        }
+        return count
     }
     func changeDoitArray(){
         if let result = doitResult.value{

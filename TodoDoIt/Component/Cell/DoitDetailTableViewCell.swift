@@ -85,12 +85,15 @@ class DoitDetailTableViewCell: UITableViewCell {
                 DispatchQueue.main.async {
                     let size = CGSize(width: self.completeImageView.frame.width, height: self.completeImageView.frame.height)
                     self.completeImageView.image = fileImage.downsampling(to: size)
-                    self.memoLabel.text = data.impression
-                    self.countLabel.text = "\(totalcount - index)회차"
                 }
+            }
         }
+        if data.impression.isEmpty{
+            self.memoLabel.text = data.createDate.changeFormatString(format: "yyyy-MM-dd")
+        }else {
+            self.memoLabel.text = data.impression
         }
-       
+        self.countLabel.text = "\(totalcount - index)회차"
     }
     
 }

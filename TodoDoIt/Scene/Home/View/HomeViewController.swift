@@ -36,6 +36,7 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewmodel.fetchData(date: selectDate)
+        fsCalendar.reloadData()
     }
     
     func setNavigationBar(title: String){
@@ -102,10 +103,13 @@ extension HomeViewController: ModalPresentDelegate {
         switch section {
         case .doit:
             viewmodel.fetchDoitData(date: selectDate)
+            fsCalendar.reloadData()
         case .todo:
             viewmodel.fetchTodoData(date: selectDate)
+            fsCalendar.reloadData()
         case .memo:
             viewmodel.fetchMemoData(date: selectDate)
+            fsCalendar.reloadData()
         }
     }
     
@@ -124,24 +128,20 @@ extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
         // Weekday 폰트 설정
         calendar.appearance.weekdayFont = UIFont(name: "NotoSansKR-Regular", size: 14)
         // 각각의 일(날짜) 폰트 설정 (ex. 1 2 3 4 5 6 ...)
-        calendar.appearance.titleFont = UIFont(name: "NotoSansKR-Regular", size: 14)
+        calendar.appearance.titleFont = UIFont(name: "NotoSansKR-Regular", size: 16)
         
         //요일 글자색
         calendar.appearance.weekdayTextColor = Design.Color.blackFont
         calendar.appearance.titleDefaultColor = Design.Color.blackFont
         // 상단 요일을 한글로 변경
         calendar.locale = Locale(identifier: "ko_KR")
-//        calendar.calendarWeekdayView.weekdayLabels[0].text = "일"
-//        calendar.calendarWeekdayView.weekdayLabels[1].text = "월"
-//        calendar.calendarWeekdayView.weekdayLabels[2].text = "화"
-//        calendar.calendarWeekdayView.weekdayLabels[3].text = "수"
-//        calendar.calendarWeekdayView.weekdayLabels[4].text = "목"
-//        calendar.calendarWeekdayView.weekdayLabels[5].text = "금"
-//        calendar.calendarWeekdayView.weekdayLabels[6].text = "토"
+        
+        // 이벤트 표시 색상
+        calendar.appearance.eventDefaultColor = Design.Color.cell
+        calendar.appearance.todayColor = Design.Color.cell
+        calendar.appearance.selectionColor = Design.Color.cell
         
 
-      
-        
         
         self.fsCalendar = calendar
         view.addSubview(fsCalendar)
@@ -167,10 +167,9 @@ extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
             fsCalendar.setScope(.month, animated: true)
         }
     }
-    // 날짜 표시
+    // 날짜 이벤트 표시
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let event = viewmodel.getTodoitems(date: date)
-        return event.count
+        return viewmodel.dateOfCountItem(date: date)
         }
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
@@ -181,12 +180,14 @@ extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
             self.view.layoutIfNeeded()
         }
     }
-    //날짜 선택
+    //날짜 선택 이벤트
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        calendar.appearance.todayColor = .clear
+        calendar.appearance.titleTodayColor = Design.Color.blackFont
         viewmodel.fetchData(date: date)
         selectDate = date
     }
-    // 페이지변경
+    // 페이지변경 이벤트
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let pageTitle = calendar.currentPage.changeFormatString(format: "yyyy년MM월")
         setNavigationBar(title: pageTitle)
