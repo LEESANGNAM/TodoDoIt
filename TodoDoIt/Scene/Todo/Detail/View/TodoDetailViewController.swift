@@ -53,7 +53,10 @@ class TodoDetailViewcontroller: BaseViewController {
         }
     }
     @objc private func tomorrowButtonTapped() {
-        
+        showAlert(text: "내일로 미루시겠습니까?", addButtonText: "확인") { [weak self] in
+            self?.viewmodel.updateTodo()
+            self?.dismiss(animated: true)
+        }
     }
     
     private func bind() {
