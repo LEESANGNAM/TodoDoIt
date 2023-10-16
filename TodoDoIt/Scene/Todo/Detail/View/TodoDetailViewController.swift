@@ -39,6 +39,11 @@ class TodoDetailViewcontroller: BaseViewController {
     }
     
     @objc private func updateButtonTapped() {
+        guard let getTodo = viewmodel.getTodo() else { return }
+        if getTodo.finish {
+            view.makeToast("이미 할일을 완료했습니다.")
+            return
+        }
         let vc = TodoAddViewController()
         vc.delegate = self
         vc.viewmodel.todo.value = viewmodel.getTodo()
@@ -53,6 +58,11 @@ class TodoDetailViewcontroller: BaseViewController {
         }
     }
     @objc private func tomorrowButtonTapped() {
+        guard let getTodo = viewmodel.getTodo() else { return }
+        if getTodo.finish {
+            view.makeToast("이미 할일을 완료했습니다.")
+            return
+        }
         showAlert(text: "내일로 미루시겠습니까?", addButtonText: "확인") { [weak self] in
             self?.viewmodel.updateTodo()
             self?.dismiss(animated: true)
