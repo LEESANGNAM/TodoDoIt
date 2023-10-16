@@ -8,114 +8,74 @@
 import UIKit
 
 class DoitAddView: BaseView {
-    let doitLabel = {
-        let view = UILabel()
-        view.text = "목표"
-        return view
-    }()
-    let dateTitleLabel = {
-        let view = UILabel()
-        view.text = "기간"
-        return view
-    }()
-    let startDateLabel = {
-        let view = UILabel()
-        view.text = "시작"
-        return view
-    }()
-    let endDateLabel = {
-        let view = UILabel()
-        view.text = "종료"
-        return view
-    }()
-    let completeLabel = {
-        let view = UILabel()
-        view.text = "횟수"
-        return view
-    }()
-    let doitTextField = {
-        let view = UITextField()
-        view.placeholder = "목표를 입력해주세요"
-        return view
-    }()
-    let startDateTextField = {
-        let view = UITextField()
-        view.placeholder = "00.00.00"
-        return view
-    }()
-    let endDateTextField = {
-        let view = UITextField()
-        view.placeholder = "00.00.00"
-        return view
-    }()
-    let completeTextField = {
-        let view = UITextField()
-        view.placeholder = "00회"
-        return view
-    }()
+    lazy var doitLabel = createTitleLabel(text: "목표")
+    lazy var dateTitleLabel = createTitleLabel(text: "기간")
+    lazy var startDateLabel = createTitleLabel(text: "시작일")
+    lazy var endDateLabel = createTitleLabel(text: "종료일")
+    lazy var completeLabel = createTitleLabel(text: "도전 횟수")
     
+    lazy var  doitTextField = createTextField(placeHolder: "도전할 목표를 입력해주세요")
+    lazy var  startDateTextField = createTextField(placeHolder: "0000.00.00")
+    lazy var  endDateTextField = createTextField(placeHolder: "0000.00.00")
+    lazy var  completeTextField = createTextField(placeHolder: "00회")
+    
+    lazy var doitStackView = createStackView(child: [doitLabel, doitTextField])
+    lazy var startDateStackView = createStackView(child: [startDateLabel, startDateTextField])
+    lazy var endDateStackView = createStackView(child: [endDateLabel, endDateTextField])
+    lazy var completeStackView = createStackView(child: [completeLabel, completeTextField])
+    
+    lazy var mainStackView = createStackView(child: [doitStackView,dateTitleLabel,startDateStackView,endDateStackView,completeStackView])
+    
+    private func createTitleLabel(text: String) -> UILabel {
+        let view = UILabel()
+        view.text = text
+        return view
+    }
+    private func createTextField(placeHolder: String) -> UITextField {
+        let view = UITextField()
+        view.placeholder = placeHolder
+        view.textAlignment = .right
+        return view
+    }
+    private func createStackView(child: [UIView]) -> UIStackView {
+        let view = UIStackView(arrangedSubviews: child)
+        return view
+    }
+    private func setupStackView(){
+        mainStackView.axis = .vertical
+        mainStackView.distribution = .fillEqually
+        mainStackView.spacing = 20
+        
+        
+        doitStackView.distribution = .fillProportionally
+        doitStackView.axis = .horizontal
+        startDateStackView.distribution = .fillProportionally
+        startDateStackView.axis = .horizontal
+        endDateStackView.distribution = .fillProportionally
+        endDateStackView.axis = .horizontal
+        completeStackView.distribution = .fillProportionally
+        completeStackView.axis = .horizontal
+        
+        
+    }
     override func setHierarchy() {
-        addSubview(doitLabel)
-        addSubview(dateTitleLabel)
-        addSubview(startDateLabel)
-        addSubview(endDateLabel)
-        addSubview(completeLabel)
-        addSubview(doitTextField)
-        addSubview(startDateTextField)
-        addSubview(endDateTextField)
-        addSubview(completeTextField)
+        addSubview(mainStackView)
+        setupStackView()
     }
     deinit {
         print("메인뷰 사라지")
     }
     override func setConstraints() {
-        doitLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
-            make.width.equalTo(44)
-            make.height.equalTo(44)
-            make.top.equalTo(safeAreaLayoutGuide).offset(20)
+        mainStackView.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(20)
+            make.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(20)
         }
         dateTitleLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
+            make.leading.equalToSuperview()
             make.width.equalTo(44)
             make.height.equalTo(44)
-            make.top.equalTo(doitLabel.snp.bottom).offset(20)
-        }
-        startDateLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
-            make.width.equalTo(44)
-            make.height.equalTo(44)
-            make.top.equalTo(dateTitleLabel.snp.bottom).offset(20)
-        }
-        endDateLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
-            make.width.equalTo(44)
-            make.height.equalTo(44)
-            make.top.equalTo(startDateLabel.snp.bottom).offset(20)
-        }
-        completeLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
-            make.width.equalTo(44)
-            make.height.equalTo(44)
-            make.top.equalTo(endDateLabel.snp.bottom).offset(20)
         }
         
-        doitTextField.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-20)
-            make.top.equalTo(doitLabel.snp.top)
-        }
-        startDateTextField.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-20)
-            make.top.equalTo(startDateLabel.snp.top)
-        }
-        endDateTextField.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-20)
-            make.top.equalTo(endDateLabel.snp.top)
-        }
-        completeTextField.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-20)
-            make.top.equalTo(completeLabel.snp.top)
-        }
     }
 
 
