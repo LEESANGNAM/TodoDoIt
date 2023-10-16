@@ -69,7 +69,6 @@ class DoitCompleteAddViewController: BaseViewController {
     }
     
     @objc private func ImageViewTapgesture() {
-        print("탭탭탭탭탭탭탭탭탭탭탭탭탭탭탭탭")
         present(picker, animated: true)
     }
     @objc private func MainViewTapgesture() {
@@ -106,11 +105,11 @@ extension DoitCompleteAddViewController: PHPickerViewControllerDelegate {
                 
                 if let itemProvider = itemProvider,
                    itemProvider.canLoadObject(ofClass: UIImage.self) { // 3
-                    itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in // 4
-                        DispatchQueue.main.async {
-                            self.originImage = image as? UIImage
-                            self.mainView.imageView.image = image as? UIImage // 5
-                            self.mainView.plusImageView.isHidden = true
+                    itemProvider.loadObject(ofClass: UIImage.self) {[weak self] (image, error) in // 4
+                        DispatchQueue.main.async { [weak self] in
+                            self?.originImage = image as? UIImage
+                            self?.mainView.imageView.image = image as? UIImage // 5
+                            self?.mainView.plusImageView.isHidden = true
                         }
                     }
                 } else {

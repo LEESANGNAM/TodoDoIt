@@ -85,5 +85,5 @@ class DoitDetailViewModel {
         return vaildProgress.value
     }
     
-    
+
 }

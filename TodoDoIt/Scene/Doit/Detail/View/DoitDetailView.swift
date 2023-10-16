@@ -10,6 +10,7 @@ import UIKit
 
 
 class DoitDetailView: BaseView {
+
     var circularProgressbar = CircularProgressView()
     
     var completeTableView = {

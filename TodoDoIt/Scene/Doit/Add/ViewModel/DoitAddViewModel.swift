@@ -41,7 +41,4 @@ class DoitAddViewModel {
     func updateDate(doit: DoIt, title: String) {
         repository.updateItem(value: ["_id": doit._id,"title": title ,"endDate": endDate.value, "complete": completeCount.value])
     }
-    deinit {
-        print("목표 추가 뷰모델 사라짐")
-    }
 }

@@ -62,9 +62,6 @@ class DoitAddView: BaseView {
         addSubview(mainStackView)
         setupStackView()
     }
-    deinit {
-        print("메인뷰 사라지")
-    }
     override func setConstraints() {
         mainStackView.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide).offset(20)

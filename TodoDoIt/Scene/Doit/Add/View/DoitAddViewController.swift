@@ -42,9 +42,6 @@ class DoitAddViewController: BaseViewController {
             self?.viewmodel.fetchCompletMaxCount()
         }
     }
-    deinit {
-        print("목표 추가 뷰 사라짐")
-    }
     private func setupNavigationBar(){
         if let doit = viewmodel.getDoitData(){
             self.navigationItem.title = "수정하기"

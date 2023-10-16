@@ -43,10 +43,7 @@ class DoitDetailTableViewCell: UITableViewCell {
         setConstraints()
     }
     
-    deinit {
-        print("테이블뷰 사라짐")
-    }
-    
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

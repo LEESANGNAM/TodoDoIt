@@ -15,11 +15,7 @@ class DoitDetailViewController: BaseViewController {
     override func loadView() {
         view = mainview
     }
-    
-    deinit {
-        print("목표 상세뷰 삭제")
-    }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         viewmodel.fetchDoit()

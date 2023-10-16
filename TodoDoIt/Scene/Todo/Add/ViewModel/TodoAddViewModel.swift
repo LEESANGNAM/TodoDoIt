@@ -9,6 +9,7 @@ import Foundation
 import RealmSwift
 
 class TodoAddViewModel {
+
     let repository = TodoRepository()
     var todo = Observer<Todo?>(nil)
     var title = Observer("")

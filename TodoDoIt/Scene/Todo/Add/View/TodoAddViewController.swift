@@ -38,18 +38,18 @@ class TodoAddViewController: BaseViewController{
         }
     }
     private func bind(){
-        viewmodel.title.bind {_ in
-            self.viewmodel.checkvaild()
+        viewmodel.title.bind {[weak self] _ in
+            self?.viewmodel.checkvaild()
         }
-        viewmodel.vaild.bind { valid in
+        viewmodel.vaild.bind { [weak self] valid in
             if valid {
-                if let todo = self.viewmodel.getTodo(){
-                    self.viewmodel.updateData()
-                    self.view.makeToast("할일이 변경되었습니다.")
-                    self.dismissModal()
+                if let todo = self?.viewmodel.getTodo(){
+                    self?.viewmodel.updateData()
+                    self?.view.makeToast("할일이 변경되었습니다.")
+                    self?.dismissModal()
                 }else {
-                    self.viewmodel.saveData(date: self.selectDate)
-                    self.view.makeToast("할일이 저장되었습니다.",position: .center)
+                    self?.viewmodel.saveData(date: self?.selectDate ?? Date())
+                    self?.view.makeToast("할일이 저장되었습니다.",position: .center)
                 }
             }
         }
