@@ -16,4 +16,11 @@ extension Date {
         let dateString = dateFormatter.string(from: self)
         return dateString
     }
+    // 같은날 인지 파악 시간제외
+    func isSameDay(as date: Date) -> Bool {
+           let calendar = Calendar.current
+           let components1 = calendar.dateComponents([.year, .month, .day], from: self)
+           let components2 = calendar.dateComponents([.year, .month, .day], from: date)
+           return components1 == components2
+       }
 }

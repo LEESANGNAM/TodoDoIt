@@ -42,6 +42,20 @@ class DoitDetailViewController: BaseViewController {
             self?.navigationItem.title = doit?.title
             self?.mainview.circularProgressbar.value = doit?.progress()
             self?.mainview.completeTableView.reloadData()
+            self?.viewmodel.checkValidProgress()
+            self?.viewmodel.checkValidDateCompleted(date: Date())
+        }
+        viewmodel.vaildProgress.bind {[weak self] bool in
+            if !bool {
+                print("vaildChange ")
+                self?.viewmodel.updateValue()
+                self?.setNavigationBar()
+            }
+        }
+        viewmodel.validTodayCompleted.bind { [weak self] bool in
+            if !bool{
+                self?.setNavigationBar()
+            }
         }
     }
     
@@ -56,11 +70,20 @@ class DoitDetailViewController: BaseViewController {
     
     private func setUIAction() -> [UIAction] {
         let complete = UIAction(title: "완료") {[weak self] _ in
-            print("완료버튼")
-            let vc = DoitCompleteAddViewController()
-            vc.viewmodel.doitKey.value = self?.viewmodel.getDoitKey()
-            vc.delegate = self
-            self?.present(vc, animated: true)
+            if let isProgress = self?.viewmodel.getValidProgress(),
+               let isTodayComplete = self?.viewmodel.getValidDateCompleted(){
+                if isProgress && isTodayComplete{
+                    let vc = DoitCompleteAddViewController()
+                    vc.viewmodel.doitKey.value = self?.viewmodel.getDoitKey()
+                    vc.delegate = self
+                    self?.present(vc, animated: true)
+                }else if !isProgress {
+                    self?.view.makeToast("달성한 목표입니다.")
+                }else if !isTodayComplete {
+                    self?.view.makeToast("오늘 목표를 달성했습니다.")
+                }
+            }
+            
         }
         let update = UIAction(title: "수정") {[weak self] _ in
             let vc = DoitAddViewController()

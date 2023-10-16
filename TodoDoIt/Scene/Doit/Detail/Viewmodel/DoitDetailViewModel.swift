@@ -13,6 +13,13 @@ class DoitDetailViewModel {
     var doit = Observer<DoIt?>(nil)
     var doitkey = Observer<ObjectId?>(nil)
     var doitcompleteList = Observer<[DoitCompleted]>([])
+    var vaildProgress = Observer(true)
+    var validTodayCompleted = Observer(true)
+    
+    func updateValue(){
+        guard let doitData = doit.value else { return }
+        repository.updateItem(value: ["_id": doitData._id, "finish": true])
+    }
     
     func fetchDoit(){
         guard let id = doitkey.value else { return}
@@ -53,7 +60,30 @@ class DoitDetailViewModel {
         repository.removeItem(doit)
         
     }
-    
+    func checkValidDateCompleted(date: Date){
+        guard let doitcopmlete = doitcompleteList.value.last  else { return }
+        
+        let lastDate = doitcopmlete.createDate
+        if date.isSameDay(as: lastDate){
+            validTodayCompleted.value = false
+        }else {
+            validTodayCompleted.value = true
+        }
+    }
+    func getValidDateCompleted() -> Bool{
+        return validTodayCompleted.value
+    }
+    func checkValidProgress() {
+        guard let doit = doit.value else { return }
+        if doit.progress() >= 1.0 {
+            vaildProgress.value = false
+        }else{
+            vaildProgress.value = true
+        }
+    }
+    func getValidProgress() -> Bool{
+        return vaildProgress.value
+    }
     
     
 }
