@@ -12,7 +12,6 @@ class DoitAddViewModel {
     var startDate = Observer(Date())
     var endDate = Observer(Date())
     var completeCount = Observer(0)
-    var list = Observer<[Int]>([])
     var completMaxCount = Observer<Int?>(nil)
     var doit = Observer<DoIt?>(nil)
     
@@ -20,20 +19,11 @@ class DoitAddViewModel {
          let calendar = Calendar.current
         let components = calendar.dateComponents([.day], from: startDate.value, to: endDate.value)
         guard let dayCount = components.day else { return }
-         completMaxCount.value = dayCount
+         completMaxCount.value = dayCount + 1
      }
-    func fetchListValue(){
-        guard let maxcount = completMaxCount.value, maxcount != 0 else { return }
-        list.value = Array(1...maxcount)
-    }
-    func fetchCompleteCount(index: Int){
-        completeCount.value = getListValue(index: index)
-    }
-    func listCount() -> Int{
-        return list.value.count
-    }
-    func getListValue(index: Int) -> Int {
-        return list.value[index]
+    func getcompletMaxCount() -> Int {
+        guard let Maxcount = completMaxCount.value else { return 0 }
+        return Maxcount
     }
     func saveData(title: String) {
         let data = DoIt(title: title, startDate: startDate.value, endDate: endDate.value, complete: completeCount.value)
