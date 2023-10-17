@@ -11,11 +11,21 @@ import UIKit
 
 class DoitCompleteAddViewModel {
     let repository = DoitRepository()
+    var doit = Observer<DoIt?>(nil)
     var doitKey = Observer<ObjectId?>(nil)
    
     func updateValue(complete: DoitCompleted){
         guard let key = doitKey.value else { return }
         repository.appendCompletedItem(doItId: key, completedItem: complete)
+    }
+    
+    func fetchDoit(){
+        guard let key = doitKey.value else { return }
+        let doitData = repository.fetchFilterKey(id: key)
+        doit.value = doitData
+    }
+    func getDoit() -> DoIt?{
+         return doit.value
     }
     
     func saveImage(image: UIImage?,imageName: String){

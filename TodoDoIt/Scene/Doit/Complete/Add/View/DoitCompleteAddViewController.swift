@@ -27,6 +27,13 @@ class DoitCompleteAddViewController: BaseViewController {
         setmemoTextView()
         setTapGesture()
         setSaveButton()
+        viewmodel.fetchDoit()
+        setTitle()
+    }
+    
+    private func setTitle(){
+        let doitValue = viewmodel.getDoit()
+        mainView.titleLabel.text = doitValue?.title
     }
     
     private func setPHPicker(){
