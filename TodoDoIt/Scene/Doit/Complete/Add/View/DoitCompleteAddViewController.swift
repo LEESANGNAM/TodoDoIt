@@ -93,6 +93,10 @@ extension DoitCompleteAddViewController: UITextViewDelegate {
             memoText = textView.text
         }
     }
+    func textViewDidChange(_ textView: UITextView) {
+        guard let text = textView.text else { return }
+        memoText = text
+    }
     
 }
 
