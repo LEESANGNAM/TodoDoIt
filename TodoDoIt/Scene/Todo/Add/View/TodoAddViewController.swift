@@ -17,6 +17,7 @@ class TodoAddViewController: BaseViewController{
     
     let titleTextField = {
         let view = UITextField()
+        view.textColor = .black
         return view
     }()
     let doneButton = {
