@@ -44,6 +44,7 @@ final class DoitRepository: RepositoryTypeProtocol {
             try realm.write {
                 realm.add(item)
             }
+            print(realm.configuration.fileURL)
         } catch {
             print(error)
         }

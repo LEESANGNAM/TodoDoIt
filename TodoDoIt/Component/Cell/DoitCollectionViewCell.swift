@@ -22,9 +22,9 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
         view.textColor = Design.Color.whiteFont
         return view
     }()
-    lazy var progressView = {
+    var progressView = {
        let view = UIProgressView()
-        view.progress = 0.4
+        view.progress = 0
         view.progressTintColor = Design.Color.whiteFont
         view.trackTintColor = Design.Color.progress
         
@@ -73,6 +73,7 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
         progressView.setProgress(0, animated: true)
     }
     func setupData(doit: DoIt){
+        layoutIfNeeded()
         let progress = doit.progress()
         let title = doit.title
         let date = doit.dateString
