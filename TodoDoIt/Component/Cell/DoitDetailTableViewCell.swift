@@ -12,24 +12,34 @@ class DoitDetailTableViewCell: UITableViewCell {
     
     let completeImageView = {
        let view = UIImageView()
-        view.image = UIImage(systemName: "star.fill")
         view.backgroundColor = .red
-        view.layer.cornerRadius = 30
+        view.layer.cornerRadius = 20
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         return view
     }()
-    
+    let dateLabel = {
+        let view = UILabel()
+        view.font = .boldSystemFont(ofSize: Design.Font.titleFontSize)
+        view.textColor = Design.Color.whiteFont
+        return view
+    }()
+    let yearMonthLabel = {
+        let view = UILabel()
+        view.textColor = Design.Color.whiteFont
+        view.font = .systemFont(ofSize: Design.Font.contentFontSize)
+        return view
+    }()
     let countLabel = {
        let view = UILabel()
-        view.text = "00회차"
+        view.font = .boldSystemFont(ofSize: Design.Font.titleFontSize)
         view.tintColor = Design.Color.blackFont
         return view
     }()
     let memoLabel = {
        let view = UILabel()
-        view.text = "메모메모메모메모메모메모메모메모메모메모메모메모메모메모메모메모메모메모메모메"
         view.textAlignment = .left
+        view.font = .systemFont(ofSize: Design.Font.dateFontSize)
         view.tintColor = Design.Color.blackFont
         view.numberOfLines = 0
         return view
@@ -51,6 +61,8 @@ class DoitDetailTableViewCell: UITableViewCell {
     
     func setHierarchy() {
         addSubview(completeImageView)
+        addSubview(yearMonthLabel)
+        addSubview(dateLabel)
         addSubview(countLabel)
         addSubview(memoLabel)
     }
@@ -62,6 +74,19 @@ class DoitDetailTableViewCell: UITableViewCell {
             make.width.equalTo(self.snp.width).multipliedBy(0.4)
             make.height.equalTo(completeImageView.snp.width)
         }
+        yearMonthLabel.snp.makeConstraints { make in
+            make.height.equalTo(20)
+            make.bottom.equalTo(completeImageView.snp.bottom).offset(-10)
+            make.leading.equalTo(completeImageView.snp.leading).offset(20)
+            make.trailing.lessThanOrEqualTo(completeImageView.snp.trailing)
+        }
+        dateLabel.snp.makeConstraints { make in
+            make.height.equalTo(40)
+            make.bottom.equalTo(yearMonthLabel.snp.bottom).offset(-10)
+            make.leading.equalTo(completeImageView.snp.leading).offset(20)
+            make.trailing.lessThanOrEqualTo(completeImageView.snp.trailing)
+        }
+       
         countLabel.snp.makeConstraints { make in
             make.leading.equalTo(completeImageView.snp.trailing).offset(10)
             make.top.equalTo(self.safeAreaLayoutGuide).offset(10)
@@ -83,14 +108,16 @@ class DoitDetailTableViewCell: UITableViewCell {
                     let size = CGSize(width: self.completeImageView.frame.width, height: self.completeImageView.frame.height)
                     self.completeImageView.image = fileImage.downsampling(to: size)
                 }
+            }else {
+                DispatchQueue.main.async {
+                    self.completeImageView.backgroundColor = .systemGray3
+                }
             }
         }
-        if data.impression.isEmpty{
-            self.memoLabel.text = data.createDate.changeFormatString(format: "yyyy-MM-dd")
-        }else {
-            self.memoLabel.text = data.impression
-        }
-        self.countLabel.text = "\(totalcount - index)회차"
+        dateLabel.text = data.createDate.changeFormatString(format: "dd일")
+        yearMonthLabel.text = data.createDate.changeFormatString(format: "yyyy년MM월")
+        memoLabel.text = data.impression
+        countLabel.text = "\(totalcount - index)회차"
     }
     
 }

@@ -131,11 +131,12 @@ extension DoitDetailViewController: UITableViewDelegate, UITableViewDataSource {
         let index = totalcount - indexPath.row - 1
         let data = viewmodel.getListData(index: index)
         cell.setData(data: data, totalcount: totalcount, index: indexPath.row)
+        cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "목표 완료"
+        return "목표 달성"
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
