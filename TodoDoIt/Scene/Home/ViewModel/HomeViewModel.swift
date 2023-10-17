@@ -52,6 +52,11 @@ class HomeViewModel {
         }
         return count
     }
+    func changeArray(){
+        changeDoitArray()
+        changeMemoArray()
+        changeTodoArray()
+    }
     func changeDoitArray(){
         if let result = doitResult.value{
             doitArray.value = Array(result)

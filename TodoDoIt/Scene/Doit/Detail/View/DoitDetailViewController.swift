@@ -34,9 +34,13 @@ class DoitDetailViewController: BaseViewController {
     
     private func bind(){
         viewmodel.doit.bind {[weak self] doit in
+            guard let doit else {
+                self?.navigationController?.popViewController(animated: true)
+                return
+            }
             self?.viewmodel.fetchdoitCompleteList()
-            self?.navigationItem.title = doit?.title
-            self?.mainview.circularProgressbar.value = doit?.progress()
+            self?.navigationItem.title = doit.title
+            self?.mainview.circularProgressbar.value = doit.progress()
             self?.mainview.completeTableView.reloadData()
             self?.viewmodel.checkValidProgress()
             self?.viewmodel.checkValidDateCompleted(date: Date())

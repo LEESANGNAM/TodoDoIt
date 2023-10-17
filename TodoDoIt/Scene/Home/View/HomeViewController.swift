@@ -30,7 +30,6 @@ class HomeViewController: BaseViewController {
         configureDataSource()
         setUpSwipeGusture()
         bind()
-        viewmodel.fetchData(date: today)
         setNavigationBar(title: today.changeFormatString(format: "yyyy년MM월"))
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -45,23 +44,15 @@ class HomeViewController: BaseViewController {
     
     private func bind(){
         viewmodel.doitResult.bind { _ in
-            print("두잇 결과 바뀜 배열로 바꿀 예쩡")
-            self.viewmodel.changeDoitArray()
-        }
-        viewmodel.doitArray.bind {_ in
-            print("두잇 어레이 바뀜 업데이트 스냅샷 예정")
+            self.viewmodel.changeArray()
             self.updateSnapshot()
         }
         viewmodel.todoResult.bind { _ in
-            self.viewmodel.changeTodoArray()
-        }
-        viewmodel.todoArray.bind {_ in
+            self.viewmodel.changeArray()
             self.updateSnapshot()
         }
         viewmodel.memoResult.bind { _ in
-            self.viewmodel.changeMemoArray()
-        }
-        viewmodel.memoArray.bind {_ in
+            self.viewmodel.changeArray()
             self.updateSnapshot()
         }
     }
@@ -338,8 +329,6 @@ extension HomeViewController {
         snapshot.appendItems(viewmodel.getMemoArray(),toSection: .memo)
         //        dataSource?.apply(snapshot, animatingDifferences: true)
         dataSource?.applySnapshotUsingReloadData(snapshot)
-        print("업데이트 스냅샷짜자잔")
-        
     }
     @objc func addButtonTapped(_ sender: UIButton){
         let section = SectionType(rawValue: sender.tag)

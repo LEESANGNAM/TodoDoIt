@@ -18,7 +18,6 @@ class DoitListViewController: BaseViewController {
         setNavibar()
         configureDataSource()
         bind()
-        viewmodel.fetch()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -39,8 +38,6 @@ class DoitListViewController: BaseViewController {
     private func bind(){
         viewmodel.doitresult.bind { _ in
             self.viewmodel.fetchList()
-        }
-        viewmodel.doitList.bind { _ in
             self.updateSnapshot()
         }
     }
@@ -106,6 +103,6 @@ extension DoitListViewController{
         var snapshot = NSDiffableDataSourceSnapshot<DoitSectionType, DoIt>()
         snapshot.appendSections(DoitSectionType.allCases)
         snapshot.appendItems(viewmodel.getDoitList(),toSection: .doing)
-        dataSource?.apply(snapshot, animatingDifferences: false)
+        dataSource?.applySnapshotUsingReloadData(snapshot)
     }
 }
