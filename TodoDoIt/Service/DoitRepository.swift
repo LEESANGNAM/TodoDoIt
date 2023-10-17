@@ -74,6 +74,15 @@ final class DoitRepository: RepositoryTypeProtocol {
             print(error)
         }
     }
+    func removeCompletedItem(_ item: T, index: Int) {
+        do {
+            try realm.write {
+                realm.delete(item.doitComplete[index])
+            }
+        } catch {
+            print(error)
+        }
+    }
     
     func removeItem(_ item: T) {
         do {

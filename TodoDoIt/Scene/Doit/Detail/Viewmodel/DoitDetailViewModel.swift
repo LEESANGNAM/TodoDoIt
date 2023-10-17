@@ -60,6 +60,15 @@ class DoitDetailViewModel {
         repository.removeItem(doit)
         
     }
+    func
+    removeCompleted(index : Int){
+        guard let doit = doit.value else { return }
+        let doitCompleted = getListData(index: index)
+        print(doitCompleted._id, "삭제하기전 완료 ID")
+        print(index, "삭제하기전 index")
+        repository.removeCompletedItem(doit,index: index)
+    }
+    
     func checkValidDateCompleted(date: Date){
         guard let doitcopmlete = doitcompleteList.value.last  else { return }
         

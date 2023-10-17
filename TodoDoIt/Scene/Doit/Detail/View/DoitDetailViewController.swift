@@ -114,7 +114,7 @@ extension DoitDetailViewController: ModalPresentDelegate {
     
 }
 
-
+//MARK: tableView
 extension DoitDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -134,4 +134,13 @@ extension DoitDetailViewController: UITableViewDelegate, UITableViewDataSource {
         return "목표 완료"
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let totalcount = viewmodel.ListCount()
+        let index = totalcount - indexPath.row - 1
+        if editingStyle == .delete {
+            viewmodel.removeCompleted(index: index)
+            viewmodel.fetchDoit()
+            
+        }
+    }
 }
