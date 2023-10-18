@@ -40,9 +40,6 @@ class MemoAddViewController: BaseViewController {
             self?.mainView.memoTextView.text = memo.title
             self?.viewmodel.title.value = memo.title
         }
-        viewmodel.title.bind { [weak self] _ in
-            self?.viewmodel.checkvaild()
-        }
     }
     
     private func setTitleDate(){

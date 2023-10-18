@@ -38,8 +38,9 @@ class HomeViewController: BaseViewController {
         bind()
         setNavigationBar(title: today.changeFormatString(format: "yyyy년MM월"))
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         viewmodel.fetchData(date: selectDate)
         fsCalendar.reloadData()
     }
