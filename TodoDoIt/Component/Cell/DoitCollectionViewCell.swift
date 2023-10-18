@@ -70,7 +70,8 @@ class DoitCollectionViewCell: BaseCollectionViewCell {
         }
     }
     override func prepareForReuse() {
-        progressView.setProgress(0, animated: true)
+        super.prepareForReuse()
+       progressView.setProgress(0, animated: true)
     }
     func setupData(doit: DoIt){
         layoutIfNeeded()
