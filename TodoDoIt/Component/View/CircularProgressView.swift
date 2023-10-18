@@ -21,7 +21,7 @@ class CircularProgressView: UIView, CAAnimationDelegate {
 
         bezierPath.addArc(withCenter: CGPoint(x: rect.midX, y: rect.midY), radius: rect.midX - ((lineWidth - 1) / 2), startAngle: 0, endAngle: .pi * 2, clockwise: true)
 
-        bezierPath.lineWidth = 3
+        bezierPath.lineWidth = 5
         Design.Color.progress.set()
         bezierPath.stroke()
     }
@@ -76,7 +76,7 @@ class CircularProgressView: UIView, CAAnimationDelegate {
         let label = UILabel()
         label.text = "\(Int(value * 100))%"
         label.textColor = .label
-        label.font = .systemFont(ofSize: Design.Font.titleFontSize, weight: .light)
+        label.font = .systemFont(ofSize: Design.Font.titleFontSize, weight: .bold)
 
         self.addSubview(label)
 
