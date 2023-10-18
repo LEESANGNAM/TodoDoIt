@@ -171,19 +171,12 @@ extension DoitAddViewController {
         startDatePicker.isEnabled = false // 시작날짜는 오늘로 고정
         startDatePicker.addTarget(self, action: #selector(startDateValueChanged), for: .valueChanged)
         
-        let toolBar = setupTollbar(tag: 0)
-        
         mainview.startDateTextField.inputView = startDatePicker
-        mainview.startDateTextField.inputAccessoryView = toolBar
     }
     private func setupEndDatePickerView(){
         let endDatePicker = createDatePickerView()
         endDatePicker .addTarget(self, action: #selector(endDateValueChanged), for: .valueChanged)
-        
-        let toolBar = setupTollbar(tag: 1)
-        
         mainview.endDateTextField.inputView = endDatePicker
-        mainview.endDateTextField.inputAccessoryView = toolBar
     }
     
     private func createDatePickerView() -> UIDatePicker {
@@ -197,40 +190,4 @@ extension DoitAddViewController {
         return picker
     }
     
-    private func setupTollbar(tag: Int) -> UIToolbar{
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit() // 사이즈 맞추기
-        
-        let cancelButton = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelButtonTapped))
-        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneButtonTapped))
-        cancelButton.tag = tag
-        doneButton.tag = tag
-        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-        toolbar.setItems([cancelButton,space,doneButton], animated: false)
-        return toolbar
-    }
-    
-    @objc private func cancelButtonTapped(_ sender: UIBarButtonItem) {
-        // 취소 버튼을 눌렀을 때 실행되는 함수
-        if sender.tag == 0 {
-            mainview.startDateTextField.resignFirstResponder()
-        } else if sender.tag == 1 {
-            mainview.endDateTextField.text = ""
-            mainview.endDateTextField.resignFirstResponder()
-        }
-    }
-    
-    @objc private func doneButtonTapped(_ sender: UIBarButtonItem) {
-        // 완료 버튼을 눌렀을 때 실행되는 함수
-        if sender.tag == 0 {
-            mainview.startDateTextField.resignFirstResponder()
-            let dateString = viewmodel.startDate.value.changeFormatString(format: "yyyy.MM.dd")
-            mainview.startDateTextField.text = dateString
-        } else if sender.tag == 1 {
-            mainview.endDateTextField.resignFirstResponder()
-            mainview.endDateTextField.text = viewmodel.endDate.value.changeFormatString(format: "yyyy.MM.dd")
-            viewmodel.fetchCompletMaxCount()
-        }
-    }
 }
