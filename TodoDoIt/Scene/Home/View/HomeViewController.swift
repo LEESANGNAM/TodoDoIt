@@ -19,8 +19,14 @@ class HomeViewController: BaseViewController {
     private typealias DoitCellRegistration = UICollectionView.CellRegistration<DoitCollectionViewCell,DoIt>
     private typealias TodoCellRegistration = UICollectionView.CellRegistration<TodoCollectionViewCell,Todo>
     private typealias MemoCellRegistration = UICollectionView.CellRegistration<MemoCollectionViewCell,Memo>
+    private typealias NotDataCellRegistration = UICollectionView.CellRegistration<NotDataCollectionViewCell,Object>
     
     var dataSource: UICollectionViewDiffableDataSource<SectionType,Object>?
+    
+    private let emptyDoit = DoIt()
+    private let emptyTodo = Todo()
+    private let emptyMemo = Memo()
+    
     
     let viewmodel = HomeViewModel()
     var selectDate = Date() // 선택날짜
@@ -187,27 +193,40 @@ extension HomeViewController: FSCalendarDelegate, FSCalendarDataSource{
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let section = SectionType(rawValue: indexPath.section)
+        guard let section = SectionType(rawValue: indexPath.section) else { return }
         switch section {
         case .doit:
             if let selecteItem =
                 dataSource?.itemIdentifier(for: indexPath) as? DoIt{
-                let vc = DoitDetailViewController()
-                vc.viewmodel.doitkey.value = selecteItem._id
-                navigationController?.pushViewController(vc, animated: true)
+                if selecteItem._id == emptyDoit._id{
+                    navigationController?.pushViewController(DoitAddViewController(), animated: true)
+                }else {
+                    let vc = DoitDetailViewController()
+                    vc.viewmodel.doitkey.value = selecteItem._id
+                    navigationController?.pushViewController(vc, animated: true)
+                }
             }
         case .todo:
             if let selectItem = dataSource?.itemIdentifier(for: indexPath) as? Todo {
-                let vc = TodoDetailViewcontroller()
-                vc.delegate = self
-                if  let sheet = vc.sheetPresentationController {
-                    sheet.detents = [.medium()]
-                    sheet.prefersGrabberVisible = true
+                if selectItem._id == emptyTodo._id{
+                    let vc = TodoAddViewController()
+                    vc.delegate = self
+                    vc.modalPresentationStyle = .overFullScreen
+                    vc.modalTransitionStyle = .crossDissolve
+                    present(vc,animated: true)
+                }else {
+                    let vc = TodoDetailViewcontroller()
+                    vc.delegate = self
+                    if  let sheet = vc.sheetPresentationController {
+                        sheet.detents = [.medium()]
+                        sheet.prefersGrabberVisible = true
+                    }
+                    vc.viewmodel.todokey.value = selectItem._id
+                    present(vc, animated: true)
                 }
-                vc.viewmodel.todokey.value = selectItem._id
-                present(vc, animated: true)
             }
         case .memo:
+            // 메모는 추가뷰에 넘어갔을때 ID 검사후 Add, update 검사하기때문에  바로 넘겨도 된다.
             if let selectItem = dataSource?.itemIdentifier(for: indexPath) as? Memo {
                 let vc = MemoAddViewController()
                 vc.delegate = self
@@ -218,8 +237,6 @@ extension HomeViewController: UICollectionViewDelegate {
                 vc.viewmodel.memoKey.value = selectItem._id
                 present(vc, animated: true)
             }
-        case .none:
-            view.makeToast("잘못된 섹션입니다.")
         }
     }
 }
@@ -282,20 +299,39 @@ extension HomeViewController {
         let memoCellRegistration = MemoCellRegistration { cell, indexPath, identifier in
             cell.setupData(memo: identifier)
         }
+        let notDataCellRegistraion = NotDataCellRegistration { cell, indexPath, itemIdentifier in
+            guard let section = SectionType(rawValue: indexPath.section) else { return }
+            cell.setupData(section: section)
+        }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             guard let section = SectionType(rawValue: indexPath.section) else { return UICollectionViewCell()}
-            // 섹션별로 다른 셀
+            
             switch section {
             case .doit:
-                let cell = collectionView.dequeueConfiguredReusableCell(using: doitCellRegistration, for: indexPath, item: itemIdentifier as? DoIt)
-                return cell
+                if self.viewmodel.getDoitArray().isEmpty {
+                    let cell =  collectionView.dequeueConfiguredReusableCell(using: notDataCellRegistraion, for: indexPath, item: itemIdentifier)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueConfiguredReusableCell(using: doitCellRegistration, for: indexPath, item: itemIdentifier as? DoIt)
+                    return cell
+                }
             case .todo:
-                let cell = collectionView.dequeueConfiguredReusableCell(using: todoCellRegistration, for: indexPath, item: itemIdentifier as? Todo)
-                return cell
+                if self.viewmodel.getTodoArray().isEmpty {
+                    let cell =  collectionView.dequeueConfiguredReusableCell(using: notDataCellRegistraion, for: indexPath, item: itemIdentifier)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueConfiguredReusableCell(using: todoCellRegistration, for: indexPath, item: itemIdentifier as? Todo)
+                    return cell
+                }
             case .memo:
-                let cell = collectionView.dequeueConfiguredReusableCell(using: memoCellRegistration, for: indexPath, item: itemIdentifier as? Memo)
-                return cell
+                if self.viewmodel.getMemoArray().isEmpty {
+                    let cell =  collectionView.dequeueConfiguredReusableCell(using: notDataCellRegistraion, for: indexPath, item: itemIdentifier)
+                    return cell
+                } else {
+                    let cell = collectionView.dequeueConfiguredReusableCell(using: memoCellRegistration, for: indexPath, item: itemIdentifier as? Memo)
+                    return cell
+                }
             }
         }
         
@@ -324,12 +360,19 @@ extension HomeViewController {
     func updateSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<SectionType, Object>()
         snapshot.appendSections(SectionType.allCases)
-        snapshot.appendItems(viewmodel.getDoitArray(),toSection: .doit)
-        snapshot.appendItems(viewmodel.getTodoArray(),toSection: .todo)
-        snapshot.appendItems(viewmodel.getMemoArray(),toSection: .memo)
+        
+        let doitArray = viewmodel.getDoitArray().isEmpty ? [emptyDoit] : viewmodel.getDoitArray()
+        let todoArray = viewmodel.getTodoArray().isEmpty ? [emptyTodo] : viewmodel.getTodoArray()
+        let memoArray = viewmodel.getMemoArray().isEmpty ? [emptyMemo] : viewmodel.getMemoArray()
+        
+        
+        snapshot.appendItems(doitArray,toSection: .doit)
+        snapshot.appendItems(todoArray,toSection: .todo)
+        snapshot.appendItems(memoArray,toSection: .memo)
         //        dataSource?.apply(snapshot, animatingDifferences: true)
         dataSource?.applySnapshotUsingReloadData(snapshot)
     }
+    
     @objc func addButtonTapped(_ sender: UIButton){
         let section = SectionType(rawValue: sender.tag)
         switch section {

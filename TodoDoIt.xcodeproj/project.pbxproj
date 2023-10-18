@@ -64,6 +64,7 @@
 		D6D92F0A2AC031DF0074236E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D92F092AC031DF0074236E /* HomeViewController.swift */; };
 		D6D92F0F2AC031E00074236E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6D92F0E2AC031E00074236E /* Assets.xcassets */; };
 		D6D92F122AC031E00074236E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6D92F102AC031E00074236E /* LaunchScreen.storyboard */; };
+		D6EE24602AE029EE00D7425F /* NotDataCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EE245F2AE029EE00D7425F /* NotDataCollectionViewCell.swift */; };
 		D6F0C6162AC5B5B100EE99AF /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0C6152AC5B5B100EE99AF /* Date+Extension.swift */; };
 		D6F0C6192AC8096B00EE99AF /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0C6182AC8096B00EE99AF /* Observer.swift */; };
 		D6F0C61B2AC8285000EE99AF /* DoitAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0C61A2AC8285000EE99AF /* DoitAddViewModel.swift */; };
@@ -123,6 +124,7 @@
 		D6D92F0E2AC031E00074236E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6D92F112AC031E00074236E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D6D92F132AC031E00074236E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6EE245F2AE029EE00D7425F /* NotDataCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotDataCollectionViewCell.swift; sourceTree = "<group>"; };
 		D6F0C6152AC5B5B100EE99AF /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		D6F0C6182AC8096B00EE99AF /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		D6F0C61A2AC8285000EE99AF /* DoitAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitAddViewModel.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				D6835B582ACAE70F00B0A488 /* TodoCollectionViewCell.swift */,
 				D6835B5A2ACAE71A00B0A488 /* MemoCollectionViewCell.swift */,
 				D64BDD2A2AD2DB7900C4F6FB /* DoitDetailTableViewCell.swift */,
+				D6EE245F2AE029EE00D7425F /* NotDataCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -682,6 +685,7 @@
 				D6A80F1D2AD85DEA00364CF5 /* TodoRepository.swift in Sources */,
 				D62B07A02AC45813002C7EAB /* BaseViewController.swift in Sources */,
 				D6835B5E2ACAE8EF00B0A488 /* Design.swift in Sources */,
+				D6EE24602AE029EE00D7425F /* NotDataCollectionViewCell.swift in Sources */,
 				D62B07A22AC4581A002C7EAB /* BaseView.swift in Sources */,
 				D64BDD312AD339FC00C4F6FB /* DoitDetailViewModel.swift in Sources */,
 				D6F0C6162AC5B5B100EE99AF /* Date+Extension.swift in Sources */,
