@@ -12,7 +12,6 @@ class DoitDetailTableViewCell: UITableViewCell {
     
     let completeImageView = {
        let view = UIImageView()
-        view.backgroundColor = .red
         view.layer.cornerRadius = 20
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
@@ -65,6 +64,11 @@ class DoitDetailTableViewCell: UITableViewCell {
         addSubview(dateLabel)
         addSubview(countLabel)
         addSubview(memoLabel)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        completeImageView.image = nil
     }
     
     func setConstraints(){

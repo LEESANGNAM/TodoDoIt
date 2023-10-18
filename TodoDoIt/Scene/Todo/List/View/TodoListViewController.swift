@@ -31,7 +31,7 @@ class TodoListViewController: BaseViewController {
      }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewmodel.fetchData(date: today)
+        viewmodel.fetchData(date: selectDate)
         fsCalendar.reloadData()
     }
    
