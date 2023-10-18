@@ -21,6 +21,7 @@ class DoitAddViewController: BaseViewController {
         bind()
         setupPickerView()
         setupNavigationBar()
+        setUpTapGesture()
         setDelegate()
     }
     func bind(){
@@ -41,6 +42,13 @@ class DoitAddViewController: BaseViewController {
             self?.mainview.endDateTextField.text = dateString
             self?.viewmodel.fetchCompletMaxCount()
         }
+    }
+    private func setUpTapGesture(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapgestureTapped))
+        view.addGestureRecognizer(tapGesture)
+    }
+    @objc private func tapgestureTapped(){
+        view.endEditing(true)
     }
     private func setupNavigationBar(){
         if let doit = viewmodel.getDoitData(){
