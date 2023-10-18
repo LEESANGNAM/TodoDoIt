@@ -47,7 +47,8 @@ class DoitAddView: BaseView {
         mainStackView.spacing = 20
         
         
-        doitStackView.distribution = .fillProportionally
+        doitStackView.distribution = .fill
+        doitStackView.spacing = 10
         doitStackView.axis = .horizontal
         startDateStackView.distribution = .fillProportionally
         startDateStackView.axis = .horizontal
