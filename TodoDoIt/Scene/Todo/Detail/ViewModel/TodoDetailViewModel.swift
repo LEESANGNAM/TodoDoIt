@@ -26,7 +26,6 @@ class TodoDetailViewModel {
         guard let tododata = todo.value else { return }
         let today = tododata.createDate
         if let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today){
-            print("오늘날짜 : \(today),     내일날짜 : \(tomorrow)")
             repository.updateItem(value: ["_id":tododata._id,"createDate": tomorrow])
         }
     }

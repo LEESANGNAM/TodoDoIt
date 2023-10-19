@@ -27,7 +27,6 @@ class DoitDetailViewController: BaseViewController {
         }
     }
     override func viewWillAppear(_ animated: Bool) {
-        print(#function)
         super.viewWillAppear(animated)
         viewmodel.fetchDoit()
     }

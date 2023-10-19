@@ -35,13 +35,9 @@ class DoitListViewModel {
     }
     
     func getDoitList() -> [DoIt]{
-        print("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
-        print(doitList.value)
         return doitList.value
     }
     func getDoitFinishList() -> [DoIt]{
-        print("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
-        print(doitFinishList.value)
         return doitFinishList.value
     }
     

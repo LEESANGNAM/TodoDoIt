@@ -34,7 +34,6 @@ class TodoAddViewController: BaseViewController{
         super.viewDidLoad()
         view.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
         if let date = delegate?.sendDateToModal(){
-            print(date)
             selectDate = date
         }
     }
