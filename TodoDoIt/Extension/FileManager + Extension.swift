@@ -5,10 +5,14 @@
 //  Created by 이상남 on 2023/10/13.
 //
 
-import Foundation
 import UIKit
 
 extension FileManager {
+   static func getDocumentDirectoryPath() -> URL? {
+        guard let documnetDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+        return documnetDirectory
+    }
+    
     static func saveImageToDocumentDirectory(image: UIImage, fileName: String) -> String? {
         //document 경로
         guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
@@ -84,5 +88,4 @@ extension FileManager {
         }
     }
 }
-
 

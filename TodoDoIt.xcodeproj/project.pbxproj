@@ -52,6 +52,7 @@
 		D6835B5E2ACAE8EF00B0A488 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B5D2ACAE8EF00B0A488 /* Design.swift */; };
 		D69B039A2AE0FC2F0083D3B2 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69B03992AE0FC2F0083D3B2 /* SettingViewController.swift */; };
 		D69B039C2AE0FC3A0083D3B2 /* SettingEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69B039B2AE0FC3A0083D3B2 /* SettingEnum.swift */; };
+		D69B039F2AE15F5B0083D3B2 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = D69B039E2AE15F5B0083D3B2 /* Zip */; };
 		D6A80F192AD8541100364CF5 /* DoitCompleteAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F182AD8541100364CF5 /* DoitCompleteAddViewModel.swift */; };
 		D6A80F1B2AD859FB00364CF5 /* DoitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F1A2AD859FB00364CF5 /* DoitRepository.swift */; };
 		D6A80F1D2AD85DEA00364CF5 /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F1C2AD85DEA00364CF5 /* TodoRepository.swift */; };
@@ -139,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D69B039F2AE15F5B0083D3B2 /* Zip in Frameworks */,
 				D62B07852AC2B1BA002C7EAB /* Toast in Frameworks */,
 				D62B077D2AC2B11B002C7EAB /* SnapKit in Frameworks */,
 				D62B077A2AC2B10D002C7EAB /* Kingfisher in Frameworks */,
@@ -623,6 +625,7 @@
 				D62B077F2AC2B17F002C7EAB /* Realm */,
 				D62B07812AC2B17F002C7EAB /* RealmSwift */,
 				D62B07842AC2B1BA002C7EAB /* Toast */,
+				D69B039E2AE15F5B0083D3B2 /* Zip */,
 			);
 			productName = TodoDoIt;
 			productReference = D6D92F022AC031DF0074236E /* TodoDoIt.app */;
@@ -658,6 +661,7 @@
 				D62B077B2AC2B11B002C7EAB /* XCRemoteSwiftPackageReference "SnapKit" */,
 				D62B077E2AC2B17F002C7EAB /* XCRemoteSwiftPackageReference "realm-swift" */,
 				D62B07832AC2B1BA002C7EAB /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				D69B039D2AE15F5B0083D3B2 /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = D6D92F032AC031DF0074236E /* Products */;
 			projectDirPath = "";
@@ -999,6 +1003,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		D69B039D2AE15F5B0083D3B2 /* XCRemoteSwiftPackageReference "Zip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/Zip.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1031,6 +1043,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D62B07832AC2B1BA002C7EAB /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		D69B039E2AE15F5B0083D3B2 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D69B039D2AE15F5B0083D3B2 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

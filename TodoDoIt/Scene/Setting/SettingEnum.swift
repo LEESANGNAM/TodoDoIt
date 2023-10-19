@@ -23,40 +23,39 @@ enum SettingEnum: Int, CaseIterable {
     
 }
 
-extension SettingEnum {
-    enum dataEnum: Int, CaseIterable {
-        case reset
-        case backup
-        case restore
-        
-        var title: String {
-            switch self {
-            case .reset:
-                return "데이터 초기화"
-            case .backup:
-                return "데이터 백업"
-            case .restore:
-                return "데이터 복구"
-            }
-        }
-    }
-    enum openSourceEnum: Int, CaseIterable {
-        case fsCalendar
-        case realm
-        case snapKit
-        case toast
-        
-        var title: String {
-            switch self {
-            case .fsCalendar:
-                return "fsCalendar"
-            case .realm:
-                return "realm"
-            case .snapKit:
-                return "snapKit"
-            case .toast:
-                return "toast"
-            }
+enum DataEnum: Int, CaseIterable {
+    case reset
+    case backup
+    case restore
+    
+    var title: String {
+        switch self {
+        case .reset:
+            return "데이터 초기화"
+        case .backup:
+            return "데이터 백업"
+        case .restore:
+            return "데이터 복구"
         }
     }
 }
+enum OpenSourceEnum: Int, CaseIterable {
+    case fsCalendar
+    case realm
+    case snapKit
+    case toast
+    
+    var title: String {
+        switch self {
+        case .fsCalendar:
+            return "fsCalendar"
+        case .realm:
+            return "realm"
+        case .snapKit:
+            return "snapKit"
+        case .toast:
+            return "toast"
+        }
+    }
+}
+
