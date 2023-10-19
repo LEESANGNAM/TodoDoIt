@@ -56,7 +56,7 @@ class CircularProgressView: UIView, CAAnimationDelegate {
 
         let color: UIColor = Design.Color.cell
         shapeLayer.strokeColor = color.cgColor
-        shapeLayer.fillColor = Design.Color.background.cgColor
+        shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineWidth = lineWidth
         
         circleShapeLayer = shapeLayer
