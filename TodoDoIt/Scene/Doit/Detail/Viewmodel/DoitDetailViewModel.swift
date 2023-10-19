@@ -16,9 +16,9 @@ class DoitDetailViewModel {
     var vaildProgress = Observer(true)
     var validTodayCompleted = Observer(true)
     
-    func updateValue(){
+    func updateValue(finish: Bool){
         guard let doitData = doit.value else { return }
-        repository.updateItem(value: ["_id": doitData._id, "finish": true])
+        repository.updateItem(value: ["_id": doitData._id, "finish": finish])
     }
     
     func fetchDoit(){
@@ -64,13 +64,13 @@ class DoitDetailViewModel {
     removeCompleted(index : Int){
         guard let doit = doit.value else { return }
         let doitCompleted = getListData(index: index)
-        print(doitCompleted._id, "삭제하기전 완료 ID")
-        print(index, "삭제하기전 index")
         repository.removeCompletedItem(doit,index: index)
     }
     
     func checkValidDateCompleted(date: Date){
-        guard let doitcopmlete = doitcompleteList.value.last  else { return }
+        guard let doitcopmlete = doitcompleteList.value.last  else {
+            validTodayCompleted.value = true
+            return }
         
         let lastDate = doitcopmlete.createDate
         if date.isSameDay(as: lastDate){

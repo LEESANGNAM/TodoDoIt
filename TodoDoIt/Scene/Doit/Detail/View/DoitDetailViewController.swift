@@ -46,16 +46,16 @@ class DoitDetailViewController: BaseViewController {
             self?.viewmodel.checkValidDateCompleted(date: Date())
         }
         viewmodel.vaildProgress.bind {[weak self] bool in
-            if !bool {
-                print("vaildChange ")
-                self?.viewmodel.updateValue()
+            if bool {
+                self?.viewmodel.updateValue(finish: !bool)
+                self?.setNavigationBar()
+            }else {
+                self?.viewmodel.updateValue(finish: !bool)
                 self?.setNavigationBar()
             }
         }
         viewmodel.validTodayCompleted.bind { [weak self] bool in
-            if !bool{
                 self?.setNavigationBar()
-            }
         }
     }
     
