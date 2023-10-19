@@ -50,6 +50,8 @@
 		D6835B592ACAE70F00B0A488 /* TodoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B582ACAE70F00B0A488 /* TodoCollectionViewCell.swift */; };
 		D6835B5B2ACAE71A00B0A488 /* MemoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B5A2ACAE71A00B0A488 /* MemoCollectionViewCell.swift */; };
 		D6835B5E2ACAE8EF00B0A488 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6835B5D2ACAE8EF00B0A488 /* Design.swift */; };
+		D69B039A2AE0FC2F0083D3B2 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69B03992AE0FC2F0083D3B2 /* SettingViewController.swift */; };
+		D69B039C2AE0FC3A0083D3B2 /* SettingEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69B039B2AE0FC3A0083D3B2 /* SettingEnum.swift */; };
 		D6A80F192AD8541100364CF5 /* DoitCompleteAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F182AD8541100364CF5 /* DoitCompleteAddViewModel.swift */; };
 		D6A80F1B2AD859FB00364CF5 /* DoitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F1A2AD859FB00364CF5 /* DoitRepository.swift */; };
 		D6A80F1D2AD85DEA00364CF5 /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F1C2AD85DEA00364CF5 /* TodoRepository.swift */; };
@@ -108,6 +110,8 @@
 		D6835B582ACAE70F00B0A488 /* TodoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCollectionViewCell.swift; sourceTree = "<group>"; };
 		D6835B5A2ACAE71A00B0A488 /* MemoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCollectionViewCell.swift; sourceTree = "<group>"; };
 		D6835B5D2ACAE8EF00B0A488 /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
+		D69B03992AE0FC2F0083D3B2 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		D69B039B2AE0FC3A0083D3B2 /* SettingEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEnum.swift; sourceTree = "<group>"; };
 		D6A80F182AD8541100364CF5 /* DoitCompleteAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitCompleteAddViewModel.swift; sourceTree = "<group>"; };
 		D6A80F1A2AD859FB00364CF5 /* DoitRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitRepository.swift; sourceTree = "<group>"; };
 		D6A80F1C2AD85DEA00364CF5 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
@@ -209,6 +213,7 @@
 		D62B079A2AC45599002C7EAB /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				D69B03972AE0FC100083D3B2 /* Setting */,
 				D62B079E2AC45804002C7EAB /* Base */,
 				D62B07862AC2B22F002C7EAB /* TabBar */,
 				D62B07892AC2B732002C7EAB /* Home */,
@@ -471,6 +476,23 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		D69B03972AE0FC100083D3B2 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				D69B03982AE0FC1C0083D3B2 /* View */,
+				D69B039B2AE0FC3A0083D3B2 /* SettingEnum.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		D69B03982AE0FC1C0083D3B2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D69B03992AE0FC2F0083D3B2 /* SettingViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D6A80F162AD8425700364CF5 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -686,6 +708,7 @@
 				D62B07A02AC45813002C7EAB /* BaseViewController.swift in Sources */,
 				D6835B5E2ACAE8EF00B0A488 /* Design.swift in Sources */,
 				D6EE24602AE029EE00D7425F /* NotDataCollectionViewCell.swift in Sources */,
+				D69B039A2AE0FC2F0083D3B2 /* SettingViewController.swift in Sources */,
 				D62B07A22AC4581A002C7EAB /* BaseView.swift in Sources */,
 				D64BDD312AD339FC00C4F6FB /* DoitDetailViewModel.swift in Sources */,
 				D6F0C6162AC5B5B100EE99AF /* Date+Extension.swift in Sources */,
@@ -698,6 +721,7 @@
 				D62B07962AC3E972002C7EAB /* Todo.swift in Sources */,
 				D64BDD402AD6DDAF00C4F6FB /* DoitCompleteAddViewController.swift in Sources */,
 				D62B079D2AC456B5002C7EAB /* DoitAddViewController.swift in Sources */,
+				D69B039C2AE0FC3A0083D3B2 /* SettingEnum.swift in Sources */,
 				D6835B552ACA7BCE00B0A488 /* DoitListViewModel.swift in Sources */,
 				D6D92F062AC031DF0074236E /* AppDelegate.swift in Sources */,
 				D64BDD3B2AD675EE00C4F6FB /* TodoDetailViewModel.swift in Sources */,
