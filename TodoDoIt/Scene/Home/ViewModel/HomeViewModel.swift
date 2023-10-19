@@ -59,7 +59,14 @@ class HomeViewModel {
     }
     func changeDoitArray(){
         if let result = doitResult.value{
-            doitArray.value = Array(result)
+            let doitList = Array(result)
+            doitArray.value = []
+            for doitElement in doitList{
+                if doitElement.finish{ }
+                else {
+                    doitArray.value.append(doitElement)
+                }
+            }
         }
     }
     func changeTodoArray(){

@@ -12,6 +12,7 @@ class DoitListViewModel {
     let reposiroty = DoitRepository()
     var doitresult = Observer<Results<DoIt>?>(nil)
     var doitList = Observer<[DoIt]>([])
+    var doitFinishList = Observer<[DoIt]>([])
     
     func fetch(){
         doitresult.value = reposiroty.fetch()
@@ -19,12 +20,29 @@ class DoitListViewModel {
     
     func fetchList(){
         if let result = doitresult.value{
-            doitList.value = Array(result)
+            let doitArray = Array(result)
+            doitList.value = []
+            doitFinishList.value = []
+            for doitElement in doitArray {
+                if doitElement.finish {
+                    doitFinishList.value.append(doitElement)
+                }else {
+                    doitList.value.append(doitElement)
+                }
+            }
+            
         }
     }
     
     func getDoitList() -> [DoIt]{
+        print("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
+        print(doitList.value)
         return doitList.value
+    }
+    func getDoitFinishList() -> [DoIt]{
+        print("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
+        print(doitFinishList.value)
+        return doitFinishList.value
     }
     
 }

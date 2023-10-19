@@ -33,7 +33,11 @@ class DoitListViewController: BaseViewController {
     }
     
     @objc private func addButtonTapped(){
-        navigationController?.pushViewController(DoitAddViewController(), animated: true)
+        if viewmodel.getDoitList().count < 5 {
+            navigationController?.pushViewController(DoitAddViewController(), animated: true)
+        }else{
+            view.makeToast("도전가능한 목표는 최대 5개 입니다.")
+        }
     }
     private func bind(){
         viewmodel.doitresult.bind { _ in
@@ -44,6 +48,7 @@ class DoitListViewController: BaseViewController {
     override func setHierarchy() {
         view.addSubview(collectionView)
         view.backgroundColor = Design.Color.background
+        collectionView.register(ListCollectionViewHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "MySectionHeaderView")
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = Design.Color.background
         collectionView.delegate = self
@@ -83,7 +88,12 @@ extension DoitListViewController{
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                    heightDimension: .fractionalHeight(0.2)),
                 subitem: item, count: 1)
+            
+            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.1))
+            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+            
             let section = NSCollectionLayoutSection(group: containerGroup)
+            section.boundarySupplementaryItems = [sectionHeader]
             return section
         }
         return layout
@@ -97,12 +107,28 @@ extension DoitListViewController{
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
                 let cell = collectionView.dequeueConfiguredReusableCell(using: doitCellRegistration, for: indexPath, item: itemIdentifier)
                 return cell
+            
+        }
+        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+            if kind == UICollectionView.elementKindSectionHeader {
+                // 섹션 헤더를 만들고 반환
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "MySectionHeaderView", for: indexPath) as! ListCollectionViewHeaderView
+                // headerView의 내용 설정
+                let title = DoitSectionType.allCases[indexPath.section].title
+                headerView.addButton.setTitle(title, for: .normal)
+                headerView.addButton.configuration?.image = nil
+                headerView.listButton.isHidden = true
+                return headerView
+            } else {
+                return nil
+            }
         }
     }
     func updateSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<DoitSectionType, DoIt>()
         snapshot.appendSections(DoitSectionType.allCases)
         snapshot.appendItems(viewmodel.getDoitList(),toSection: .doing)
+        snapshot.appendItems(viewmodel.getDoitFinishList(),toSection: .complete)
         dataSource?.applySnapshotUsingReloadData(snapshot)
     }
 }

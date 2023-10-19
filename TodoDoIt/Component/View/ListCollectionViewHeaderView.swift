@@ -12,10 +12,11 @@ class ListCollectionViewHeaderView: UICollectionReusableView {
     let addButton = {
         let button = UIButton()
         button.setTitle("test", for: .normal)
-        button.setImage(Design.Image.plusButton, for: .normal)
+//        button.setImage(Design.Image.plusButton, for: .normal)
         
         var configuration = UIButton.Configuration.gray()
         // 이미지와 타이틀을 아래로 배치
+        configuration.image = Design.Image.plusButton
         configuration.imagePlacement = NSDirectionalRectEdge.trailing
         configuration.baseForegroundColor = Design.Color.blackFont
         configuration.buttonSize = .mini
