@@ -31,7 +31,7 @@ class NotDataCollectionViewCell: BaseCollectionViewCell{
     func setupData(section: SectionType){
         switch section {
         case .doit:
-            titleLabel.text = section.title + "가 없습니다."
+            titleLabel.text = "도전중인" + section.title + "가 없습니다."
         case .todo:
             titleLabel.text = section.title + "이 없습니다."
         case .memo:

@@ -69,9 +69,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             case .backup:
                 let today = Date().changeFormatString(format: "yyyyMMdd")
                 let fileName = "TodoDoIt-\(today)"
-                guard let zipfileURL = backupDataAndImagesToDocumentDirectory(fileNamge: fileName) else { return }
-
-                showActivityViewController(fileURL: zipfileURL)
+                if let zipfileURL = backupDataAndImagesToDocumentDirectory(fileNamge: fileName){
+                    showActivityViewController(fileURL: zipfileURL)
+                }else {
+                    view.makeToast("데이터가 없습니다.")
+                }
             case .restore:
                 showAlert(text: "기존 데이터가 전부 삭제됩니다. \n 백업 데이터로 복구하시겠습니까?",addButtonText: "복구") {[weak self] in
                     self?.showDocumentViewController()
