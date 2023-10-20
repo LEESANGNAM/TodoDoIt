@@ -69,6 +69,17 @@ class HomeViewModel {
             }
         }
     }
+    func validDoitCount() -> Bool {
+        let doitNotFinish = doitRepository.fetchFilterFinish()
+        let notFinishcount =  doitNotFinish.count
+        
+        if notFinishcount < 5 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func changeTodoArray(){
         if let result = todoResult.value{
             todoArray.value = Array(result)

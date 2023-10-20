@@ -36,7 +36,7 @@ class DoitListViewController: BaseViewController {
         if viewmodel.getDoitList().count < 5 {
             navigationController?.pushViewController(DoitAddViewController(), animated: true)
         }else{
-            view.makeToast("도전가능한 목표는 최대 5개 입니다.")
+            view.makeToast("도전중인 목표가 있습니다. \n 도전은 5개까지 가능합니다.")
         }
     }
     private func bind(){

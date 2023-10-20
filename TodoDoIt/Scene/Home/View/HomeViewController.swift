@@ -378,10 +378,10 @@ extension HomeViewController {
         let section = SectionType(rawValue: sender.tag)
         switch section {
         case .doit:
-            if viewmodel.getDoitArray().count < 5 {
+            if viewmodel.validDoitCount() {
                 navigationController?.pushViewController(DoitAddViewController(), animated: true)
             }else{
-                view.makeToast("목표는 5개까지만 추가 가능합니다.")
+                view.makeToast("도전중인 목표가 있습니다. \n 도전은 5개까지 가능합니다.")
             }
         case .todo:
             let vc = TodoAddViewController()

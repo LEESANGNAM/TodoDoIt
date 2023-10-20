@@ -16,6 +16,9 @@ final class DoitRepository: RepositoryTypeProtocol {
     func fetch() -> Results<T> {
         return realm.objects(T.self)
     }
+    func fetchFilterFinish() -> Results<T> {
+        return realm.objects(T.self).filter("finish == %@", false)
+    }
     func fetchFilterDateSortByFinish(date: Date) -> Results<T>{
         let filterDate = fetchFilterDate(date: date)
         return filterDate.sorted(byKeyPath: "finish",ascending: true)
