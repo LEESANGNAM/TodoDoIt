@@ -28,7 +28,7 @@ class TabbarController: UITabBarController {
     
     private func setupTabbarItem(){
         HomeVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house.fill"), tag: 0)
-        DoitListVC.tabBarItem = UITabBarItem(title: "목표", image: UIImage(systemName: "book.fill"), tag: 1)
+        DoitListVC.tabBarItem = UITabBarItem(title: "목표", image: UIImage(systemName: "flag.and.flag.filled.crossed"), tag: 1)
         TodoListVC.tabBarItem = UITabBarItem(title: "할일", image: UIImage(systemName: "checklist.checked"), tag: 2)
         SettingVC.tabBarItem = UITabBarItem(title: "더보기", image: UIImage(systemName: "ellipsis"), tag: 3)
     }
