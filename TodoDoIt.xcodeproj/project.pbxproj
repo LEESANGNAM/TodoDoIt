@@ -53,6 +53,8 @@
 		D69B039A2AE0FC2F0083D3B2 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69B03992AE0FC2F0083D3B2 /* SettingViewController.swift */; };
 		D69B039C2AE0FC3A0083D3B2 /* SettingEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69B039B2AE0FC3A0083D3B2 /* SettingEnum.swift */; };
 		D69B039F2AE15F5B0083D3B2 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = D69B039E2AE15F5B0083D3B2 /* Zip */; };
+		D69B03A12AE3FAC20083D3B2 /* .gitIgnore in Resources */ = {isa = PBXBuildFile; fileRef = D69B03A02AE3FAC20083D3B2 /* .gitIgnore */; };
+		D69B03A32AE3FB460083D3B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D69B03A22AE3FB460083D3B2 /* GoogleService-Info.plist */; };
 		D6A80F192AD8541100364CF5 /* DoitCompleteAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F182AD8541100364CF5 /* DoitCompleteAddViewModel.swift */; };
 		D6A80F1B2AD859FB00364CF5 /* DoitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F1A2AD859FB00364CF5 /* DoitRepository.swift */; };
 		D6A80F1D2AD85DEA00364CF5 /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F1C2AD85DEA00364CF5 /* TodoRepository.swift */; };
@@ -113,6 +115,8 @@
 		D6835B5D2ACAE8EF00B0A488 /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
 		D69B03992AE0FC2F0083D3B2 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		D69B039B2AE0FC3A0083D3B2 /* SettingEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingEnum.swift; sourceTree = "<group>"; };
+		D69B03A02AE3FAC20083D3B2 /* .gitIgnore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitIgnore; sourceTree = "<group>"; };
+		D69B03A22AE3FB460083D3B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D6A80F182AD8541100364CF5 /* DoitCompleteAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitCompleteAddViewModel.swift; sourceTree = "<group>"; };
 		D6A80F1A2AD859FB00364CF5 /* DoitRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoitRepository.swift; sourceTree = "<group>"; };
 		D6A80F1C2AD85DEA00364CF5 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
@@ -578,6 +582,8 @@
 				D6D92F0E2AC031E00074236E /* Assets.xcassets */,
 				D6D92F102AC031E00074236E /* LaunchScreen.storyboard */,
 				D6D92F132AC031E00074236E /* Info.plist */,
+				D69B03A02AE3FAC20083D3B2 /* .gitIgnore */,
+				D69B03A22AE3FB460083D3B2 /* GoogleService-Info.plist */,
 			);
 			path = TodoDoIt;
 			sourceTree = "<group>";
@@ -678,7 +684,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6D92F122AC031E00074236E /* LaunchScreen.storyboard in Resources */,
+				D69B03A32AE3FB460083D3B2 /* GoogleService-Info.plist in Resources */,
 				D6D92F0F2AC031E00074236E /* Assets.xcassets in Resources */,
+				D69B03A12AE3FAC20083D3B2 /* .gitIgnore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
