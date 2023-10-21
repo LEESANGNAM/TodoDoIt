@@ -55,6 +55,8 @@
 		D69B039F2AE15F5B0083D3B2 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = D69B039E2AE15F5B0083D3B2 /* Zip */; };
 		D69B03A12AE3FAC20083D3B2 /* .gitIgnore in Resources */ = {isa = PBXBuildFile; fileRef = D69B03A02AE3FAC20083D3B2 /* .gitIgnore */; };
 		D69B03A32AE3FB460083D3B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D69B03A22AE3FB460083D3B2 /* GoogleService-Info.plist */; };
+		D69B03A62AE3FC6B0083D3B2 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = D69B03A52AE3FC6B0083D3B2 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		D69B03A82AE3FC6B0083D3B2 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D69B03A72AE3FC6B0083D3B2 /* FirebaseCrashlytics */; };
 		D6A80F192AD8541100364CF5 /* DoitCompleteAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F182AD8541100364CF5 /* DoitCompleteAddViewModel.swift */; };
 		D6A80F1B2AD859FB00364CF5 /* DoitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F1A2AD859FB00364CF5 /* DoitRepository.swift */; };
 		D6A80F1D2AD85DEA00364CF5 /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A80F1C2AD85DEA00364CF5 /* TodoRepository.swift */; };
@@ -150,7 +152,9 @@
 				D62B077A2AC2B10D002C7EAB /* Kingfisher in Frameworks */,
 				D62B07802AC2B17F002C7EAB /* Realm in Frameworks */,
 				D62B07822AC2B17F002C7EAB /* RealmSwift in Frameworks */,
+				D69B03A82AE3FC6B0083D3B2 /* FirebaseCrashlytics in Frameworks */,
 				D62B07772AC2B101002C7EAB /* FSCalendar in Frameworks */,
+				D69B03A62AE3FC6B0083D3B2 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,6 +622,7 @@
 				D6D92EFE2AC031DF0074236E /* Sources */,
 				D6D92EFF2AC031DF0074236E /* Frameworks */,
 				D6D92F002AC031DF0074236E /* Resources */,
+				D69B03A92AE3FD170083D3B2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -632,6 +637,8 @@
 				D62B07812AC2B17F002C7EAB /* RealmSwift */,
 				D62B07842AC2B1BA002C7EAB /* Toast */,
 				D69B039E2AE15F5B0083D3B2 /* Zip */,
+				D69B03A52AE3FC6B0083D3B2 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				D69B03A72AE3FC6B0083D3B2 /* FirebaseCrashlytics */,
 			);
 			productName = TodoDoIt;
 			productReference = D6D92F022AC031DF0074236E /* TodoDoIt.app */;
@@ -668,6 +675,7 @@
 				D62B077E2AC2B17F002C7EAB /* XCRemoteSwiftPackageReference "realm-swift" */,
 				D62B07832AC2B1BA002C7EAB /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				D69B039D2AE15F5B0083D3B2 /* XCRemoteSwiftPackageReference "Zip" */,
+				D69B03A42AE3FC6A0083D3B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = D6D92F032AC031DF0074236E /* Products */;
 			projectDirPath = "";
@@ -691,6 +699,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D69B03A92AE3FD170083D3B2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D6D92EFE2AC031DF0074236E /* Sources */ = {
@@ -802,7 +835,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1019,6 +1052,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		D69B03A42AE3FC6A0083D3B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1056,6 +1097,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D69B039D2AE15F5B0083D3B2 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
+		};
+		D69B03A52AE3FC6B0083D3B2 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D69B03A42AE3FC6A0083D3B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		D69B03A72AE3FC6B0083D3B2 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D69B03A42AE3FC6A0083D3B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
