@@ -66,6 +66,9 @@ class DoitAddViewController: BaseViewController {
         if title.isEmpty {
             view.makeToast("목표명을 입력해주세요")
             return
+        }else if title.removeSpace().isEmpty {
+            view.makeToast("빈칸만 있습니다. 목표명을 입력해주세요")
+            return
         }else if viewmodel.completeCount.value == 0{
             view.makeToast("도전횟수를 입력해주세요")
             return
@@ -80,6 +83,9 @@ class DoitAddViewController: BaseViewController {
         guard let doit = viewmodel.getDoitData() else { return }
         if title.isEmpty {
             view.makeToast("목표명을 입력해주세요")
+            return
+        } else if title.removeSpace().isEmpty {
+            view.makeToast("빈칸만 있습니다. 목표명을 입력해주세요")
             return
         } else if viewmodel.completeCount.value < doit.doitComplete.count{
             view.makeToast("현재 완료한 횟수보다 적습니다.")
