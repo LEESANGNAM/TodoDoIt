@@ -106,22 +106,29 @@ class DoitDetailTableViewCell: UITableViewCell {
     
     func setData(data: DoitCompleted, totalcount: Int, index: Int){
         let filename = data.imageTitle + ".jpg"
-        DispatchQueue.global().async {
-            if let fileImage = FileManager.loadImageFromDocumentDirectory(fileName: filename){
-                DispatchQueue.main.async {
-                    let size = CGSize(width: self.completeImageView.frame.width, height: self.completeImageView.frame.height)
-                    self.completeImageView.image = fileImage.downsampling(to: size)
-                }
-            }else {
-                DispatchQueue.main.async {
-                    self.completeImageView.backgroundColor = .systemGray3
-                }
-            }
+        // 이미지뷰 크기를 비동기로 가져오기
+        DispatchQueue.main.async {
+            let size = CGSize(width: self.completeImageView.frame.width, height: self.completeImageView.frame.height)
+
+            self.setImage(filename: filename, size: size)
         }
         dateLabel.text = data.createDate.changeFormatString(format: "dd일")
         yearMonthLabel.text = data.createDate.changeFormatString(format: "yyyy년MM월")
         memoLabel.text = data.impression
         countLabel.text = "\(totalcount - index)회차"
     }
-    
+    func setImage(filename: String, size: CGSize) {
+        DispatchQueue.global().async {
+            if let fileImage = FileManager.loadImageFromDocumentDirectory(fileName: filename) {
+                let image = fileImage.downsampling(to: size)
+                DispatchQueue.main.async {
+                    self.completeImageView.image = image
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.completeImageView.backgroundColor = .systemGray3
+                }
+            }
+        }
+    }
 }
