@@ -70,7 +70,7 @@ class DoitCompleteAddView: BaseView {
         }
         memoTextView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(10)
-            make.top.equalTo(imageView.snp.bottom).offset(20)
+            make.top.equalTo(imageView.snp.bottom).offset(30)
         }
         saveButton.snp.makeConstraints { make in
             make.height.equalTo(40)

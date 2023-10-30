@@ -63,11 +63,13 @@ class DoitAddViewController: BaseViewController {
     }
     @objc  private func saveButtonTapped(){
         guard let title = mainview.doitTextField.text else { return }
+        view.endEditing(true)
         if title.isEmpty {
             view.makeToast("목표명을 입력해주세요")
             return
         }else if title.removeSpace().isEmpty {
             view.makeToast("빈칸만 있습니다. 목표명을 입력해주세요")
+            mainview.doitTextField.text = ""
             return
         }else if viewmodel.completeCount.value == 0{
             view.makeToast("도전횟수를 입력해주세요")
@@ -80,12 +82,14 @@ class DoitAddViewController: BaseViewController {
     
     @objc  private func updateButtonTapped(){
         guard let title = mainview.doitTextField.text else { return }
+        view.endEditing(true)
         guard let doit = viewmodel.getDoitData() else { return }
         if title.isEmpty {
             view.makeToast("목표명을 입력해주세요")
             return
         } else if title.removeSpace().isEmpty {
             view.makeToast("빈칸만 있습니다. 목표명을 입력해주세요")
+            mainview.doitTextField.text = ""
             return
         } else if viewmodel.completeCount.value < doit.doitComplete.count{
             view.makeToast("현재 완료한 횟수보다 적습니다.")
@@ -144,6 +148,7 @@ extension DoitAddViewController: UITextFieldDelegate {
                     viewmodel.completeCount.value = maxCount
                     mainview.completeTextField.text = "\(maxCount)"
                     view.makeToast("최대횟수 \(maxCount) 회 입니다.")
+                    textField.resignFirstResponder()
                     return false
                 } else {
                     viewmodel.completeCount.value = inputInt

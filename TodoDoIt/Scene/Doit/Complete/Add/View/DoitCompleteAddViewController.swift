@@ -62,8 +62,22 @@ class DoitCompleteAddViewController: BaseViewController {
         mainView.memoTextView.textColor = .lightGray
         mainView.memoTextView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         mainView.memoTextView.delegate = self
+        setMemoTextViewToolBar()
     }
     
+    private func setMemoTextViewToolBar(){
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        // 툴바 생성
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        toolbar.items = [flexibleSpace, doneButton]
+        mainView.memoTextView.inputAccessoryView = toolbar
+    }
+    
+    @objc private func doneButtonTapped() {
+            mainView.memoTextView.resignFirstResponder()
+        }
     
     private func setTapGesture(){
         let imageViewTapgesture = UITapGestureRecognizer(target: self, action: #selector(ImageViewTapgesture))
