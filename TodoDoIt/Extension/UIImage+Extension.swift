@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIImage {
-    func downsampling(to size: CGSize) -> UIImage {
+    func reSize(to size: CGSize) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: size)
         return renderer.image { _ in
             self.draw(in: CGRect(origin: .zero, size: size))

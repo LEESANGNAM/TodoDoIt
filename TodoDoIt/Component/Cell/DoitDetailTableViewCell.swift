@@ -120,7 +120,7 @@ class DoitDetailTableViewCell: UITableViewCell {
     func setImage(filename: String, size: CGSize) {
         DispatchQueue.global().async {
             if let fileImage = FileManager.loadImageFromDocumentDirectory(fileName: filename) {
-                let image = fileImage.downsampling(to: size)
+                let image = fileImage.reSize(to: size)
                 DispatchQueue.main.async {
                     self.completeImageView.image = image
                 }
