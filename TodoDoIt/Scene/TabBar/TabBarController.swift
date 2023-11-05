@@ -11,11 +11,12 @@ class TabbarController: UITabBarController {
     let HomeVC = UINavigationController(rootViewController: HomeViewController())
     let DoitListVC = UINavigationController(rootViewController: DoitListViewController())
     let TodoListVC = UINavigationController(rootViewController: TodoListViewController())
+    let MemoListVC = UINavigationController(rootViewController: MemoListViewController())
     let SettingVC = SettingViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewControllers = [HomeVC,DoitListVC,TodoListVC,SettingVC]
+        viewControllers = [HomeVC,DoitListVC,TodoListVC,MemoListVC,SettingVC]
         setupTabbar()
     }
     
@@ -30,7 +31,8 @@ class TabbarController: UITabBarController {
         HomeVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house.fill"), tag: 0)
         DoitListVC.tabBarItem = UITabBarItem(title: "목표", image: UIImage(systemName: "flag.and.flag.filled.crossed"), tag: 1)
         TodoListVC.tabBarItem = UITabBarItem(title: "할일", image: UIImage(systemName: "checklist.checked"), tag: 2)
-        SettingVC.tabBarItem = UITabBarItem(title: "더보기", image: UIImage(systemName: "ellipsis"), tag: 3)
+        MemoListVC.tabBarItem = UITabBarItem(title: "메모", image: UIImage(systemName: "bookmark.fill"), tag: 3)
+        SettingVC.tabBarItem = UITabBarItem(title: "더보기", image: UIImage(systemName: "ellipsis"), tag: 4)
     }
     
     
