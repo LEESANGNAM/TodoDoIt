@@ -14,12 +14,12 @@ class MemoListViewController: BaseViewController {
     private typealias MemoCellRegistration = UICollectionView.CellRegistration<MemoListCollectionViewCell,Memo>
     var dataSource: UICollectionViewDiffableDataSource<Int,Memo>?
     let viewmodel = MemoListViewModel()
-    
+    var selectItemDate = Date()
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDataSource()
         bind()
-        title = "모든 메모"
+        navigationItem.title = "모든 메모"
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -33,11 +33,43 @@ class MemoListViewController: BaseViewController {
     }
     override func setHierarchy() {
         view.addSubview(collectionView)
+        collectionView.delegate = self
+        collectionView.backgroundColor = Design.Color.background
     }
     override func setConstraints() {
         collectionView.snp.makeConstraints { make in
             make.horizontalEdges.verticalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
+    }
+}
+
+// MARK: - Modaldelegate
+extension MemoListViewController: ModalPresentDelegate {
+    func sendDateToModal() -> Date {
+        return selectItemDate
+    }
+    
+    func disMissModal(section: SectionType) {
+        viewmodel.fetchData()
+    }
+    
+    
+}
+
+extension MemoListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let selectItem = dataSource?.itemIdentifier(for: indexPath) as? Memo {
+            selectItemDate = selectItem.createDate
+            let vc = MemoAddViewController()
+            vc.delegate = self
+            if  let sheet = vc.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.prefersGrabberVisible = true
+            }
+            vc.viewmodel.memoKey.value = selectItem._id
+            present(vc, animated: true)
+        }
+
     }
 }
 

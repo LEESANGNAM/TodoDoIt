@@ -343,15 +343,12 @@ extension HomeViewController {
                 // headerView의 내용 설정
                 let title = SectionType.allCases[indexPath.section].title
                 headerView.addButton.setTitle(title, for: .normal)
+                
                 headerView.addButton.tag = indexPath.section
                 headerView.addButton.addTarget(self, action: #selector(self.addButtonTapped), for: .touchUpInside)
-                if indexPath.section == 2 {
-                    headerView.listButton.isHidden = true
-                } else {
-                    headerView.listButton.isHidden = false
-                    headerView.listButton.tag = indexPath.section
-                    headerView.listButton.addTarget(self, action: #selector(self.listButtonTapped), for: .touchUpInside)
-                }
+                
+                headerView.listButton.tag = indexPath.section
+                headerView.listButton.addTarget(self, action: #selector(self.listButtonTapped), for: .touchUpInside)
                 return headerView
             } else {
                 return nil
@@ -416,7 +413,10 @@ extension HomeViewController {
             if let tabBarController = self.tabBarController {
                 tabBarController.selectedIndex = 2
             }
-        case .memo: break
+        case .memo:
+            if let tabBarController = self.tabBarController {
+                tabBarController.selectedIndex = 3
+            }
         case .none:
             print("Error")
         }

@@ -31,7 +31,7 @@ class TabbarController: UITabBarController {
         HomeVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house.fill"), tag: 0)
         DoitListVC.tabBarItem = UITabBarItem(title: "목표", image: UIImage(systemName: "flag.and.flag.filled.crossed"), tag: 1)
         TodoListVC.tabBarItem = UITabBarItem(title: "할일", image: UIImage(systemName: "checklist.checked"), tag: 2)
-        MemoListVC.tabBarItem = UITabBarItem(title: "메모", image: UIImage(systemName: "bookmark.fill"), tag: 3)
+        MemoListVC.tabBarItem = UITabBarItem(title: "메모", image: UIImage(systemName: "square.and.pencil"), tag: 3)
         SettingVC.tabBarItem = UITabBarItem(title: "더보기", image: UIImage(systemName: "ellipsis"), tag: 4)
     }
     
