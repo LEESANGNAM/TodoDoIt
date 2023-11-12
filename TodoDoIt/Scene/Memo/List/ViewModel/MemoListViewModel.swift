@@ -7,22 +7,42 @@
 
 import Foundation
 import RealmSwift
+import RxSwift
+import RxCocoa
 
 class MemoListViewModel {
-    let repository = MemoRepository()
-    var memoResult = Observer<Results<Memo>?>(nil)
-    var memoArray = Observer<[Memo]>([])
     
-    func fetchData(){
-        memoResult.value = repository.fetch()
+    struct Input{
+        let viewWillAppear: Observable<Void>
+        let cellTap: ControlEvent<IndexPath>
+        let modelSelect: ControlEvent<Memo>
     }
-    func changeMemoArray(){
-        if let result = memoResult.value{
-            memoArray.value = Array(result)
-        }
-    }
-    func getMemoArray() -> [Memo] {
-        return memoArray.value
+    struct OutPut{
+        var memoArray: PublishRelay<[Memo]>
     }
     
+    var disposeBag = DisposeBag()
+    
+    let dismissModal = PublishRelay<Void>()
+    
+    func transform(input: Input) -> OutPut {
+        let repository = MemoRepository()
+        var memoArray = PublishRelay<[Memo]>()
+        
+        input.viewWillAppear
+            .bind(with: self) { owner, _ in
+                let memoData = repository.fetch()
+                let memoDataArray = Array(memoData)
+                memoArray.accept(memoDataArray)
+            }.disposed(by: disposeBag)
+        
+        dismissModal
+            .bind(with: self) { owner, _ in
+                let memoData = repository.fetch()
+                let memoDataArray = Array(memoData)
+                memoArray.accept(memoDataArray)
+            }.disposed(by: disposeBag)
+        
+        return OutPut(memoArray: memoArray)
+    }
 }

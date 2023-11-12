@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 
 class MemoListViewController: BaseViewController {
@@ -15,6 +17,7 @@ class MemoListViewController: BaseViewController {
     var dataSource: UICollectionViewDiffableDataSource<Int,Memo>?
     let viewmodel = MemoListViewModel()
     var selectItemDate = Date()
+    var disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDataSource()
@@ -23,13 +26,17 @@ class MemoListViewController: BaseViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewmodel.fetchData()
+//        viewmodel.fetchData()
     }
     func bind(){
-        viewmodel.memoResult.bind { [weak self] _ in
-            self?.viewmodel.changeMemoArray()
-            self?.updateSnapshot()
-        }
+        let input = MemoListViewModel.Input(viewWillAppear: self.rx.viewWillAppear.map { _ in }, cellTap: collectionView.rx.itemSelected, modelSelect: collectionView.rx.modelSelected(Memo.self))
+        let output = viewmodel.transform(input: input)
+        
+        output.memoArray
+            .bind(with: self) { owner, value in
+                owner.updateSnapshot(value: value)
+            }.disposed(by: disposeBag)
+        
     }
     override func setHierarchy() {
         view.addSubview(collectionView)
@@ -50,7 +57,7 @@ extension MemoListViewController: ModalPresentDelegate {
     }
     
     func disMissModal(section: SectionType) {
-        viewmodel.fetchData()
+        viewmodel.dismissModal.accept(())
     }
     
     
@@ -108,10 +115,10 @@ extension MemoListViewController{
         
 
     }
-    func updateSnapshot() {
+    func updateSnapshot(value: [Memo]) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, Memo>()
         snapshot.appendSections([0])
-        snapshot.appendItems(viewmodel.getMemoArray())
+        snapshot.appendItems(value)
         dataSource?.applySnapshotUsingReloadData(snapshot)
     }
 }

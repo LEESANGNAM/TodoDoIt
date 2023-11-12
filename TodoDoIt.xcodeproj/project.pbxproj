@@ -10,6 +10,8 @@
 		D60953222B009C9E003C2AA8 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D60953212B009C9E003C2AA8 /* RxCocoa */; };
 		D60953242B009C9E003C2AA8 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D60953232B009C9E003C2AA8 /* RxRelay */; };
 		D60953262B009C9E003C2AA8 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D60953252B009C9E003C2AA8 /* RxSwift */; };
+		D60953282B00C2D4003C2AA8 /* ViewModelTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60953272B00C2D4003C2AA8 /* ViewModelTypeProtocol.swift */; };
+		D609532A2B00CBE9003C2AA8 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60953292B00CBE9003C2AA8 /* ViewController+Extension.swift */; };
 		D62B07772AC2B101002C7EAB /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = D62B07762AC2B101002C7EAB /* FSCalendar */; };
 		D62B077A2AC2B10D002C7EAB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D62B07792AC2B10D002C7EAB /* Kingfisher */; };
 		D62B077D2AC2B11B002C7EAB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D62B077C2AC2B11B002C7EAB /* SnapKit */; };
@@ -84,6 +86,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D60953272B00C2D4003C2AA8 /* ViewModelTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTypeProtocol.swift; sourceTree = "<group>"; };
+		D60953292B00CBE9003C2AA8 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		D62B07872AC2B252002C7EAB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		D62B078E2AC33CE3002C7EAB /* ListCollectionViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewHeaderView.swift; sourceTree = "<group>"; };
 		D62B07912AC3E1A5002C7EAB /* DoIt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoIt.swift; sourceTree = "<group>"; };
@@ -521,6 +525,7 @@
 				D64BDD1A2ACF350400C4F6FB /* ModalPresentDelegate.swift */,
 				D64BDD2C2AD2FC8E00C4F6FB /* ReusableProtocol.swift */,
 				D62B07982AC3EB1E002C7EAB /* RepositoryTypeProtocol.swift */,
+				D60953272B00C2D4003C2AA8 /* ViewModelTypeProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -640,6 +645,7 @@
 				D64BDD182ACF0A5800C4F6FB /* UIView+Extension.swift */,
 				D6A80F202AD870DC00364CF5 /* FileManager + Extension.swift */,
 				D6A80F222AD87BA100364CF5 /* UIImage+Extension.swift */,
+				D60953292B00CBE9003C2AA8 /* ViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -781,6 +787,7 @@
 				D64BDCE72ACC063200C4F6FB /* TodoAddViewController.swift in Sources */,
 				D6835B592ACAE70F00B0A488 /* TodoCollectionViewCell.swift in Sources */,
 				D6A80F1B2AD859FB00364CF5 /* DoitRepository.swift in Sources */,
+				D609532A2B00CBE9003C2AA8 /* ViewController+Extension.swift in Sources */,
 				D6F0C61B2AC8285000EE99AF /* DoitAddViewModel.swift in Sources */,
 				D6F0C6192AC8096B00EE99AF /* Observer.swift in Sources */,
 				D64BDD222ACF420600C4F6FB /* TodoListViewController.swift in Sources */,
@@ -820,6 +827,7 @@
 				D6A80F232AD87BA100364CF5 /* UIImage+Extension.swift in Sources */,
 				D62B07922AC3E1A5002C7EAB /* DoIt.swift in Sources */,
 				D64BDD1B2ACF350400C4F6FB /* ModalPresentDelegate.swift in Sources */,
+				D60953282B00C2D4003C2AA8 /* ViewModelTypeProtocol.swift in Sources */,
 				D6D92F082AC031DF0074236E /* SceneDelegate.swift in Sources */,
 				D6835B572ACA7BE000B0A488 /* DoitListViewController.swift in Sources */,
 				D64BDD252AD17D0D00C4F6FB /* DoitDetailViewController.swift in Sources */,
