@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D60953222B009C9E003C2AA8 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D60953212B009C9E003C2AA8 /* RxCocoa */; };
+		D60953242B009C9E003C2AA8 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D60953232B009C9E003C2AA8 /* RxRelay */; };
+		D60953262B009C9E003C2AA8 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D60953252B009C9E003C2AA8 /* RxSwift */; };
 		D62B07772AC2B101002C7EAB /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = D62B07762AC2B101002C7EAB /* FSCalendar */; };
 		D62B077A2AC2B10D002C7EAB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D62B07792AC2B10D002C7EAB /* Kingfisher */; };
 		D62B077D2AC2B11B002C7EAB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D62B077C2AC2B11B002C7EAB /* SnapKit */; };
@@ -155,13 +158,16 @@
 			files = (
 				D69B039F2AE15F5B0083D3B2 /* Zip in Frameworks */,
 				D62B07852AC2B1BA002C7EAB /* Toast in Frameworks */,
+				D60953222B009C9E003C2AA8 /* RxCocoa in Frameworks */,
 				D62B077D2AC2B11B002C7EAB /* SnapKit in Frameworks */,
 				D62B077A2AC2B10D002C7EAB /* Kingfisher in Frameworks */,
 				D62B07802AC2B17F002C7EAB /* Realm in Frameworks */,
+				D60953262B009C9E003C2AA8 /* RxSwift in Frameworks */,
 				D62B07822AC2B17F002C7EAB /* RealmSwift in Frameworks */,
 				D69B03A82AE3FC6B0083D3B2 /* FirebaseCrashlytics in Frameworks */,
 				D62B07772AC2B101002C7EAB /* FSCalendar in Frameworks */,
 				D69B03A62AE3FC6B0083D3B2 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				D60953242B009C9E003C2AA8 /* RxRelay in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,6 +679,9 @@
 				D69B039E2AE15F5B0083D3B2 /* Zip */,
 				D69B03A52AE3FC6B0083D3B2 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				D69B03A72AE3FC6B0083D3B2 /* FirebaseCrashlytics */,
+				D60953212B009C9E003C2AA8 /* RxCocoa */,
+				D60953232B009C9E003C2AA8 /* RxRelay */,
+				D60953252B009C9E003C2AA8 /* RxSwift */,
 			);
 			productName = TodoDoIt;
 			productReference = D6D92F022AC031DF0074236E /* TodoDoIt.app */;
@@ -709,6 +718,7 @@
 				D62B07832AC2B1BA002C7EAB /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				D69B039D2AE15F5B0083D3B2 /* XCRemoteSwiftPackageReference "Zip" */,
 				D69B03A42AE3FC6A0083D3B2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D60953202B009C9E003C2AA8 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = D6D92F032AC031DF0074236E /* Products */;
 			projectDirPath = "";
@@ -1043,6 +1053,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D60953202B009C9E003C2AA8 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		D62B07752AC2B101002C7EAB /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
@@ -1102,6 +1120,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D60953212B009C9E003C2AA8 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D60953202B009C9E003C2AA8 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		D60953232B009C9E003C2AA8 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D60953202B009C9E003C2AA8 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		D60953252B009C9E003C2AA8 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D60953202B009C9E003C2AA8 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
 		D62B07762AC2B101002C7EAB /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D62B07752AC2B101002C7EAB /* XCRemoteSwiftPackageReference "FSCalendar" */;
