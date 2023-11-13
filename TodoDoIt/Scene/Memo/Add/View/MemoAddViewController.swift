@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxCocoa
 
 
 class MemoAddViewController: BaseViewController {
@@ -13,7 +14,12 @@ class MemoAddViewController: BaseViewController {
     private let mainView = MemoAddView()
     
     weak var delegate: ModalPresentDelegate?
-    let viewmodel = MemoAddViewModel()
+    let viewmodel: MemoAddViewModel
+    
+    init(viewmodel: MemoAddViewModel){
+        self.viewmodel = viewmodel
+        super.init()
+    }
     
     override func loadView() {
         view = mainView
@@ -21,12 +27,9 @@ class MemoAddViewController: BaseViewController {
     var selectDate = Date()
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
-        viewmodel.fetchMemo()
         setTitleDate()
-        setButtonAddTarget()
+        bind()
         setTapGesture()
-        setmemoTextView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -35,27 +38,57 @@ class MemoAddViewController: BaseViewController {
     }
     
     private func bind(){
-        viewmodel.memo.bind { [weak self] memo in
-            guard let memo else { return }
-            self?.mainView.memoTextView.text = memo.title
-            self?.viewmodel.title.value = memo.title
-        }
+        print("여긴 바인드 선택날자",selectDate)
+        let input = MemoAddViewModel.Input(selectDate: selectDate, viewWillAppear: self.rx.viewWillAppear.map { _ in }, addButtonTap: mainView.doneButton.rx.tap, removeButtonTap: mainView.closeButton.rx.tap, textViewTextChange: mainView.memoTextView.rx.text.orEmpty.changed)
+        let output = viewmodel.transform(input: input)
+                
+        output.memo
+            .asObservable()
+            .distinctUntilChanged()
+            .bind(with: self) { owner, memo in
+                owner.setButtonAddTarget(memo: memo)
+                owner.setMemoTextView(memo: memo)
+                owner.viewmodel.title.accept(memo?.title ?? "")
+            }.disposed(by: disposeBag)
+        
+        
+        rx.viewWillAppear
+            .bind(with: self) { owner, _ in
+                owner.mainView.memoTextView.rx.didBeginEditing
+                    .bind(with: self) { owner, _ in
+                        if owner.mainView.memoTextView.text == owner.viewmodel.textViewPlaceHolder{
+                            owner.mainView.memoTextView.text = nil
+                            owner.mainView.memoTextView.textColor = Design.Color.blackFont
+                        }
+                    }.disposed(by: owner.disposeBag)
+                
+                owner.mainView.memoTextView.rx.didEndEditing
+                    .bind(with: self) { owner, _ in
+                        if owner.mainView.memoTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                            owner.memoTextViewPlaceHolder()
+                        }
+                    }.disposed(by: owner.disposeBag)
+            }.disposed(by: disposeBag)
+        
     }
-    
+    private func memoTextViewPlaceHolder(){
+        mainView.memoTextView.text = viewmodel.textViewPlaceHolder
+        mainView.memoTextView.textColor = .lightGray
+    }
     private func setTitleDate(){
         if let date = delegate?.sendDateToModal(){
             mainView.titleDateLabel.text = date.changeFormatString(format: "yyyy년 MM월 dd일 EEEE")
             selectDate = date
         }
     }
-    private func setmemoTextView(){
-        if let _ = viewmodel.getMemo() {
+    private func setMemoTextView(memo: Memo?){
+        if let memo = memo {
             mainView.memoTextView.textColor = Design.Color.blackFont
+            mainView.memoTextView.text = memo.title
         }else {
             memoTextViewPlaceHolder()
         }
         mainView.memoTextView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        mainView.memoTextView.delegate = self
     }
     private func setTapGesture(){
         let mainViewTapgesture = UITapGestureRecognizer(target: self, action: #selector(MainViewTapgesture))
@@ -65,8 +98,8 @@ class MemoAddViewController: BaseViewController {
     @objc private func MainViewTapgesture() {
         mainView.endEditing(true)
     }
-    private func setButtonAddTarget(){
-        if let _ = viewmodel.getMemo() {
+    private func setButtonAddTarget(memo: Memo?){
+        if let _ = memo {
             mainView.closeButton.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
             mainView.closeButton.setTitle("삭제", for: .normal)
             mainView.doneButton.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
@@ -80,15 +113,11 @@ class MemoAddViewController: BaseViewController {
     @objc private func removeButtonTapped(){
         showAlert(text: "삭제하시겠습니까?", addButtonText: "확인") { [weak self] in
             self?.viewmodel.removeMemodata()
+            print("삭제버튼 탭")
             self?.dismiss(animated: true)
         }
     }
     @objc private func updateButtonTapped(){
-        if viewmodel.checkvaild() {
-            viewmodel.updateMemoData()
-        }else {
-            print("아무것도 안일어남")
-        }
         dismiss(animated: true)
     }
     
@@ -96,37 +125,7 @@ class MemoAddViewController: BaseViewController {
         dismiss(animated: true)
     }
     @objc private func doneButtonTapped(){
-        if viewmodel.checkvaild() {
-            viewmodel.saveMemoData(date: selectDate)
-        }else {
-            print("아무것도 안일어남")
-        }
         dismiss(animated: true)
-    }
-    
-}
-
-extension MemoAddViewController: UITextViewDelegate {
-    private func memoTextViewPlaceHolder(){
-        mainView.memoTextView.text = viewmodel.textViewPlaceHolder
-        mainView.memoTextView.textColor = .lightGray
-    }
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == viewmodel.textViewPlaceHolder{
-            textView.text = nil
-            textView.textColor = Design.Color.blackFont
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            memoTextViewPlaceHolder()
-        }else {
-            viewmodel.title.value = textView.text
-        }
-    }
-    func textViewDidChange(_ textView: UITextView) {
-        viewmodel.title.value = textView.text
     }
     
 }

@@ -17,7 +17,6 @@ class MemoListViewController: BaseViewController {
     var dataSource: UICollectionViewDiffableDataSource<Int,Memo>?
     let viewmodel = MemoListViewModel()
     var selectItemDate = Date()
-    var disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDataSource()
@@ -67,13 +66,14 @@ extension MemoListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectItem = dataSource?.itemIdentifier(for: indexPath) as? Memo {
             selectItemDate = selectItem.createDate
-            let vc = MemoAddViewController()
+            let vm = MemoAddViewModel(memoKey: selectItem._id)
+            let vc = MemoAddViewController(viewmodel: vm)
             vc.delegate = self
             if  let sheet = vc.sheetPresentationController {
                 sheet.detents = [.medium(), .large()]
                 sheet.prefersGrabberVisible = true
             }
-            vc.viewmodel.memoKey.value = selectItem._id
+//            vc.viewmodel.memoKey.value = selectItem._id
             present(vc, animated: true)
         }
 

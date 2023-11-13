@@ -227,16 +227,26 @@ extension HomeViewController: UICollectionViewDelegate {
                 }
             }
         case .memo:
-            // 메모는 추가뷰에 넘어갔을때 ID 검사후 Add, update 검사하기때문에  바로 넘겨도 된다.
             if let selectItem = dataSource?.itemIdentifier(for: indexPath) as? Memo {
-                let vc = MemoAddViewController()
-                vc.delegate = self
-                if  let sheet = vc.sheetPresentationController {
-                    sheet.detents = [.medium(), .large()]
-                    sheet.prefersGrabberVisible = true
+                if selectItem._id == emptyMemo._id{
+                    let vm = MemoAddViewModel(memoKey: nil)
+                    let vc = MemoAddViewController(viewmodel: vm)
+                    vc.delegate = self
+                    if  let sheet = vc.sheetPresentationController {
+                        sheet.detents = [.medium(), .large()]
+                        sheet.prefersGrabberVisible = true
+                    }
+                    present(vc, animated: true)
+                } else {
+                    let vm = MemoAddViewModel(memoKey: selectItem._id)
+                    let vc = MemoAddViewController(viewmodel: vm)
+                    vc.delegate = self
+                    if  let sheet = vc.sheetPresentationController {
+                        sheet.detents = [.medium(), .large()]
+                        sheet.prefersGrabberVisible = true
+                    }
+                    present(vc, animated: true)
                 }
-                vc.viewmodel.memoKey.value = selectItem._id
-                present(vc, animated: true)
             }
         }
     }
@@ -390,7 +400,8 @@ extension HomeViewController {
             if let memo = viewmodel.getMemoArray().first{
                 self.view.makeToast("메모는 하루에 한개만 가능합니다. 메모가 이미 있습니다.")
             }else {
-                let vc = MemoAddViewController()
+                let vm = MemoAddViewModel(memoKey: nil)
+                let vc = MemoAddViewController(viewmodel: vm)
                 vc.delegate = self
                 if let sheet = vc.sheetPresentationController {
                     sheet.detents = [.medium(),.large()]
