@@ -38,7 +38,7 @@ class MemoAddViewController: BaseViewController {
     }
     
     private func bind(){
-        print("여긴 바인드 선택날자",selectDate)
+//        print("여긴 바인드 선택날자",selectDate)
         let input = MemoAddViewModel.Input(selectDate: selectDate, viewWillAppear: self.rx.viewWillAppear.map { _ in }, addButtonTap: mainView.doneButton.rx.tap, removeButtonTap: mainView.closeButton.rx.tap, textViewTextChange: mainView.memoTextView.rx.text.orEmpty.changed)
         let output = viewmodel.transform(input: input)
                 

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "226D917C-63E0-4133-A233-6C320242AE60"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9F8963A7-81B1-4DC1-8608-DDC0D0567C15"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TodoDoIt/Scene/Memo/Add/View/MemoAddViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "bind()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0F181514-C862-4B86-9D52-57F009951602"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TodoDoIt/Scene/Memo/Add/View/MemoAddViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "setButtonAddTarget(memo:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0F181514-C862-4B86-9D52-57F009951602 - 303a1327a358dfd2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TodoDoIt.MemoAddViewController.setButtonAddTarget(memo: Swift.Optional&lt;TodoDoIt.Memo&gt;) -&gt; ()"
+                  moduleName = "TodoDoIt"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isangnam/Documents/iOS/SeSac/TodoDoIt/TodoDoIt/Scene/Memo/Add/View/MemoAddViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "248">
+               </Location>
+               <Location
+                  uuid = "0F181514-C862-4B86-9D52-57F009951602 - 303a1327a358df31"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TodoDoIt.MemoAddViewController.setButtonAddTarget(memo: Swift.Optional&lt;TodoDoIt.Memo&gt;) -&gt; ()"
+                  moduleName = "TodoDoIt"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isangnam/Documents/iOS/SeSac/TodoDoIt/TodoDoIt/Scene/Memo/Add/View/MemoAddViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "82"
+                  endingLineNumber = "82"
+                  offsetFromSymbolStart = "120">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FEF1C965-0638-4C3D-A237-C3E8F7014391"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TodoDoIt/Scene/Memo/Add/View/MemoAddViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "setButtonAddTarget(memo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F8FA4D8B-975A-4986-9997-CF68F68FB385"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TodoDoIt/Scene/Memo/Add/View/MemoAddViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "setButtonAddTarget(memo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "426EA5C0-7BD1-4D70-94C4-0FAB7E3CC972"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TodoDoIt/Scene/Memo/Add/ViewModel/MemoAddViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "transform(input:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EEDF6903-2A25-4DEF-ADE3-247090B4CB15"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TodoDoIt/Scene/Memo/Add/ViewModel/MemoAddViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "transform(input:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EEDF6903-2A25-4DEF-ADE3-247090B4CB15 - 56cee7940d46d17f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (TodoDoIt.MemoAddViewModel, ()) -&gt; () in TodoDoIt.MemoAddViewModel.transform(input: TodoDoIt.MemoAddViewModel.Input) -&gt; TodoDoIt.MemoAddViewModel.Output"
+                  moduleName = "TodoDoIt"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isangnam/Documents/iOS/SeSac/TodoDoIt/TodoDoIt/Scene/Memo/Add/ViewModel/MemoAddViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "124">
+               </Location>
+               <Location
+                  uuid = "EEDF6903-2A25-4DEF-ADE3-247090B4CB15 - 56cee7940d46d17f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (TodoDoIt.MemoAddViewModel, ()) -&gt; () in TodoDoIt.MemoAddViewModel.transform(input: TodoDoIt.MemoAddViewModel.Input) -&gt; TodoDoIt.MemoAddViewModel.Output"
+                  moduleName = "TodoDoIt"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isangnam/Documents/iOS/SeSac/TodoDoIt/TodoDoIt/Scene/Memo/Add/ViewModel/MemoAddViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "200">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
