@@ -1,10 +1,16 @@
 # TodoDoIt
 
 ### 실행화면
-![전체화면](https://github.com/LEESANGNAM/TodoDoIt/assets/61412496/2ee7812c-a9e6-417b-a73c-aa75737ff333)
-![홈화면](https://github.com/LEESANGNAM/TodoDoIt/assets/61412496/519d94ab-9eda-4900-bec9-8082c58d2105)![목표리스트](https://github.com/LEESANGNAM/TodoDoIt/assets/61412496/efbee232-b777-4114-84da-7e09a3625f9c)![목표상세](https://github.com/LEESANGNAM/TodoDoIt/assets/61412496/d8053e92-29e7-405a-8163-d1fb2872aca5)
-![할일리스트](https://github.com/LEESANGNAM/TodoDoIt/assets/61412496/c993dd90-29fa-409e-ae6b-405eb5fa32b4)![할일상세](https://github.com/LEESANGNAM/TodoDoIt/assets/61412496/b294beb2-fcb2-4393-9c38-82efcf36f418)![IMG_1417](https://github.com/LEESANGNAM/TodoDoIt/assets/61412496/bbac3277-2c0e-4d2d-b71a-b343de4f271b)
-
+<p>
+<img src = "https://github.com/LEESANGNAM/TodoDoIt/assets/61412496/519d94ab-9eda-4900-bec9-8082c58d2105.png" width="30%"/>
+<img src = "https://github.com/LEESANGNAM/TodoDoIt/assets/61412496/efbee232-b777-4114-84da-7e09a3625f9c.png" width="30%"/>
+<img src = "https://github.com/LEESANGNAM/TodoDoIt/assets/61412496/d8053e92-29e7-405a-8163-d1fb2872aca5.png" width="30%"/>
+</p>
+<p>
+<img src = "https://github.com/LEESANGNAM/TodoDoIt/assets/61412496/c993dd90-29fa-409e-ae6b-405eb5fa32b4.png" width="30%"/>
+<img src = "https://github.com/LEESANGNAM/TodoDoIt/assets/61412496/b294beb2-fcb2-4393-9c38-82efcf36f418.png" width="30%"/>
+<img src = "https://github.com/LEESANGNAM/TodoDoIt/assets/61412496/bbac3277-2c0e-4d2d-b71a-b343de4f271b.png" width="30%"/>
+</p>
 
 
 ### 간단소개
