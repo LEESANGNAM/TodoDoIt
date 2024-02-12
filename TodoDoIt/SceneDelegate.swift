@@ -64,10 +64,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 // 끝나지 않은 할일이 있다면 알림 설정
                 if !todos.isEmpty,
                    let firstTodo = todos.first, !firstTodo.finish {
-                    self.sendNotification(title: "할일 알림", body: "아직 남은 할일이 있어요. 확인해보세요!")
+                    self.sendNotification(title: "TodoDoIt", body: "아직 남은 할일이 있어요. 확인해보세요!")
                 } else {
                     // 할일이 없으면 다른 메시지 보내기
-                    self.sendNotification(title: "할일 알림", body: "오늘 하루도 수고하셨어요. 내일 할일을 설정해보세요!")
+                    self.sendNotification(title: "TodoDoIt", body: "오늘 하루도 수고하셨어요. 내일 할일을 설정해보세요!")
                 }
             } else {
                 print("권한없음")
