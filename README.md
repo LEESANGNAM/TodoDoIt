@@ -37,7 +37,7 @@
 ## 트러블슈팅
 [트러블슈팅 전체보기](https://west-cicada-052.notion.site/dfef67fbe68d4285bdeee820cc057be2?pvs=4)
 
-### Main thread에서 이미지 불러와 리사이징 하는 과정에서 테이블뷰 스크롤시 버벅거리는 현상
+### 1. Main thread에서 이미지 불러와 리사이징 하는 과정에서 테이블뷰 스크롤시 버벅거리는 현상
 1. 메인쓰레드에서 비동기로 이미지뷰의 사이즈를 가져온다.
 2. 백그라운드 쓰레드에서 파일매니저를 통해 이미지를 가져 온다
 3. 가져온 이미지를 이미지뷰 크기만큼 리사이징 해준다.
@@ -72,6 +72,57 @@ func setData(data: DoitCompleted, totalcount: Int, index: Int){
         }
     }
 ```
+### 2. modalPresentationStyle(OverFullscreen)이후 ViewwillAppear 실행 안되는문제
+viewWillAppear 에서 데이터를 갱신하는데 갱신이 되지않아 델리게이트 패턴을 활용해 문제를 해결했다.
+
+```swift
+protocol ModalPresentDelegate: AnyObject {
+    func sendDateToModal() -> Date
+    func disMissModal(section: SectionType)
+}
+```
+
+```swift
+weak var delegate: ModalPresentDelegate?
+
+@objc func tapgestureTapped(){
+        dismissModal()
+    }
+    private func dismissModal(){
+        titleTextField.resignFirstResponder()
+        dismiss(animated: true)
+        delegate?.disMissModal(section: .todo)  // 닫힐때 호출
+    }
+```
+
+```swift
+extension HomeViewController: ModalPresentDelegate {
+    func sendDateToModal() -> Date {
+        return selectDate
+    }
+    
+    func disMissModal(section: SectionType) {
+        switch section {
+        case .doit:
+            viewmodel.fetchDoitData(date: selectDate)
+            fsCalendar.reloadData()
+        case .todo:
+            viewmodel.fetchTodoData(date: selectDate)
+            fsCalendar.reloadData()
+        case .memo:
+            viewmodel.fetchMemoData(date: selectDate)
+            fsCalendar.reloadData()
+        }
+    }
+}
+```
+### 3. 원형 프로그래스뷰 그려지지않는 문제
++ 메인스레드에서 데이터를넣어 그려지게해서 해결
+```swift
+ DispatchQueue.main.async { [weak self] in
+            self?.mainview.circularProgressbar.value = self?.viewmodel.getDoitProgress()
+        }
+  ```
 
 ## 개인일지
 |날짜|이터레이션|링크|

@@ -22,7 +22,7 @@ class DoitDetailViewController: BaseViewController {
         setNavigationBar()
         setTableView()
         bind()
-        DispatchQueue.main.asyncAfter(deadline: .now()){ [weak self] in
+        DispatchQueue.main.async { [weak self] in
             self?.mainview.circularProgressbar.value = self?.viewmodel.getDoitProgress()
         }
     }
