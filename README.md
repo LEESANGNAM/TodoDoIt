@@ -29,22 +29,21 @@
 + Firebase
     + Google Analytics
     + Crashlytics
-+ SnapKit, Toast-Swift, FSCalendar    
-+ Realm DB, Zip
++ SnapKit, Toast, FSCalendar    
++ Realm, Zip
 
 
 ### 기능 소개
-+ 목표
-    + 목표의 기간과 횟수를 설정해서 달성 할 수 있습니다.
-    + 상세화면에서 목표의 세부사항(진행률, 달성일자, 인증샷, 메모)등을 확인할 수 있습니다.
-
-+ 할 일
-    + 선택한 날짜의 할 일을 추가할 수 있습니다.
-    + 할 일을 내일로 미루는 것도 가능합니다.
-    + 체크를 통해 남은 할 일을 먼저 확인 할 수 있습니다.
-
-+ 메모
-    + 갑자기 떠오른 아이디어나 기억해야 할 것들을 빠르게 적고 확인 할 수 있습니다.
++ **FSCalendar** 를 활용해 날짜별 데이터 표시
++ **CompositionalLayout** 을 활용해 홈화면 구현
++ **UIBezierPath** 를 활용해 원형 프로그래스바 구현
++ **Observable** 클래스를 활용해 MVVM 패턴 적용
++ **repository pattern을**  활용해 Realm사용
++ **Realm** 을 활용해 목표,메모,할일 데이터 CRUD
++ **FileManager** 를 활용해 원본 이미지 저장
++ **Zip** 을 활용해 데이터 백업 및 복구
++ **Firebase (Analytics, Crashlytics)** 를 활용해 유저 관리 및 앱 기능 분석
++ **UNUserNotificationCenter** 를 활용해 **Local Notification** 구현
 
 ## 트러블슈팅
 [트러블슈팅 전체보기](https://west-cicada-052.notion.site/dfef67fbe68d4285bdeee820cc057be2?pvs=4)
