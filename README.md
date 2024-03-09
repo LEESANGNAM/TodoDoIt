@@ -19,9 +19,14 @@
 목표를 설정하고 달성 현황을 확인 할 수 있는 TodoList 
 
 
-## 개발기간 
-2023.09.25 ~ 2023.10.20 / 1.0 출시 이후 업데이트
-## 사용 기술 및 라이브러리
+## 개발기간
++ 개인프로젝트 
++ 2023.09.25 ~ 2023.10.20 / 1.0 출시 이후 업데이트
+
+## 최소타겟
++ iOS 15.0
+
+## 기술스택
 + UIKit, AutoLayout
 + CompositionalLayout, DiffableDataSource
 + MVC, MVVM
@@ -32,8 +37,7 @@
 + SnapKit, Toast, FSCalendar    
 + Realm, Zip
 
-
-### 기능 소개
+## 기능 소개
 + **FSCalendar** 를 활용해 날짜별 데이터 표시
 + **CompositionalLayout** 을 활용해 홈화면 구현
 + **UIBezierPath** 를 활용해 원형 프로그래스바 구현
