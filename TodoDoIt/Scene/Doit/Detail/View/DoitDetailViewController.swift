@@ -147,4 +147,31 @@ extension DoitDetailViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
     }
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] (_, _, completionHandler) in
+//            guard let self = self else { return }
+//            let totalcount = self.viewmodel.ListCount()
+//            let index = totalcount - indexPath.row - 1
+//            self.viewmodel.removeCompleted(index: index)
+//            self.viewmodel.fetchDoit()
+//            completionHandler(true)
+//        }
+//        
+//        let editAction = UIContextualAction(style: .normal, title: "수정") { [weak self]  (_, _, completionHandler) in
+//            guard let self = self else { return }
+//            let totalcount = self.viewmodel.ListCount()
+//            let index = totalcount - indexPath.row - 1
+//            print("인덱스: ",index)
+//            print("모델확인 ", self.viewmodel.getListData(index: index))
+//            print("여기 수정코드임 ")
+//            completionHandler(true)
+//        }
+//        
+//        deleteAction.backgroundColor = .red
+//        editAction.backgroundColor = Design.Color.cell
+//        
+//        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+//        configuration.performsFirstActionWithFullSwipe = false
+//        return configuration
+//    }
 }
